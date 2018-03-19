@@ -49,6 +49,12 @@ if (empty($_SESSION['admin'])) {
                     case 'pro':
                         include "profil.php";
                         break;
+                    case 'about':
+                        include "about.php";
+                        break;
+                    case 'lpd':
+                        include "laporan_dummy.php";
+                        break;
                 }
             } else {
                 ?>
@@ -179,7 +185,8 @@ if (empty($_SESSION['admin'])) {
                             </div>
 
                         <?php }
-                    } ?>
+                    }
+                    ?>
                     <!-- /.row -->
 
                 </div>

@@ -59,6 +59,9 @@ if (!empty($_SESSION['admin'])) {
                             <li>
                                 <a href="?page=mdk">Dummy Kembali</a>
                             </li>
+                            <li>
+                                <a href="?page=lpd">Laporan</a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
