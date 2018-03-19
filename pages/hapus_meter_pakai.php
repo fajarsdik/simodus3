@@ -6,14 +6,6 @@ if (empty($_SESSION['admin'])) {
     die();
 } else {
 
-    if (isset($_SESSION['errQ'])) {
-        $errQ = $_SESSION['errQ'];
-        echo '<div id="alert"  class="alert alert-success">
-                            ' . $errQ . '
-                          </div>';
-        unset($_SESSION['errQ']);
-    }
-
     $id_meter = $_REQUEST['id_meter'];
 
     $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
@@ -86,13 +78,24 @@ if (empty($_SESSION['admin'])) {
                     <div class="col-lg-12">
                         <h1 class="page-header">Hapus Data Pemakaian Dummy</h1>
                     </div>
+
                     <div class="row">
+
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <?php echo $_SESSION['nama']; ?>
                                 </div>
                                 <div class="panel-body">
+                                    <?php
+                                    if (isset($_SESSION['errQ'])) {
+                                        $errQ = $_SESSION['errQ'];
+                                        echo '<div id="alert"  class="alert alert-success">
+                                                ' . $errQ . '
+                                                </div>';
+                                        unset($_SESSION['errQ']);
+                                    }
+                                    ?>
                                     <div class="well">
                                         <table class="table table-responsive">
                                             <thead class="red lighten-5 red-text">
@@ -101,15 +104,22 @@ if (empty($_SESSION['admin'])) {
                                             </div>
                                             </thead>
                                             <tbody>
+
+                                                <?php
+                                                $no_dummy = $row['no_dummy'];
+                                                $no_meter_rusak = $row['no_meter_rusak'];
+                                                ?>
+
+
                                                 <tr>
                                                     <td width="22%">No. Dummy</td>
                                                     <td width="1%">:</td>
-                                                    <td width="86%"><?php echo $row['no_dummy'] ?></td>
+                                                    <td width="86%"><?= $no_dummy ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="22%">No. Meter Rusak</td>
                                                     <td width="1%">:</td>
-                                                    <td width="86%"><?php echo $row['no_meter_rusak'] ?></td>
+                                                    <td width="86%"><?= $no_meter_rusak ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td width="22%">Merk Meter Rusak</td>
@@ -154,22 +164,22 @@ if (empty($_SESSION['admin'])) {
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <?php
                                 if (isset($_REQUEST['submit'])) {
 
-                                    $id_meter = $_REQUEST['id_meter'];
-                                    $no_dummy = $_REQUEST['no_dummy'];
+                                    $id_meter = $row['id_meter'];
+                                    $no_dummy = $row['no_dummy'];
 
                                     $cek_aktivasi = mysqli_query($config, "SELECT aktivasi FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
                                     list($aktivasi) = mysqli_fetch_array($cek_aktivasi);
 
                                     if ($aktivasi == "non aktif") {
-                                        
+
                                         $update_stok = mysqli_query($confiq, "UPDATE tbl_metdum_stok SET status='ready', tgl_pakai=NULL, no_meter_rusak='' WHERE no_dummy='$no_dummy'");
-                                        
+
                                         $query = mysqli_query($config, "DELETE FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
-                                        
+
                                         if ($query == true) {
                                             $_SESSION['succDel'] = 'SUKSES! Data berhasil dihapus<br/>';
                                             header("Location: ./admin.php?page=mdg");
@@ -187,5 +197,7 @@ if (empty($_SESSION['admin'])) {
                             }
                         }
                     }
-                    ?>
-                    
+                    ?> </div>
+            </div>
+        </div>
+
