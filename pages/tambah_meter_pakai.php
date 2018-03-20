@@ -184,7 +184,7 @@ if (empty($_SESSION['admin'])) {
 
                                         <div class="form-group col-lg-6">
                                             <label for="sisa_pulsa">Sisa Pulsa</label>
-                                            <input class="form-control" type="number" name="sisa_pulsa" id="sisa_pulsa" required>
+                                            <input class="form-control" type="text" name="sisa_pulsa" id="sisa_pulsa" required>
                                         </div>
 
                                         <div class="form-group col-lg-6">
@@ -194,7 +194,7 @@ if (empty($_SESSION['admin'])) {
 
                                         <div class="form-group col-lg-6">
                                             <label for="std_dummy">Stand Dummy</label>
-                                            <input class="form-control" type="number" name="std_dummy" id="std_dummy" required>
+                                            <input class="form-control" type="text" name="std_dummy" id="std_dummy" required>
                                         </div>
                                     </div>    
 

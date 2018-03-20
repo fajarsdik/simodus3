@@ -110,7 +110,6 @@ if (empty($_SESSION['admin'])) {
                                                 $no_meter_rusak = $row['no_meter_rusak'];
                                                 ?>
 
-
                                                 <tr>
                                                     <td width="22%">No. Dummy</td>
                                                     <td width="1%">:</td>
@@ -167,16 +166,14 @@ if (empty($_SESSION['admin'])) {
 
                                 <?php
                                 if (isset($_REQUEST['submit'])) {
-
-                                    $id_meter = $row['id_meter'];
-                                    $no_dummy = $row['no_dummy'];
+                                    $unit = $_SESSION['unit'];
 
                                     $cek_aktivasi = mysqli_query($config, "SELECT aktivasi FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
                                     list($aktivasi) = mysqli_fetch_array($cek_aktivasi);
 
                                     if ($aktivasi == "non aktif") {
 
-                                        $update_stok = mysqli_query($confiq, "UPDATE tbl_metdum_stok SET status='ready', tgl_pakai=NULL, no_meter_rusak='' WHERE no_dummy='$no_dummy'");
+                                        $update_stok = mysqli_query($config, "UPDATE tbl_metdum_stok SET status='ready', tgl_pakai=NULL, no_meter_rusak='' WHERE no_dummy='$no_dummy' && unit LIKE '$unit%'");
 
                                         $query = mysqli_query($config, "DELETE FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
 
@@ -192,6 +189,7 @@ if (empty($_SESSION['admin'])) {
                                         }
                                     } else {
                                         $_SESSION['errQ'] = 'ERROR! Meter sudah aktivasi dan data tidak bisa dihapus!';
+                                        unset($_SERVER['errQ']);
                                     }
                                 }
                             }

@@ -65,7 +65,7 @@ if (!empty($_SESSION['admin'])) {
                                 </ul>
                             </li>
                             <li>
-                                <a href="?page=mdk">Dummy Kembali (On Progress)</a>
+                                <a href="?page=mdk">Dummy Kembali</a>
                             </li>
                             <li>
                                 <a href="?page=lpd">Laporan</a>
