@@ -182,6 +182,8 @@ if (empty($_SESSION['admin'])) {
                             $merk_meter_rusak = 'Glomet';
                         } else if ($row['merk_meter_rusak'] == 01) {
                             $merk_meter_rusak = 'Hexing (Lama)';
+                        } else if ($row['merk_meter_rusak'] == 50) {
+                            $merk_meter_rusak = 'Cannet';   
                         } else {
                             $merk_meter_rusak = 'Merk Lain';
                         }

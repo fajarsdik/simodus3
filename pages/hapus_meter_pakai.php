@@ -30,6 +30,8 @@ if (empty($_SESSION['admin'])) {
                 $merk_meter_rusak = 'Glomet';
             } else if ($row['merk_meter_rusak'] == 01) {
                 $merk_meter_rusak = 'Hexing (Lama)';
+            } else if ($row['merk_meter_rusak'] == 50) {
+                $merk_meter_rusak = 'Cannet';   
             } else {
                 $merk_meter_rusak = 'Merk lain';
             }
@@ -173,7 +175,7 @@ if (empty($_SESSION['admin'])) {
 
                                     if ($aktivasi == "non aktif") {
 
-                                        $update_stok = mysqli_query($config, "UPDATE tbl_metdum_stok SET status='ready', tgl_pakai=NULL, no_meter_rusak='' WHERE no_dummy='$no_dummy' && unit LIKE '$unit%'");
+                                        $update_stok = mysqli_query($config, "UPDATE ftbl_metdum_stok SET status='ready', tgl_pakai=NULL, no_meter_rusak='' WHERE no_dummy='$no_dummy' && unit LIKE '$unit%'");
 
                                         $query = mysqli_query($config, "DELETE FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
 
