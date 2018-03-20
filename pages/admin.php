@@ -40,8 +40,8 @@ if (empty($_SESSION['admin'])) {
                     case 'atv':
                         include "aktivasi_meter.php";
                         break;
-                    case 'dft_atv':
-                        include "daftar_aktivasi.php";
+                    case 'his_atv':
+                        include "histori_aktivasi.php";
                         break;
                     case 'usr':
                         include "user.php";
@@ -101,13 +101,6 @@ if (empty($_SESSION['admin'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">View Details</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
@@ -123,13 +116,6 @@ if (empty($_SESSION['admin'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">View Details</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
@@ -145,13 +131,6 @@ if (empty($_SESSION['admin'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">View Details</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
                             </div>
                         </div>
                         <?php
@@ -173,7 +152,7 @@ if (empty($_SESSION['admin'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="#">
+                                        <a href="?page=atv">
                                             <div class="panel-footer">
                                                 <span class="pull-left">Lihat detail</span>
                                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -184,7 +163,8 @@ if (empty($_SESSION['admin'])) {
                                 </div>
                             </div>
 
-                        <?php }
+                            <?php
+                        }
                     }
                     ?>
                     <!-- /.row -->
@@ -192,12 +172,12 @@ if (empty($_SESSION['admin'])) {
                 </div>
                 <!-- /#page-wrapper -->
 
-    <?php } ?>
+            <?php } ?>
 
         </div> 
 
         <!-- Include Footer START -->
-    <?php include('../include/footer.php'); ?>
+        <?php include('../include/footer.php'); ?>
         <!-- Include Footer END -->
 
     </body>  

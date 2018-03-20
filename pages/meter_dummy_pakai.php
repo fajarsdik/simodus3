@@ -93,8 +93,8 @@ if (empty($_SESSION['admin'])) {
                     </div>
                             
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Pemakaian Dummy
+                        <div class="panel-heading"><i class="fa fa-user fa-fw"></i>
+                            ' . $nama . '
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -302,8 +302,8 @@ if (empty($_SESSION['admin'])) {
                 ?>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Pemakaian Dummy
+                    <div class="panel-heading"><i class="fa fa-user fa-fw"></i>
+                        <?php echo $_SESSION['nama']; ?>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">

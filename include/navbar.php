@@ -23,7 +23,7 @@ if (!empty($_SESSION['admin'])) {
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-user">
+                <ul class="dropdown-menu dropdown-toggle">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                     </li>
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
@@ -54,10 +54,18 @@ if (!empty($_SESSION['admin'])) {
                                 <a href="?page=mdg">Pemakaian Dummy</a>
                             </li>
                             <li>
-                                <a href="?page=atv">Aktivasi Meter Pengganti</a>
+                                <a href="#">Aktivasi Meter Pengganti <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="?page=atv">Aktivasi Meter</a>
+                                    </li>
+                                    <li>
+                                        <a href="?page=his_atv">Histori Aktivasi</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="?page=mdk">Dummy Kembali</a>
+                                <a href="?page=mdk">Dummy Kembali (On Progress)</a>
                             </li>
                             <li>
                                 <a href="?page=lpd">Laporan</a>
@@ -66,7 +74,7 @@ if (!empty($_SESSION['admin'])) {
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="?page=about"><i class="fa fa-table fa-fw"></i> About</a>
+                        <a href="?page=about"><i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>
                 </ul>
             </div>
