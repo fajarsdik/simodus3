@@ -169,9 +169,7 @@ if (empty($_SESSION['admin'])) {
 
                             echo ' <div class="row"><a class="btn btn-warning" href="?page=mdk&act=edit&id_meter=' . $row['id_meter'] . '">
                                     <i class="fa fa-edit"> Edit</i></a></div></br>
-                                   <div class="row">    
-                                    <a class="btn btn-danger" href="?page=mdk&act=del&id_meter=' . $row['id_meter'] . '">
-                                    <i class="fa fa-trash-o"> Delete</i></a></div>';
+                                   <div class="row"> ';
                         } else {
                             echo '<i class="glyphicon glyphicon-ban-circle"></i></a>';
                         }
@@ -308,9 +306,7 @@ if (empty($_SESSION['admin'])) {
 
                                                 echo ' <div class="row"><a class="btn btn-warning" href="?page=mdk&act=edit&id_meter=' . $row['id_meter'] . '">
                                                         <i class="fa fa-edit"> Edit</i></a></div></br>
-                                                    <div class="row">    
-                                                    <a class="btn btn-danger" href="?page=mdk&act=del&id_meter=' . $row['id_meter'] . '">
-                                                        <i class="fa fa-trash-o"> Delete</i></a></div>';
+                                                    <div class="row">';
                                             } else {
                                                 echo '<i class="glyphicon glyphicon-ban-circle"></i></a>';
                                             }
