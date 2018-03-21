@@ -81,7 +81,7 @@ if (empty($_SESSION['admin'])) {
             $unit = $_SESSION['unit'];
 
             $query = mysqli_query($config, "SELECT * FROM tbl_aktivasi WHERE no_dummy LIKE '%$cari%' || no_meter_rusak LIKE '%$cari%'||"
-                            . "no_meter_baru LIKE '%$cari%' || id_pelanggan LIKE '%$cari%' || nama LIKE '%$cari%' && unit='$unit%' "
+                    . "no_meter_baru LIKE '%$cari%' || id_pelanggan LIKE '%$cari%' || nama LIKE '%$cari%' && unit='$unit%' "
                     . "ORDER by tgl_aktivasi DESC LIMIT $curr, $limit");
 
             if (mysqli_num_rows($query) > 0) {
@@ -109,7 +109,7 @@ if (empty($_SESSION['admin'])) {
                     } else if ($row['merk_meter_rusak'] == 01) {
                         $merk_meter_rusak = 'Hexing (Lama)';
                     } else if ($row['merk_meter_rusak'] == 50) {
-                        $merk_meter_rusak = 'Cannet';   
+                        $merk_meter_rusak = 'Cannet';
                     } else {
                         $merk_meter_rusak = 'Merk Lain';
                     }
@@ -134,6 +134,8 @@ if (empty($_SESSION['admin'])) {
                         $merk_meter_baru = 'Glomet';
                     } else if ($row['merk_meter_baru'] == 01) {
                         $merk_meter_baru = 'Hexing (Lama)';
+                    } else if ($row['merk_meter_rusak'] == 50) {
+                        $merk_meter_rusak = 'Cannet';
                     } else {
                         $merk_meter_baru = 'Merk Lain';
                     }

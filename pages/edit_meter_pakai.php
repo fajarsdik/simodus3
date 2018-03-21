@@ -10,7 +10,6 @@ if (empty($_SESSION['admin'])) {
 
     if (isset($_REQUEST['submit'])) {
         
-        //$no_dummy = $_REQUEST['no_dummy'];
         $id_meter = $_REQUEST['id_meter'];
         $no_meter_rusak = $_REQUEST['no_meter_rusak'];
         $alasan_rusak = $_REQUEST['alasan_rusak'];
@@ -22,44 +21,41 @@ if (empty($_SESSION['admin'])) {
         $nama = $_SESSION['nama'];
         $id_user = $_SESSION['id_user'];
 
-        
-
-        if (!preg_match("/^[0-9]*$/", $no_meter_rusak)) {
-            $_SESSION['no_meter_rusak'] = 'Form Nomor Meter Rusak harus diisi angka!';
+        //validasi input data
+        if (!preg_match("/^[0-9]*$/", $no_dummy)) {
+            $_SESSION['no_meter'] = 'Form Nomor Meter harus diisi angka!';
             echo '<script language="javascript">window.history.back();</script>';
         } else {
 
-            if (!preg_match("/^[a-zA-Z0-9.,_()%&@\/\r\n -]*$/", $alasan_rusak)) {
-                $_SESSION['alasan_rusak'] = 'Form Alasan Rusak hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), kurung(), underscore(_), dan(&) persen(%) dan at(@)';
+            if (!preg_match("/^[0-9]*$/", $no_meter_rusak)) {
+                $_SESSION['no_meter_rusak'] = 'Form Nomor Meter Rusak harus diisi angka!';
                 echo '<script language="javascript">window.history.back();</script>';
             } else {
 
-                if (!preg_match("/^[a-zA-Z0-9.,_()%&@\/\r\n -]*$/", $ptgs_pasang)) {
-                    $_SESSION['ptgs_pasang'] = 'Form Petugas Pasang hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), kurung(), underscore(_), dan(&) persen(%) dan at(@)';
+                if (!preg_match("/^[a-zA-Z0-9.,_()%&@\/\r\n -]*$/", $alasan_rusak)) {
+                    $_SESSION['alasan_rusak'] = 'Form Alasan Rusak hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), kurung(), underscore(_), dan(&) persen(%) dan at(@)';
                     echo '<script language="javascript">window.history.back();</script>';
                 } else {
 
-                    if (!preg_match("/^[a-zA-Z0-9.,_()%&@\/\r\n -]*$/", $sisa_pulsa)) {
-                        $_SESSION['sisa_pulsa'] = 'Isi dengan angka';
+                    if (!preg_match("/^[a-zA-Z0-9.,_()%&@\/\r\n -]*$/", $ptgs_pasang)) {
+                        $_SESSION['ptgs_pasang'] = 'Form Petugas Pasang hanya boleh mengandung karakter huruf, angka, spasi, titik(.), koma(,), minus(-), garis miring(/), kurung(), underscore(_), dan(&) persen(%) dan at(@)';
                         echo '<script language="javascript">window.history.back();</script>';
                     } else {
 
-                        if (!preg_match("/^[0-9]*$/", $no_hp_plg)) {
-                            $_SESSION['no_hp_plg'] = 'Form Nomor HP Pelanggan harus diisi angka!';
+                        if (!preg_match("/^[a-zA-Z0-9.,_()%&@\/\r\n -]*$/", $sisa_pulsa)) {
+                            $_SESSION['sisa_pulsa'] = 'Isi dengan angka';
                             echo '<script language="javascript">window.history.back();</script>';
                         } else {
 
-                            if (!preg_match("/^[a-zA-Z0-9.,_()%&@\/\r\n -]*$/", $std_dummy)) {
-                                $_SESSION['std_dummy'] = 'Isi dengan angka';
+                            if (!preg_match("/^[0-9]*$/", $no_hp_plg)) {
+                                $_SESSION['no_hp_plg'] = 'Form Nomor HP Pelanggan harus diisi angka!';
                                 echo '<script language="javascript">window.history.back();</script>';
                             } else {
 
-                                $unit = $_SESSION['unit'];
-
-                                $cek_aktivasi = mysqli_query($config, "SELECT aktivasi FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
-                                list($aktivasi) = mysqli_fetch_array($cek_aktivasi);
-
-                                if ($aktivasi == "non aktif") {
+                                if (!preg_match("/^[a-zA-Z0-9.,_()%&@\/\r\n -]*$/", $std_dummy)) {
+                                    $_SESSION['std_dummy'] = 'Isi dengan angka';
+                                    echo '<script language="javascript">window.history.back();</script>';
+                                } else {
 
                                     $query = mysqli_query($config, "UPDATE tbl_metdum_pakai SET no_meter_rusak='$no_meter_rusak', alasan_rusak='$alasan_rusak', "
                                             . "ptgs_pasang='$ptgs_pasang', sisa_pulsa='$sisa_pulsa', no_hp_plg='$no_hp_plg', std_dummy='$std_dummy' WHERE id_meter='$id_meter'");
@@ -71,12 +67,8 @@ if (empty($_SESSION['admin'])) {
                                     } else {
                                         $_SESSION['errQ'] = 'ERROR! Ada masalah dengan query';
                                         echo '<script language="javascript">window.history.back();</script>';
-                                    }  
-                                } else {
-                                    $_SESSION['succAdd'] = 'ERROR! Meter sudah aktivasi dan data tidak bisa diedit!';
-                                    header("Location: ./admin.php?page=mdg");
-                                    unset($_SERVER['errQ']);
-                                } 
+                                    }
+                                }
                             }
                         }
                     }

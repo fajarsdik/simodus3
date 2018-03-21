@@ -186,7 +186,7 @@ if (empty($_SESSION['admin'])) {
                         } else if ($row['merk_meter_rusak'] == 01) {
                             $merk_meter_rusak = 'Hexing (Lama)';
                         } else if ($row['merk_meter_rusak'] == 50) {
-                            $merk_meter_rusak = 'Cannet';   
+                            $merk_meter_rusak = 'Cannet';
                         } else {
                             $merk_meter_rusak = 'Merk Lain';
                         }
@@ -398,6 +398,8 @@ if (empty($_SESSION['admin'])) {
                                                 $merk_meter_rusak = 'Glomet';
                                             } else if ($row['merk_meter_rusak'] == 01) {
                                                 $merk_meter_rusak = 'Hexing (Lama)';
+                                            } else if ($row['merk_meter_rusak'] == 50) {
+                                                $merk_meter_rusak = 'Cannet';
                                             } else {
                                                 $merk_meter_rusak = 'Merk Lain';
                                             }
@@ -446,15 +448,26 @@ if (empty($_SESSION['admin'])) {
                                                 <td style="text-align: center">' . $row['std_dummy'] . '</td>
                                                 <td style="text-align: center">';
 
+
                                             if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
 
-                                                echo ' <div class="row"><a class="btn btn-warning" href="?page=mdg&act=edit&id_meter=' . $row['id_meter'] . '">
+                                                $id_meter = $row['id_meter'];
+
+                                                $cek_aktivasi = mysqli_query($config, "SELECT aktivasi FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
+                                                list($aktivasi) = mysqli_fetch_array($cek_aktivasi);
+
+                                                if ($aktivasi == "non aktif") {
+
+                                                    echo ' <div class="row"><a class="btn btn-warning" href="?page=mdg&act=edit&id_meter=' . $row['id_meter'] . '">
                                                         <i class="fa fa-edit"> Edit</i></a></div></br>
                                                     <div class="row">    
                                                     <a class="btn btn-danger" href="?page=mdg&act=del&id_meter=' . $row['id_meter'] . '">
                                                         <i class="fa fa-trash-o"> Delete</i></a></div>';
+                                                } else {
+                                                    echo '<btn class="btn btn-success" disabled><i class="glyphicon glyphicon-ban-circle"></i> Aktif</btn>';
+                                                }
                                             } else {
-                                                echo '<i class="glyphicon glyphicon-ban-circle"></i></a>';
+                                                echo '<btn class="btn btn-default" disabled><i class="glyphicon glyphicon-ban-circle" disabled></i></btn>';
                                             }
                                             echo '
                                                 </td> 
