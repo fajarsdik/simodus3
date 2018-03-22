@@ -121,8 +121,8 @@ if (empty($_SESSION['admin'])) {
                 //script untuk mencari data
                 $unit = $_SESSION['unit'];
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl WHERE no_dummy LIKE '%$cari%' || lokasi_posko LIKE '%$cari%' && unit LIKE '$unit%'"
-                        . "|| nama_cc LIKE '%$cari%'"
+                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl WHERE no_dummy LIKE '%$cari%' || lokasi_posko LIKE '%$cari%' || nama_cc LIKE '%$cari%' "
+                        . "&& unit LIKE '$unit%'"
                         . "ORDER by tgl_kembali DESC LIMIT $curr, $limit");
 
                 if (mysqli_num_rows($query) > 0) {

@@ -7,8 +7,9 @@ if (empty($_SESSION['admin'])) {
 } else {
 
     $id_meter = $_REQUEST['id_meter'];
+    $unit = $_SESSION['unit'];
 
-    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl WHERE id_meter='$id_meter'");
+    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl WHERE id_meter='$id_meter' && unit LIKE '$unit%'");
 
     if (mysqli_num_rows($query) > 0) {
 
@@ -87,7 +88,7 @@ if (empty($_SESSION['admin'])) {
 
                                     $update_stok = mysqli_query($config, "UPDATE tbl_metdum_stok SET status='', tgl_kembali=NULL, posko='' WHERE no_dummy='$no_dummy' && unit LIKE '$unit%'");
 
-                                    $query = mysqli_query($config, "DELETE FROM tbl_metdum_kbl WHERE id_meter='$id_meter'");
+                                    $query = mysqli_query($config, "DELETE FROM tbl_metdum_kbl WHERE id_meter='$id_meter' && unit LIKE '$unit%'");
                                     
                                     if ($query == true) {
                                         $_SESSION['succDel'] = 'SUKSES! Data berhasil dihapus<br/>';

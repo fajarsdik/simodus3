@@ -126,7 +126,9 @@ if (empty($_SESSION['admin'])) {
                             </div>
 
                             <?php
-                            $query_stok = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE status='ready' ORDER BY no_dummy");
+                            $unit = $_SESSION['unit'];
+                            
+                            $query_stok = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE status='ready' && unit='$unit' ORDER BY no_dummy");
                             ?>
 
                             <div class="panel-body">

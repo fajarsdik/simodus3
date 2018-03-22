@@ -26,8 +26,6 @@ if (empty($_SESSION['admin'])) {
             </div>
             <!-- Akhir Judul -->
 
-
-
             <?php
             $query = mysqli_query($config, "SELECT aktivasi FROM tbl_sett");
             list($aktivasi) = mysqli_fetch_array($query);
@@ -252,7 +250,7 @@ if (empty($_SESSION['admin'])) {
                     </div>
                     <!-- Row form END -->';
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE aktivasi='non aktif'");
+                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE aktivasi='non aktif' $$ unit LIKE '$unit%'");
                 $cdata = mysqli_num_rows($query);
                 $cpg = ceil($cdata / $limit);
 

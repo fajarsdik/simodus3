@@ -46,8 +46,9 @@ if (empty($_SESSION['admin'])) {
     } else {
 
         $id_meter = mysqli_real_escape_string($config, $_REQUEST['id_meter']);
+        $unit = $_SESSION['unit'];
 
-        $query = mysqli_query($config, "SELECT no_dummy, no_meter_rusak, alasan_rusak, ptgs_pasang, sisa_pulsa, no_hp_plg, std_dummy, nama, id_user FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
+        $query = mysqli_query($config, "SELECT no_dummy, no_meter_rusak, alasan_rusak, ptgs_pasang, sisa_pulsa, no_hp_plg, std_dummy, nama, id_user FROM tbl_metdum_pakai WHERE id_meter='$id_meter' && unit LIKE '$unit%'");
         list($no_dummy, $no_meter_rusak, $alasan_rusak, $ptgs_pasang, $sisa_pulsa, $no_hp_plg, $std_dummy, $nama, $id_user) = mysqli_fetch_array($query);
 
         if (isset($_SESSION['errQ'])) {
@@ -74,9 +75,10 @@ if (empty($_SESSION['admin'])) {
                             </div>
 
                             <?php
+                            
                             $id_meter = mysqli_real_escape_string($config, $_REQUEST['id_meter']);
 
-                            $query = mysqli_query($config, "SELECT no_dummy, no_meter_rusak, alasan_rusak, ptgs_pasang, sisa_pulsa, no_hp_plg, std_dummy, nama, id_user FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
+                            $query = mysqli_query($config, "SELECT no_dummy, no_meter_rusak, alasan_rusak, ptgs_pasang, sisa_pulsa, no_hp_plg, std_dummy, nama, id_user FROM tbl_metdum_pakai WHERE id_meter='$id_meter' && unit LIKE '$unit%'");
                             list($no_dummy, $no_meter_rusak, $alasan_rusak, $ptgs_pasang, $sisa_pulsa, $no_hp_plg, $std_dummy, $nama, $id_user) = mysqli_fetch_array($query);
                             ?>
 
