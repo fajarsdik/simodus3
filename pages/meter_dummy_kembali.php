@@ -52,7 +52,7 @@ if (empty($_SESSION['admin'])) {
                             <?php
                             if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
                                 echo '
-                                      <a href="?page=mdkF@&act=add" class="btn btn-primary">Tambah Data</a>
+                                      <a href="?page=mdk&act=add" class="btn btn-primary">Tambah Data</a>
                                  ';
                             }
                             ?>
