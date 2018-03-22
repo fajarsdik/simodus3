@@ -75,7 +75,7 @@ if (empty($_SESSION['admin'])) {
                         <p>Hasil pencarian untuk kata kunci <strong>" ' . stripslashes($cari) . ' "</strong>
                     </div>
                             
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading"><i class="fa fa-user fa-fw"></i>
                             ' . $_SESSION['nama'] . '
                         </div>
@@ -235,7 +235,7 @@ if (empty($_SESSION['admin'])) {
                         if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 4) {
 
                             echo '<a class="btn btn-primary" href="?page=atv&act=eam&id_meter=' . $row['id_meter'] . '">
-                                    <i class="fa fa-check"></i> Aktivasi</a>';
+                                    <i class="glyphicon glyphicon-flash"></i> Aktivasi!';
                         } else {
                             echo '<i class="glyphicon glyphicon-ban-circle"></i></a>';
                         }
@@ -297,7 +297,7 @@ if (empty($_SESSION['admin'])) {
             } else {
                 ?>
 
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading"><i class="fa fa-user fa-fw"></i>
                         <?php echo $_SESSION['nama']; ?>
                     </div>
@@ -457,7 +457,7 @@ if (empty($_SESSION['admin'])) {
                                             if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 4) {
 
                                                 echo '<a class="btn btn-primary" href="?page=atv&act=eam&id_meter=' . $row['id_meter'] . '">
-                                                    <i class="fa fa-check"></i> Aktivasi</a>';
+                                                    <i class="glyphicon glyphicon-flash"></i> Aktivasi!';
                                             } else {
                                                 echo '<i class="glyphicon glyphicon-ban-circle"></i></a>';
                                             }

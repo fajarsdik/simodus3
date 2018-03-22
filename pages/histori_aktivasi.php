@@ -40,7 +40,7 @@ if (empty($_SESSION['admin'])) {
                         <p>Hasil pencarian untuk kata kunci <strong>" ' . stripslashes($cari) . ' "</strong>
                     </div>
                             
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading"><i class="fa fa-user fa-fw"></i>
                             ' . $_SESSION['nama'] . '
                         </div>
@@ -180,7 +180,7 @@ if (empty($_SESSION['admin'])) {
                         <td style="text-align: center">' . $row['nama'] . '</td>
                         <td style="text-align: center">';
 
-                    echo '<a class="btn btn-success">
+                    echo '<a class="btn btn-success" disabled>
                         <i class="fa fa-check"></i> Aktif</a>';
 
                     echo '
@@ -196,7 +196,7 @@ if (empty($_SESSION['admin'])) {
                     </div>
                     <!-- Row form END -->';
 
-            $query = mysqli_query($config, "SELECT * FROM tbl_aktivasi");
+            $query = mysqli_query($config, "SELECT * FROM tbl_aktivasi WHERE unit LIKE '$unit%'");
             $cdata = mysqli_num_rows($query);
             $cpg = ceil($cdata / $limit);
 
@@ -241,7 +241,7 @@ if (empty($_SESSION['admin'])) {
         } else {
             ?>
 
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading"><i class="fa fa-user fa-fw"></i>
                     <?php echo $_SESSION['nama']; ?>
                 </div>
@@ -378,7 +378,7 @@ if (empty($_SESSION['admin'])) {
                                                 <td style="text-align: center">';
 
 
-                                        echo '<a class="btn btn-success">
+                                        echo '<a class="btn btn-success" disabled>
                                                     <i class="fa fa-check"></i> Aktif</a>';
 
                                         echo '
@@ -395,7 +395,7 @@ if (empty($_SESSION['admin'])) {
                     <!--/.table-responsive -->
 
                     <?php
-                    $query = mysqli_query($config, "SELECT * FROM tbl_aktivasi");
+                    $query = mysqli_query($config, "SELECT * FROM tbl_aktivasi WHERE unit LIKE '$unit%'");
                     $cdata = mysqli_num_rows($query);
                     $cpg = ceil($cdata / $limit);
 

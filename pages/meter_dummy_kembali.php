@@ -49,7 +49,13 @@ if (empty($_SESSION['admin'])) {
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-md-13 col-md-8">
-                            <a href="?page=mdk&act=add" class="btn btn-primary">Tambah Data</a>
+                            <?php
+                            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
+                                echo '
+                                      <a href="?page=mdkF@&act=add" class="btn btn-primary">Tambah Data</a>
+                                 ';
+                            }
+                            ?>
                         </div>
                         <form method="post" action="?page=mdk">
                             <div class="col-xs-4 col-xs-offset-7 col-md-3 col-md-offset-4 input-group custom-search">
@@ -92,7 +98,7 @@ if (empty($_SESSION['admin'])) {
                         <p>Hasil pencarian untuk kata kunci <strong>" ' . stripslashes($cari) . ' "</strong>
                     </div>
                             
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading"><i class="fa fa-user fa-fw"></i>
                             ' . $_SESSION['nama'] . '
                         </div>
@@ -186,7 +192,7 @@ if (empty($_SESSION['admin'])) {
                     </div>
                     <!-- Row form END -->';
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl");
+                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl unit LIKE '$unit%'");
                 $cdata = mysqli_num_rows($query);
                 $cpg = ceil($cdata / $limit);
 
@@ -231,7 +237,7 @@ if (empty($_SESSION['admin'])) {
             } else {
                 ?>
 
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading"><i class="fa fa-user fa-fw"></i>
                         <?php echo $_SESSION['nama']; ?>
                     </div>
@@ -324,7 +330,7 @@ if (empty($_SESSION['admin'])) {
                         <!--/.table-responsive -->
 
                         <?php
-                        $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl");
+                        $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl WHERE unit LIKE '$unit%'");
                         $cdata = mysqli_num_rows($query);
                         $cpg = ceil($cdata / $limit);
 

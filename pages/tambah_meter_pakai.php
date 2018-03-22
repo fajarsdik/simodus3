@@ -120,7 +120,7 @@ if (empty($_SESSION['admin'])) {
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="panel panel-default">
+                        <div class="panel panel-primary">
                             <div class="panel-heading"><i class="fa fa-user fa-fw"></i>
                                 <?php echo $_SESSION['nama']; ?>
                             </div>
