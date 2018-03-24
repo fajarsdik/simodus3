@@ -55,8 +55,17 @@ if (empty($_SESSION['admin'])) {
                     case 'lpd':
                         include "laporan_dummy.php";
                         break;
-                    case 'gmtd':
-                        include "ganti_meter_tanpa_dummy.php";
+                    case 'tgm':
+                        include "ganmet_to.php";
+                        break;
+                    case 'egm':
+                        include "ganmet_entri.php";
+                        break;
+                    case 'upg':
+                        include "ganmet_upload_foto.php";
+                        break;
+                    case 'lgm':
+                        include "ganmet_tanpa_dummy_laporan.php";
                         break;
                 }
             } else {

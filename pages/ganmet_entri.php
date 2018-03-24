@@ -14,11 +14,11 @@ if (empty($_SESSION['admin'])) {
                 <div class = "panel">
                     <div class = "panel-body">
                         
-                        <h1>Ganti Meter</h1> <hr/><br/>
+                        <h1>Soon</h1> <hr/><br/>
                         
                         <!-- isi konten disini -->
                         <p>
-                            Coming Soon!!!!
+                            Coming Soon
                         </p>
                         
                         
