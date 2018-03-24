@@ -85,12 +85,33 @@ if (empty($_SESSION['admin'])) {
                                 } else {
 
                                     $merk_meter_rusak = substr($no_meter_rusak, 0, 2);
-
+                                    
+                                    //merk tipe tahun otomatis        
+                                    $pot12 = substr($no_meter_rusak, 0, 2);
+                                    $pot34 = substr($no_meter_rusak,2,2);
+                                    $pjg_seri = strlen($no_meter_rusak);
+                                    $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12 && seri34=$pot34");
+                                    if(!queryseri){
+                                        $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
+                                    }
+                                    $rowseri=mysqli_fetch_array($queryseri);
+                                    $merk_meter = $rowseri['merk'];
+                                    $tipe_meter = $rowseri['tipe'];
+                                    $tahun_meter = $rowseri['tahun'];
+                                    //$merk_meter=$pot1;
+                                    
+                                     
+                                    $querys = mysqli_query($config, "INSERT INTO tbl_dummy_total(id_meter,no_dummy,no_meter_rusak,merk_meter_rusak,tipe_meter_rusak,tahun_meter_rusak,alasan_rusak,
+                                            tgl_pakai,ptgs_pasang,sisa_pulsa,no_hp_plg,std_dummy,aktivasi,kembali,nama,id_user,unit)
+                                            VALUES('','$no_dummy','$no_meter_rusak','$merk_meter','$tipe_meter',$tahun_meter,'$alasan_rusak','$tgl_pakai','$ptgs_pasang',"
+                                            . "'$sisa_pulsa','$no_hp_plg','$std_dummy','$aktivasi','$kembali','$nama','$id_user','$unit')");
+                                    
+                                    
                                     $query = mysqli_query($config, "INSERT INTO tbl_metdum_pakai(id_meter,no_dummy,no_meter_rusak,merk_meter_rusak,alasan_rusak,
                                             tgl_pakai,ptgs_pasang,sisa_pulsa,no_hp_plg,std_dummy,aktivasi,kembali,nama,id_user,unit)
                                             VALUES('','$no_dummy','$no_meter_rusak','$merk_meter_rusak','$alasan_rusak','$tgl_pakai','$ptgs_pasang',"
                                             . "'$sisa_pulsa','$no_hp_plg','$std_dummy','$aktivasi','$kembali','$nama','$id_user','$unit')");
-
+                                    
                                     $query_status = mysqli_query($config, "UPDATE tbl_metdum_stok SET status='', tgl_pakai='$tgl_pakai', "
                                             . "no_meter_rusak='$no_meter_rusak', posko='' WHERE no_dummy='$no_dummy'");
                                     if ($query == true) {

@@ -37,13 +37,13 @@ if (empty($_SESSION['admin'])) {
 
         $id_meter = $_REQUEST['id_meter'];
         $no_dummy = $_REQUEST['no_dummy'];
-        $lokasi_posko = $_REQUEST['lokasi_posko'];
         $nama_cc = $_REQUEST['nama_cc'];
         $stand = $_REQUEST['stand'];
         $tgl_kembali = date("Y-m-d H:i:s");
         $nama = $_SESSION['nama'];
         $id_user = $_SESSION['id_user'];
         $unit = $_SESSION['unit'];
+        $lokasi_posko = $_REQUEST['lokasi_posko'];
 
         //validasi input data
         if (!preg_match("/^[0-9]*$/", $no_dummy)) {
