@@ -65,7 +65,7 @@ if (empty($_SESSION['admin'])) {
                         include "ganmet_upload_foto.php";
                         break;
                     case 'lgm':
-                        include "ganmet_tanpa_dummy_laporan.php";
+                        include "ganmet_laporan.php";
                         break;
                 }
             } else {
