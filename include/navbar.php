@@ -78,7 +78,16 @@ if (!empty($_SESSION['admin'])) {
                         <a><i class="fa fa-fax fa-fw"></i> Ganti Meter tanpa dummy<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="?page=gmtd">Entri Ganti Meter</a>
+                                <a href="?page=tgm">TO Ganmet</a>
+                            </li>
+                            <li>
+                                <a href="?page=egm">Entri Data Ganti Meter</a>
+                            </li>
+                            <li>
+                                <a href="?page=upg">Upload Foto</a>
+                            </li>
+                            <li>
+                                <a href="?page=lgm">Laporan</a>
                             </li>
                         </ul>
                         
