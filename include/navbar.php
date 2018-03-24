@@ -12,7 +12,7 @@ if (!empty($_SESSION['admin'])) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../pages/admin.php">SIMODUS [BETA]</a>
+            <a class="navbar-brand" href="../pages/admin.php">SIMODUS</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -73,6 +73,17 @@ if (!empty($_SESSION['admin'])) {
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    
+                    <li>
+                        <a><i class="fa fa-fax fa-fw"></i> Ganti Meter tanpa dummy<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="?page=gmtd">Entri Ganti Meter</a>
+                            </li>
+                        </ul>
+                        
+                    </li>
+                    
                     <li>
                         <a href="?page=about"><i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>
