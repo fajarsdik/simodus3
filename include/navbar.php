@@ -92,6 +92,10 @@ if (!empty($_SESSION['admin'])) {
                         </ul>
                         
                     </li>
+                    <li>
+                        <a><i class="fa fa-fax fa-fw"></i> DIL<span class=""></span></a>
+                        
+                    </li>
                     
                     <li>
                         <a href="?page=about"><i class="glyphicon glyphicon-info-sign"></i> About</a>
