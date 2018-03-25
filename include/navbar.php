@@ -73,9 +73,14 @@ if (!empty($_SESSION['admin'])) {
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-                    <?php 
-                    if ($_SESSION['admin'] == 6) {
-                    '<li>
+                   
+                   
+                    <?php
+                    //admin 10 untuk sayid
+                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 10) {
+                        echo '
+                            
+                        <li>
                         <a><i class="fa fa-fax fa-fw"></i> Ganti Meter tanpa dummy<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -91,14 +96,14 @@ if (!empty($_SESSION['admin'])) {
                                 <a href="?page=lgm">Laporan</a>
                             </li>
                         </ul>                        
-                    </li>
-                    <li>
+                        </li>
+                        <li>
                         <a><i class="fa fa-fax fa-fw"></i> DIL<span class=""></span></a>
-                        
-                    </li>
-                    ';
+                        </li>
+                         ';
                     }
                     ?>
+                    
                     <li>
                         <a href="?page=about"><i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>
