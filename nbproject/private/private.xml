@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/simodus3/pages/aktivasi_meter.php</file>
-            <file>file:/C:/xampp/htdocs/simodus3/pages/aktivasi.php</file>
-            <file>file:/C:/xampp/htdocs/simodus3/pages/histori_aktivasi.php</file>
-            <file>file:/C:/xampp/htdocs/simodus3/pages/meter_dummy_pakai.php</file>
-            <file>file:/C:/xampp/htdocs/simodus3/pages/meter_dummy_kembali.php</file>
-            <file>file:/C:/xampp/htdocs/simodus3/pages/monitoring.php</file>
-            <file>file:/C:/xampp/htdocs/simodus3/pages/laporan_dummy.php</file>
+            <file>file:/C:/xampp/htdocs/simodus3/pages/admin.php</file>
+            <file>file:/C:/xampp/htdocs/simodus3/pages/ganmet_entri.php</file>
         </group>
     </open-files>
 </project-private>

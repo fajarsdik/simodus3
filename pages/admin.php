@@ -55,6 +55,11 @@ if (empty($_SESSION['admin'])) {
                     case 'lpd':
                         include "laporan_dummy.php";
                         break;
+
+                    case 'egm':
+                        include "ganmet_entri.php";
+                        break;
+                    
                 }
             } else {
                 ?>
