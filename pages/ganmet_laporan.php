@@ -14,16 +14,11 @@ if (empty($_SESSION['admin'])) {
                 <div class = "panel">
                     <div class = "panel-body">
                         
-                        <h1>Tentang</h1> <hr/><br/>
+                        <h1>Soon</h1> <hr/><br/>
                         
                         <!-- isi konten disini -->
                         <p>
-                            SIMODUS (Sistem Monitoring Dummy Terpadu)
-                            <br>
-                            <br style="">Kita tidak dapat menghindari meter yang rusak tetapi kita dapat mempersiapkan diri untuk menghadapinya.
-                            <br>
-                            <br>Meter dummy adalah meter sementara yang digunakan saat meter pelanggan dalam keadaan rusak. Cara ini adalah cara yang tepat dalam penanganan meter gangguan
-                            <br>Dalam pelaksanaanya kita harus mampu melakukan pengawasan keberadaan meter dummy, untuk itulah SIMODUS ini ada.
+                            Coming Soon
                         </p>
                         
                         

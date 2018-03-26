@@ -12,7 +12,7 @@ if (!empty($_SESSION['admin'])) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../pages/admin.php">SIMODUS [BETA]</a>
+            <a class="navbar-brand" href="../pages/admin.php">SIMODUS</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -73,6 +73,37 @@ if (!empty($_SESSION['admin'])) {
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                   
+                   
+                    <?php
+                    //admin 10 untuk sayid
+                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 10) {
+                        echo '
+                            
+                        <li>
+                        <a><i class="fa fa-fax fa-fw"></i> Ganti Meter tanpa dummy<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="?page=tgm">TO Ganmet</a>
+                            </li>
+                            <li>
+                                <a href="?page=egm">Entri Data Ganti Meter</a>
+                            </li>
+                            <li>
+                                <a href="?page=upg">Upload Foto</a>
+                            </li>
+                            <li>
+                                <a href="?page=lgm">Laporan</a>
+                            </li>
+                        </ul>                        
+                        </li>
+                        <li>
+                        <a><i class="fa fa-fax fa-fw"></i> DIL<span class=""></span></a>
+                        </li>
+                         ';
+                    }
+                    ?>
+                    
                     <li>
                         <a href="?page=about"><i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>
