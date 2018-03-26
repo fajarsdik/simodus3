@@ -33,7 +33,7 @@ if (empty($_SESSION['admin'])) {
                 . "WHERE id_meter='$id_meter'");
 
         $query_tgl_aktivasi = mysqli_query($config, "UPDATE tbl_metdum_stok SET tgl_aktivasi='$tgl_aktivasi' "
-                . "WHERE unit='$unit' && no_dummy='$no_dummy'");
+                . "WHERE no_dummy='$no_dummy'");
 
         if ($query == true) {
             $_SESSION['succAdd'] = 'SUKSES! Meter berhasil di Aktivasi!';
