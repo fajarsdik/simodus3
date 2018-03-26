@@ -174,29 +174,23 @@ if (empty($_SESSION['admin'])) {
                         } else if ($row['alasan_rusak'] == 18) {
                             $alasan_rusak = "Lain-lain";
                         }
-
-                        if ($row['merk_meter_rusak'] == 14) {
-                            $merk_meter_rusak = 'Hexing';
-                        } else if ($row['merk_meter_rusak'] == 86) {
-                            $merk_meter_rusak = 'Smart Meter';
-                        } else if ($row['merk_meter_rusak'] == 45) {
-                            $merk_meter_rusak = 'Sanxing';
-                        } else if ($row['merk_meter_rusak'] == 22) {
-                            $merk_meter_rusak = 'Star';
-                        } else if ($row['merk_meter_rusak'] == 60) {
-                            $merk_meter_rusak = 'FDE';
-                        } else if ($row['merk_meter_rusak'] == 32) {
-                            $merk_meter_rusak = 'Itron';
-                        } else if ($row['merk_meter_rusak'] == 34) {
-                            $merk_meter_rusak = 'Glomet';
-                        } else if ($row['merk_meter_rusak'] == 01) {
-                            $merk_meter_rusak = 'Hexing (Lama)';
-                        } else if ($row['merk_meter_rusak'] == 50) {
-                            $merk_meter_rusak = 'Cannet';
-                        } else {
-                            $merk_meter_rusak = 'Merk Lain';
+                        
+                        
+                        //merk tipe tahun otomatis        
+                        $no_meter_rusak=$row['no_meter_rusak'];
+                        $pot12 = substr($no_meter_rusak, 0, 2);
+                        $pot34 = substr($no_meter_rusak,2,2);
+                        $pjg_seri = strlen($no_meter_rusak);
+                        $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12 && seri34=$pot34");
+                        if(!$queryseri){
+                            $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
                         }
-
+                        $rowseri=mysqli_fetch_array($queryseri);
+                        $merk_meter_rusak = $rowseri['merk'];
+                        $tipe_meter_rusak = $rowseri['tipe'];
+                        $tahun_meter_rusak = $rowseri['tahun'];
+                                                            
+                        
                         echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>';
 
                         echo '<td style="text-align: center">' . $alasan_rusak . '</td>';
@@ -387,30 +381,24 @@ if (empty($_SESSION['admin'])) {
                                             } else {
                                                 $alasan_rusak = "Lain-lain";
                                             }
-
-                                            if ($row['merk_meter_rusak'] == 14) {
-                                                $merk_meter_rusak = 'Hexing';
-                                            } else if ($row['merk_meter_rusak'] == 86) {
-                                                $merk_meter_rusak = 'Smart Meter';
-                                            } else if ($row['merk_meter_rusak'] == 45) {
-                                                $merk_meter_rusak = 'Sanxing';
-                                            } else if ($row['merk_meter_rusak'] == 22) {
-                                                $merk_meter_rusak = 'Star';
-                                            } else if ($row['merk_meter_rusak'] == 60) {
-                                                $merk_meter_rusak = 'FDE';
-                                            } else if ($row['merk_meter_rusak'] == 32) {
-                                                $merk_meter_rusak = 'Itron';
-                                            } else if ($row['merk_meter_rusak'] == 34) {
-                                                $merk_meter_rusak = 'Glomet';
-                                            } else if ($row['merk_meter_rusak'] == 01) {
-                                                $merk_meter_rusak = 'Hexing (Lama)';
-                                            } else if ($row['merk_meter_rusak'] == 50) {
-                                                $merk_meter_rusak = 'Cannet';
-                                            } else {
-                                                $merk_meter_rusak = 'Merk Lain';
+                                            
+                                            
+                                            //merk tipe tahun otomatis        
+                                            $no_meter_rusak=$row['no_meter_rusak'];
+                                            $pot12 = substr($no_meter_rusak, 0, 2);
+                                            $pot34 = substr($no_meter_rusak,2,2);
+                                            $pjg_seri = strlen($no_meter_rusak);
+                                            $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12 && seri34=$pot34");
+                                            if(!$queryseri){
+                                                $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
                                             }
+                                            $rowseri=mysqli_fetch_array($queryseri);
+                                            $merk_meter_rusak = $rowseri['merk'];
+                                            $tipe_meter_rusak = $rowseri['tipe'];
+                                            $tahun_meter_rusak = $rowseri['tahun'];
 
-                                            echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>';
+
+                                            echo '<td style="text-align: center">' . $merk_meter_rusak. '</td>';
 
                                             echo '<td style="text-align: center">' . $alasan_rusak . '</td>';
 
