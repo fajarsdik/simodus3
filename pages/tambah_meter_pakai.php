@@ -113,7 +113,7 @@ if (empty($_SESSION['admin'])) {
                                             . "'$sisa_pulsa','$no_hp_plg','$std_dummy','$aktivasi','$kembali','$nama','$id_user','$unit')");
                                     
                                     $query_status = mysqli_query($config, "UPDATE tbl_metdum_stok SET status='', tgl_pakai='$tgl_pakai', "
-                                            . "no_meter_rusak='$no_meter_rusak', posko='$nama' WHERE unit ='$unit' && no_dummy='$no_dummy'");
+                                            . "no_meter_rusak='$no_meter_rusak', posko='' WHERE no_dummy='$no_dummy'");
                                     if ($query == true) {
                                         $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
                                         header("Location: ./admin.php?page=mdg");

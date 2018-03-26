@@ -72,7 +72,7 @@ if (empty($_SESSION['admin'])) {
                         $query_kembali = mysqli_query($config, "UPDATE tbl_metdum_pakai SET kembali='sudah' WHERE id_meter='$id_meter'");
 
                         $query_tgl_aktivasi = mysqli_query($config, "UPDATE tbl_metdum_stok SET tgl_kembali='$tgl_kembali', status='ready', "
-                                . "no_meter_rusak='', posko='$nama' WHERE unit='$unit' && no_dummy='$no_dummy'");
+                                . "no_meter_rusak='', posko='$lokasi_posko' WHERE no_dummy='$no_dummy'");
                         
                         if ($query == true) {
                             $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
