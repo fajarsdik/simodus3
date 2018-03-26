@@ -60,6 +60,13 @@ if (empty($_SESSION['admin'])) {
                         include "ganmet_entri.php";
                         break;
                     
+                    case 'utd':
+                        include "user_total.php";
+                        break;
+                    
+                    case 'tud':
+                        include "tambah_user.php";
+                        break;
                 }
             } else {
                 ?>

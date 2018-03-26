@@ -96,7 +96,7 @@ if (empty($_SESSION['admin'])) {
                                     }
                                     $rowseri=mysqli_fetch_array($queryseri);
                                     $merk_meter_rusak = $rowseri['merk'];
-                                    $tipe_meter_rusak = $rowseri['tipe'];
+                                    $tipe_meter_rusak = $rowseri['tipe']; 
                                     $tahun_meter_rusak = $rowseri['tahun'];
                           
                                     

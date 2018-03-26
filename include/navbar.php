@@ -94,7 +94,25 @@ if (!empty($_SESSION['admin'])) {
                          ';
                     }
                     ?>
-                    
+                    <?php
+                    //admin 10 untuk sayid
+                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2) {
+                        echo '
+                            
+                        <li>
+                        <a><i class="fa fa-fax fa-fw"></i> Administrator<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                            <li>
+                                <a href="?page=tud">Tambah User</a>
+                            </li>
+
+                        </ul>                        
+                        </li>
+                       
+                         ';
+                    }
+                    ?>
                     <li>
                         <a href="?page=about"><i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>
