@@ -42,6 +42,7 @@ if (empty($_SESSION['admin'])) {
         $sisa_pulsa = $_REQUEST['sisa_pulsa'];
         $no_hp_plg = $_REQUEST['no_hp_plg'];
         $std_dummy = $_REQUEST['std_dummy'];
+        $nama_cc = $_REQUEST['nama_cc'];
         $aktivasi = "non aktif";
         $kembali = "belum";
         $nama = $_SESSION['nama'];
@@ -85,25 +86,13 @@ if (empty($_SESSION['admin'])) {
                                 } else {
 
                                     
-                                    //merk tipe tahun otomatis        
-                                    $no_meter_rusak1=$row['no_meter_rusak'];
-                                    $pot12 = substr($no_meter_rusak1, 0, 2);
-                                    $pot34 = substr($no_meter_rusak1,2,2);
-                                    $pjg_seri = strlen($no_meter_rusak1);
-                                    $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12 && seri34=$pot34");
-                                    if(!$queryseri){
-                                        $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
-                                    }
-                                    $rowseri=mysqli_fetch_array($queryseri);
-                                    $merk_meter_rusak = $rowseri['merk'];
-                                    $tipe_meter_rusak = $rowseri['tipe']; 
-                                    $tahun_meter_rusak = $rowseri['tahun'];
+                                    
                           
                                     
-                                    $query = mysqli_query($config, "INSERT INTO tbl_metdum_pakai(id_meter,no_dummy,no_meter_rusak,merk_meter_rusak,alasan_rusak,
-                                            tgl_pakai,ptgs_pasang,sisa_pulsa,no_hp_plg,std_dummy,aktivasi,kembali,nama,id_user,unit)
-                                            VALUES('','$no_dummy','$no_meter_rusak','$merk_meter_rusak','$alasan_rusak','$tgl_pakai','$ptgs_pasang',"
-                                            . "'$sisa_pulsa','$no_hp_plg','$std_dummy','$aktivasi','$kembali','$nama','$id_user','$unit')");
+                                    $query = mysqli_query($config, "INSERT INTO tbl_metdum_pakai(id_meter,no_dummy,no_meter_rusak,alasan_rusak,
+                                            tgl_pakai,ptgs_pasang,sisa_pulsa,no_hp_plg,std_dummy,nama_cc,aktivasi,kembali,nama,id_user,unit)
+                                            VALUES('','$no_dummy','$no_meter_rusak','$alasan_rusak','$tgl_pakai','$ptgs_pasang',"
+                                            . "'$sisa_pulsa','$no_hp_plg','$std_dummy','$nama_cc','$aktivasi','$kembali','$nama','$id_user','$unit')");
 
                                     $query_status = mysqli_query($config, "UPDATE tbl_metdum_stok SET status='', tgl_pakai='$tgl_pakai', "
                                             . "no_meter_rusak='$no_meter_rusak', posko='$nama' WHERE unit ='$unit' && no_dummy='$no_dummy'");
@@ -211,6 +200,11 @@ if (empty($_SESSION['admin'])) {
                                         <div class="form-group col-lg-6">
                                             <label for="std_dummy">Stand Dummy</label>
                                             <input class="form-control" type="text" name="std_dummy" id="std_dummy" required>
+                                        </div>
+                                        
+                                        <div class="form-group col-lg-6">
+                                            <label for="nama_cc">Call Center</label>
+                                            <input class="form-control" type="text" name="nama_cc" id="nama_cc" required>
                                         </div>
                                     </div>    
 

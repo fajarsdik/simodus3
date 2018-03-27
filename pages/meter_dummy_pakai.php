@@ -116,6 +116,7 @@ if (empty($_SESSION['admin'])) {
                                         <th width="5%" style="text-align: center">Sisa Pulsa</th>
                                         <th width="5%" style="text-align: center">No. HP Plg</th>
                                         <th width="5%" style="text-align: center">Stand Dummy</th>
+                                        <th width="5%" style="text-align: center">Call Center</th>
                                         <th width="5%">Tindakan</th>
                                 </tr>
                             </thead>
@@ -176,21 +177,18 @@ if (empty($_SESSION['admin'])) {
                         }
                         
                         
-                        //merk tipe tahun otomatis        
+                        //merk tipe tahun otomatis  dibagian tampilan aja      
                         $no_meter_rusak=$row['no_meter_rusak'];
                         $pot12 = substr($no_meter_rusak, 0, 2);
                         $pot34 = substr($no_meter_rusak,2,2);
                         $pjg_seri = strlen($no_meter_rusak);
-                        $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12 && seri34=$pot34");
-                        if(!$queryseri){
-                            $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
-                        }
-                        $rowseri=mysqli_fetch_array($queryseri);
+
+                        $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
+                        $rowseri=mysqli_fetch_array($queryseri);  
                         $merk_meter_rusak = $rowseri['merk'];
                         $tipe_meter_rusak = $rowseri['tipe'];
-                        $tahun_meter_rusak = $rowseri['tahun'];
-                                                            
-                        
+                        $tahun_meter_rusak = $rowseri['tahun'];                            
+
                         echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>';
 
                         echo '<td style="text-align: center">' . $alasan_rusak . '</td>';
@@ -233,6 +231,7 @@ if (empty($_SESSION['admin'])) {
                             <td style="text-align: center">' . $row['sisa_pulsa'] . '</td>
                             <td style="text-align: center">' . $row['no_hp_plg'] . '</td>
                             <td style="text-align: center">' . $row['std_dummy'] . '</td>
+                            <td style="text-align: center">' . $row['nama_cc'] . '</td>
                             <td style="text-align: center">';
 
                         if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
@@ -322,6 +321,7 @@ if (empty($_SESSION['admin'])) {
                                         <th width="5%" style="text-align: center">Sisa Pulsa</th>
                                         <th width="5%" style="text-align: center">No. HP Plg</th>
                                         <th width="5%" style="text-align: center">Stand Dummy</th>
+                                        <th width="5%" style="text-align: center">Call Center</th>
                                         <th width="5%">Tindakan</th>
                                     </tr>
                                 </thead>
@@ -383,16 +383,14 @@ if (empty($_SESSION['admin'])) {
                                             }
                                             
                                             
-                                            //merk tipe tahun otomatis        
+                                            //merk tipe tahun otomatis  dibagian tampilan aja      
                                             $no_meter_rusak=$row['no_meter_rusak'];
                                             $pot12 = substr($no_meter_rusak, 0, 2);
                                             $pot34 = substr($no_meter_rusak,2,2);
                                             $pjg_seri = strlen($no_meter_rusak);
-                                            $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12 && seri34=$pot34");
-                                            if(!$queryseri){
-                                                $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
-                                            }
-                                            $rowseri=mysqli_fetch_array($queryseri);
+                                            
+                                            $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
+                                            $rowseri=mysqli_fetch_array($queryseri);  
                                             $merk_meter_rusak = $rowseri['merk'];
                                             $tipe_meter_rusak = $rowseri['tipe'];
                                             $tahun_meter_rusak = $rowseri['tahun'];
@@ -440,6 +438,7 @@ if (empty($_SESSION['admin'])) {
                                                 <td style="text-align: center">' . $row['sisa_pulsa'] . '</td>
                                                 <td style="text-align: center">' . $row['no_hp_plg'] . '</td>
                                                 <td style="text-align: center">' . $row['std_dummy'] . '</td>
+                                                <td style="text-align: center">' . $row['nama_cc'] . '</td>
                                                 <td style="text-align: center">';
 
 
