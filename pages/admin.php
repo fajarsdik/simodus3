@@ -104,6 +104,9 @@ if (empty($_SESSION['admin'])) {
                         //menghitung jumlah meter belum kembali
                         $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='aktif' && kembali='belum'"));
                         ?>
+                        
+                        <div class="col-lg-12">
+                            <div class="row">
 
                         <div class="col-lg-3 col-md-6">
                             <div class="panel panel-primary">
@@ -150,11 +153,16 @@ if (empty($_SESSION['admin'])) {
                                 </div>
                             </div>
                         </div>
+                        </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="row">
                     
                     <?php
                         if ($belum_aktivasi > 0) {
 
-                            if ($_SESSION['id_user'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4) {
+                            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4) {
                                 ?>
 
                                 <div class="col-lg-3 col-md-6">
@@ -179,7 +187,7 @@ if (empty($_SESSION['admin'])) {
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                            
 
                             <?php
                         }
@@ -189,7 +197,7 @@ if (empty($_SESSION['admin'])) {
                     <?php
                         if ($belum_kembali > 0) {
 
-                            if ($_SESSION['id_user'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4) {
+                            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4) {
                                 ?>
 
                                 <div class="col-lg-3 col-md-6">
@@ -205,7 +213,7 @@ if (empty($_SESSION['admin'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="?page=mdk">
+                                        <a href="?page=mdk&act=add">
                                             <div class="panel-footer">
                                                 <span class="pull-left">Lihat detail</span>
                                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -214,12 +222,13 @@ if (empty($_SESSION['admin'])) {
                                         </a>
                                     </div>
                                 </div>
-                            </div>
 
                             <?php
                         }
                     }
                     ?>
+                    </div>
+                    </div>
                     <!-- /.row -->
 
                 </div>
