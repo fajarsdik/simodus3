@@ -67,6 +67,11 @@ if (empty($_SESSION['admin'])) {
                     case 'tud':
                         include "tambah_user.php";
                         break;
+                    
+                    case 'coms':
+                        include "comingsoon.php";
+                        break;
+                    
                 }
             } else {
                 ?>
@@ -97,7 +102,7 @@ if (empty($_SESSION['admin'])) {
                         $belum_aktivasi = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='non aktif'"));
 
                         //menghitung jumlah meter belum kembali
-                        $count5 = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='aktif' && kembali='belum'"));
+                        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='aktif' && kembali='belum'"));
                         ?>
 
                         <div class="col-lg-3 col-md-6">
@@ -145,7 +150,8 @@ if (empty($_SESSION['admin'])) {
                                 </div>
                             </div>
                         </div>
-                        <?php
+                    
+                    <?php
                         if ($belum_aktivasi > 0) {
 
                             if ($_SESSION['id_user'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4) {
@@ -165,6 +171,41 @@ if (empty($_SESSION['admin'])) {
                                             </div>
                                         </div>
                                         <a href="?page=atv">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">Lihat detail</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php
+                        }
+                    }
+                    ?>
+                    
+                    <?php
+                        if ($belum_kembali > 0) {
+
+                            if ($_SESSION['id_user'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4) {
+                                ?>
+
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="panel panel-red">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <i class="fa fa-exclamation fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-9 text-right">
+                                                    <?php echo '<div class="huge">' . $belum_kembali . '</div>'; ?>
+                                                    <div>Meter Belum Kembali</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="?page=mdk">
                                             <div class="panel-footer">
                                                 <span class="pull-left">Lihat detail</span>
                                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

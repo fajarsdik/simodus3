@@ -86,10 +86,10 @@ if (empty($_SESSION['admin'])) {
 
                                     
                                     //merk tipe tahun otomatis        
-                                    $no_meter_rusak=$row['no_meter_rusak'];
-                                    $pot12 = substr($no_meter_rusak, 0, 2);
-                                    $pot34 = substr($no_meter_rusak,2,2);
-                                    $pjg_seri = strlen($no_meter_rusak);
+                                    $no_meter_rusak1=$row['no_meter_rusak'];
+                                    $pot12 = substr($no_meter_rusak1, 0, 2);
+                                    $pot34 = substr($no_meter_rusak1,2,2);
+                                    $pjg_seri = strlen($no_meter_rusak1);
                                     $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12 && seri34=$pot34");
                                     if(!$queryseri){
                                         $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");

@@ -473,7 +473,7 @@ if (empty($_SESSION['admin'])) {
                         <!--/.table-responsive -->
 
                         <?php
-                        $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE aktivasi='non aktif'");
+                        $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE aktivasi='non aktif' && unit='$unit'");
                         $cdata = mysqli_num_rows($query);
                         $cpg = ceil($cdata / $limit);
 
