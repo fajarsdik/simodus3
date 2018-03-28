@@ -56,18 +56,7 @@ if (empty($_SESSION['admin'])) {
                         include "laporan_dummy.php";
                         break;
 
-                    case 'egm':
-                        include "ganmet_entri.php";
-                        break;
-                    
-                    case 'utd':
-                        include "user_total.php";
-                        break;
-                    
-                    case 'tud':
-                        include "tambah_user.php";
-                        break;
-                    
+                   
                     case 'coms':
                         include "comingsoon.php";
                         break;
