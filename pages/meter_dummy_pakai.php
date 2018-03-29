@@ -98,9 +98,9 @@ if (empty($_SESSION['admin'])) {
                         <p>Hasil pencarian untuk kata kunci <strong>" ' . stripslashes($cari) . ' "</strong>
                     </div>
                             
-                    <div class="panel panel-primary>
+                    <div class="panel panel-primary">
                         <div class="panel-heading"><i class="fa fa-user fa-fw"></i>
-                            ' . $nama . '
+                            ' . $_SESSION['nama'] . '
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
