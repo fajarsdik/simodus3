@@ -55,8 +55,12 @@ if (empty($_SESSION['admin'])) {
                     case 'lpd':
                         include "laporan_dummy.php";
                         break;
-
-
+                    case 'dps':
+                        include "dummy_terpasang.php";
+                        break;
+                    case 'dsb':
+                        include "dummy_standby.php";
+                        break;
                     case 'coms':
                         include "comingsoon.php";
                         break;
@@ -71,7 +75,6 @@ if (empty($_SESSION['admin'])) {
                     <br/>
 
                     <?php
-                    
                     if ($_SESSION['unit'] == 183) {
                         $unit = "Area Tanjungpinang";
                     } elseif ($_SESSION['unit'] == 18301) {
@@ -95,8 +98,8 @@ if (empty($_SESSION['admin'])) {
                     } elseif ($_SESSION['unit'] == 18310) {
                         $unit = "Rayon Anambas";
                     }
-                    
-                    
+
+
                     if ($_SESSION['admin'] == 1) {
 
                         echo ' 
@@ -155,24 +158,24 @@ if (empty($_SESSION['admin'])) {
                     <!-- /.row -->
                     <div class="row">
 
-        <?php
-        $unit = $_SESSION['unit'];
+                        <?php
+                        $unit = $_SESSION['unit'];
 
-        //menghitung jumlah meter dummy
-        $jml_dummy = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%'"));
+                        //menghitung jumlah meter dummy
+                        $jml_dummy = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%'"));
 
-        //menghitung jumlah dummy terpasang
-        $dummy_terpasang = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status=''"));
+                        //menghitung jumlah dummy terpasang
+                        $dummy_terpasang = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status=''"));
 
-        //menghitung jumlah dummy standby
-        $dummy_standby = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status='ready'"));
+                        //menghitung jumlah dummy standby
+                        $dummy_standby = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status='ready'"));
 
-        //menghitung jumlah meter belum diaktivasi
-        $belum_aktivasi = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='non aktif'"));
+                        //menghitung jumlah meter belum diaktivasi
+                        $belum_aktivasi = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='non aktif'"));
 
-        //menghitung jumlah meter belum kembali
-        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='aktif' && kembali='belum'"));
-        ?>
+                        //menghitung jumlah meter belum kembali
+                        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='aktif' && kembali='belum'"));
+                        ?>
 
                         <div class="col-lg-12">
                             <div class="row">
@@ -185,11 +188,18 @@ if (empty($_SESSION['admin'])) {
                                                     <i class="fa fa-arrow-circle-o-up fa-5x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-        <?php echo '<div class="huge">' . $dummy_terpasang . '</div>'; ?>
+                                                    <?php echo '<div class="huge">' . $dummy_terpasang . '</div>'; ?>
                                                     <div>Dummy Terpasang</div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <a href="?page=dps">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">Lihat detail</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-6">
@@ -200,11 +210,18 @@ if (empty($_SESSION['admin'])) {
                                                     <i class="fa fa-check-square-o fa-5x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-        <?php echo '<div class="huge">' . $dummy_standby . '</div>'; ?>
+                                                    <?php echo '<div class="huge">' . $dummy_standby . '</div>'; ?>
                                                     <div>Dummy Standby</div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <a href="?page=dsb">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">Lihat detail</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-6">
@@ -215,11 +232,18 @@ if (empty($_SESSION['admin'])) {
                                                     <i class="fa fa-list-alt fa-5x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-        <?php echo '<div class="huge">' . $jml_dummy . '</div>'; ?>
+                                                    <?php echo '<div class="huge">' . $jml_dummy . '</div>'; ?>
                                                     <div>Jumlah Meter Dummy</div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <a href="?page=mon">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">Lihat detail</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -228,11 +252,11 @@ if (empty($_SESSION['admin'])) {
                         <div class="col-lg-12">
                             <div class="row">
 
-        <?php
-        if ($belum_aktivasi > 0) {
+                                <?php
+                                if ($belum_aktivasi > 0) {
 
-            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4) {
-                ?>
+                                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4) {
+                                        ?>
 
                                         <div class="col-lg-3 col-md-6">
                                             <div class="panel panel-red">
@@ -242,7 +266,7 @@ if (empty($_SESSION['admin'])) {
                                                             <i class="fa fa-exclamation fa-5x"></i>
                                                         </div>
                                                         <div class="col-xs-9 text-right">
-                <?php echo '<div class="huge">' . $belum_aktivasi . '</div>'; ?>
+                                                            <?php echo '<div class="huge">' . $belum_aktivasi . '</div>'; ?>
                                                             <div>Meter Belum Aktivasi</div>
                                                         </div>
                                                     </div>
@@ -258,10 +282,10 @@ if (empty($_SESSION['admin'])) {
                                         </div>
 
 
-                <?php
-            }
-        }
-        ?>
+                                        <?php
+                                    }
+                                }
+                                ?>
 
                                 <?php
                                 if ($belum_kembali > 0) {
@@ -277,7 +301,7 @@ if (empty($_SESSION['admin'])) {
                                                             <i class="fa fa-exclamation fa-5x"></i>
                                                         </div>
                                                         <div class="col-xs-9 text-right">
-                <?php echo '<div class="huge">' . $belum_kembali . '</div>'; ?>
+                                                            <?php echo '<div class="huge">' . $belum_kembali . '</div>'; ?>
                                                             <div>Meter Belum Kembali</div>
                                                         </div>
                                                     </div>
@@ -292,10 +316,10 @@ if (empty($_SESSION['admin'])) {
                                             </div>
                                         </div>
 
-                <?php
-            }
-        }
-        ?>
+                                        <?php
+                                    }
+                                }
+                                ?>
                             </div>
                         </div>
                         <!-- /.row -->
@@ -303,12 +327,12 @@ if (empty($_SESSION['admin'])) {
                     </div>
                     <!-- /#page-wrapper -->
 
-    <?php } ?>
+                <?php } ?>
 
             </div> 
 
             <!-- Include Footer START -->
-    <?php include('../include/footer.php'); ?>
+            <?php include('../include/footer.php'); ?>
             <!-- Include Footer END -->
 
     </body>  
