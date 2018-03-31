@@ -4,7 +4,7 @@ session_start();
 
 //cek session
 if (isset($_SESSION['admin'])) {
-    header("Location: ./admin.php");
+    header("Location: pages/admin.php");
     die();
 }
 require('include/config.php');
