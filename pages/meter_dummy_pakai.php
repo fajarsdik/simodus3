@@ -128,7 +128,7 @@ if (empty($_SESSION['admin'])) {
 
                 $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy LIKE '%$cari%' || no_meter_rusak LIKE '%$cari%'||"
                         . "ptgs_pasang LIKE '%$cari%' || sisa_pulsa LIKE '%$cari%' || no_hp_plg LIKE '%$cari%' || std_dummy LIKE '%$cari%'"
-                        . " && unit LIKE '$unit%' ORDER by tgl_pakai DESC LIMIT $curr, $limit");
+                        . " && unit LIKE '$unit%' ORDER by tgl_pakai ASC LIMIT $curr, $limit");
 
                 if (mysqli_num_rows($query) > 0) {
                     $no = 1;
@@ -333,7 +333,7 @@ if (empty($_SESSION['admin'])) {
 
                                     $no = 1;
 
-                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' ORDER by tgl_pakai DESC LIMIT $curr, $limit");
+                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' ORDER by tgl_pakai ASC LIMIT $curr, $limit");
                                     if (mysqli_num_rows($query) > 0) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
