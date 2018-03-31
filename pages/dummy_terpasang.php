@@ -59,7 +59,7 @@ if (empty($_SESSION['admin'])) {
                                 //script untuk mencari data
                                 $unit = $_SESSION['unit'];
 
-                                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE no_dummy LIKE '$cari%' && status='' && unit LIKE '$unit%' ORDER BY unit, no_dummy");
+                                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE no_dummy LIKE '$cari%' && status='' && unit LIKE '$unit%' ORDER BY unit, tgl_pakai ASC");
                                 if (mysqli_num_rows($query) > 0) {
                                     $no = 1;
                                     while ($row = mysqli_fetch_array($query)) {
@@ -240,7 +240,7 @@ if (empty($_SESSION['admin'])) {
                                 //script untuk menampilkan data
                                 $unit = $_SESSION['unit'];
 
-                                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status='' ORDER BY unit, no_dummy");
+                                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status='' ORDER BY unit, tgl_pakai ASC");
                                 if (mysqli_num_rows($query) > 0) {
                                     $no = 1;
                                     while ($row = mysqli_fetch_array($query)) {
@@ -470,7 +470,7 @@ if (empty($_SESSION['admin'])) {
                                     //script untuk mencari data
                                     $unit = $_SESSION['unit'];
 
-                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE no_dummy LIKE '$cari%' && status='' && unit LIKE '$unit%' ORDER BY unit, no_dummy");
+                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE no_dummy LIKE '$cari%' && status='' && unit LIKE '$unit%' ORDER BY tgl_pakai ASC");
                                     if (mysqli_num_rows($query) > 0) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
@@ -651,7 +651,7 @@ if (empty($_SESSION['admin'])) {
                                     //script untuk menampilkan data
                                     $unit = $_SESSION['unit'];
 
-                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE status='' && unit LIKE '$unit%' ORDER BY unit, no_dummy");
+                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE status='' && unit LIKE '$unit%' ORDER BY tgl_pakai ASC");
                                     if (mysqli_num_rows($query) > 0) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
