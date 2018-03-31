@@ -576,9 +576,9 @@ if (empty($_SESSION['admin'])) {
                                                 echo '<td style="text-align: center"> </td>';
                                             } else {
 
-                                                $y = substr($row['tgl_kbl'], 0, 4);
-                                                $m = substr($row['tgl_kbl'], 5, 2);
-                                                $d = substr($row['tgl_kbl'], 8, 2);
+                                                $y = substr($row['tgl_kembali'], 0, 4);
+                                                $m = substr($row['tgl_kembali'], 5, 2);
+                                                $d = substr($row['tgl_kembali'], 8, 2);
 
                                                 if ($m == "01") {
                                                     $nm = "Januari";
@@ -612,7 +612,7 @@ if (empty($_SESSION['admin'])) {
 
                                             //perhitungan lama standby
                                             if (!empty($row['tgl_pakai']) && $row['tgl_kembali'] > $row['tgl_pakai']) {
-                                                $lama_standby = date("Y-m-d H:i:s") - $row['tgl_kbl'];
+                                                $lama_standby = date("Y-m-d H:i:s") - $row['tgl_kembali'];
                                                 echo
                                                 '<td style="text-align: center">' . $lama_standby . ' Hari</td>';
                                             } else {

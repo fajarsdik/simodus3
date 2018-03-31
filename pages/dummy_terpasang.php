@@ -425,11 +425,11 @@ if (empty($_SESSION['admin'])) {
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Monitoring Dummy</h1>
+                        <h1 class="page-header">Meter Dummy Terpasang</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-md-6">
-                        <form method="post" action="?page=mon">
+                        <form method="post" action="?page=dps">
                             <div class="input-group custom-search-form">
                                 <input id="search" name="cari" type="text" class="form-control" placeholder="Cari No Dummy...">
                                 <input type="submit" name="submit" class="hidden">
@@ -470,7 +470,7 @@ if (empty($_SESSION['admin'])) {
                                     //script untuk mencari data
                                     $unit = $_SESSION['unit'];
 
-                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE no_dummy LIKE '$cari%' && unit LIKE '$unit%' ORDER BY unit, no_dummy");
+                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE no_dummy LIKE '$cari%' && status='' && unit LIKE '$unit%' ORDER BY unit, no_dummy");
                                     if (mysqli_num_rows($query) > 0) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
@@ -576,9 +576,9 @@ if (empty($_SESSION['admin'])) {
                                                 echo '<td style="text-align: center"> </td>';
                                             } else {
 
-                                                $y = substr($row['tgl_kbl'], 0, 4);
-                                                $m = substr($row['tgl_kbl'], 5, 2);
-                                                $d = substr($row['tgl_kbl'], 8, 2);
+                                                $y = substr($row['tgl_kembali'], 0, 4);
+                                                $m = substr($row['tgl_kembali'], 5, 2);
+                                                $d = substr($row['tgl_kembali'], 8, 2);
 
                                                 if ($m == "01") {
                                                     $nm = "Januari";
@@ -651,7 +651,7 @@ if (empty($_SESSION['admin'])) {
                                     //script untuk menampilkan data
                                     $unit = $_SESSION['unit'];
 
-                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' ORDER BY unit, no_dummy");
+                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE status='' && unit LIKE '$unit%' ORDER BY unit, no_dummy");
                                     if (mysqli_num_rows($query) > 0) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
