@@ -22,7 +22,7 @@ if (!empty($_SESSION['admin'])) {
 
     <script>
         $(document).ready(function () {
-            $('#dataTables').DataTable({
+            $('#monitoring').DataTable({
                 responsive: true
             });
         });
