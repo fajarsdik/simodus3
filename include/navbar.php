@@ -41,40 +41,63 @@ if (!empty($_SESSION['admin'])) {
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    <li>
-                        <a href="../pages/admin.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="?page=mon"><i class="fa fa-table fa-fw"></i> Monitoring Dummy</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fax fa-fw"></i> Meter Dummy<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="?page=mdg">Pemakaian Dummy</a>
-                            </li>
-                            <li>
-                                <a href="#">Aktivasi Meter Pengganti <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="?page=atv">Aktivasi Meter</a>
-                                    </li>
-                                    <li>
-                                        <a href="?page=his_atv">Histori Aktivasi</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="?page=mdk">Dummy Kembali</a>
-                            </li>
-                            <li>
-                                <a href="?page=lpd">Laporan</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                   
+                    <?php
+                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4 || $_SESSION['admin'] == 5) {
+                        ?>
+                        <li>
+                            <a href="../pages/admin.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="?page=mon"><i class="fa fa-table fa-fw"></i> Monitoring Dummy</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fax fa-fw"></i> Meter Dummy<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="?page=mdg">Pemakaian Dummy</a>
+                                </li>
+                                <li>
+                                    <a href="#">Aktivasi Meter Pengganti <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="?page=atv">Aktivasi Meter</a>
+                                        </li>
+                                        <li>
+                                            <a href="?page=his_atv">Histori Aktivasi</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="?page=mdk">Dummy Kembali</a>
+                                </li>
+                                <li>
+                                    <a href="?page=lpd">Laporan</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    <?php                
+                    }
+                    ?>
+                        
+                    <?php
+                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 6) {
+                        ?>
                     
+                            <li>
+                                <a href="#"><i class="fa fa-fax fa-fw"></i> P2TL<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="?page=pet">Temuan</a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                    <?php                
+                    }
+                    ?>
+                        
                     <li>
                         <a href="?page=about"><i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>

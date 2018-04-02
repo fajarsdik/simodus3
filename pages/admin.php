@@ -61,6 +61,11 @@ if (empty($_SESSION['admin'])) {
                     case 'dsb':
                         include "dummy_standby.php";
                         break;
+                    
+                    case 'pet':
+                        include "p2tl_temuan.php";
+                        break;
+                    
                     case 'coms':
                         include "comingsoon.php";
                         break;
