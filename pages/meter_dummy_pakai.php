@@ -107,11 +107,11 @@ if (empty($_SESSION['admin'])) {
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-1">
                                 <thead>
                                 <tr>
-                                    <th width="5%" style="text-align: center">No. Dummy</th>
+                                        <th width="5%" style="text-align: center">Tanggal Pakai</th>
+                                        <th width="5%" style="text-align: center">No. Dummy</th>
                                         <th width="5%" style="text-align: center">No. Meter Rusak</th>
                                         <th width="5%%" style="text-align: center">Merk Meter Rusak</th>
                                         <th width="5%" style="text-align: center">Alasan Rusak</th>
-                                        <th width="5%" style="text-align: center">Tanggal Pakai</th>
                                         <th width="5%" style="text-align: center">Petugas Pasang</th>
                                         <th width="5%" style="text-align: center">Sisa Pulsa</th>
                                         <th width="5%" style="text-align: center">No. HP Plg</th>
@@ -126,15 +126,50 @@ if (empty($_SESSION['admin'])) {
                 //script untuk mencari data
                 $unit = $_SESSION['unit'];
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy LIKE '%$cari%' || no_meter_rusak LIKE '%$cari%'||"
-                        . "ptgs_pasang LIKE '%$cari%' || sisa_pulsa LIKE '%$cari%' || no_hp_plg LIKE '%$cari%' || std_dummy LIKE '%$cari%'"
+                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy='$cari' || no_meter_rusak='$cari%'||"
+                        . "ptgs_pasang LIKE '%$cari%' || sisa_pulsa='$cari%' || no_hp_plg='$cari%' || std_dummy LIKE '$cari%'"
                         . " && unit LIKE '$unit%' ORDER by tgl_pakai DESC LIMIT $curr, $limit");
 
                 if (mysqli_num_rows($query) > 0) {
                     $no = 1;
                     while ($row = mysqli_fetch_array($query)) {
                         echo ' 
-                            <tr>
+                            <tr>';
+
+                        $y = substr($row['tgl_pakai'], 0, 4);
+                        $m = substr($row['tgl_pakai'], 5, 2);
+                        $d = substr($row['tgl_pakai'], 8, 2);
+                        $h = substr($row['tgl_pakai'], 11, 2);
+                        $i = substr($row['tgl_pakai'], 14, 2);
+                        $s = substr($row['tgl_pakai'], 17, 2);
+
+                        if ($m == "01") {
+                            $nm = "Januari";
+                        } elseif ($m == "02") {
+                            $nm = "Februari";
+                        } elseif ($m == "03") {
+                            $nm = "Maret";
+                        } elseif ($m == "04") {
+                            $nm = "April";
+                        } elseif ($m == "05") {
+                            $nm = "Mei";
+                        } elseif ($m == "06") {
+                            $nm = "Juni";
+                        } elseif ($m == "07") {
+                            $nm = "Juli";
+                        } elseif ($m == "08") {
+                            $nm = "Agustus";
+                        } elseif ($m == "09") {
+                            $nm = "September";
+                        } elseif ($m == "10") {
+                            $nm = "Oktober";
+                        } elseif ($m == "11") {
+                            $nm = "November";
+                        } elseif ($m == "12") {
+                            $nm = "Desember";
+                        }
+                        echo '
+                            <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <br/><hr/> ' . $h . ":" . $i . ":" . $s . '</td>
                             <td style="text-align: center">' . $row['no_dummy'] . '</td>
                             <td style="text-align: center">' . $row['no_meter_rusak'] . '</td>';
 
@@ -175,127 +210,94 @@ if (empty($_SESSION['admin'])) {
                         } else if ($row['alasan_rusak'] == 18) {
                             $alasan_rusak = "Lain-lain";
                         }
-                        
-                        
+
+
                         //merk tipe tahun otomatis  dibagian tampilan aja      
-                        $no_meter_rusak=$row['no_meter_rusak'];
+                        $no_meter_rusak = $row['no_meter_rusak'];
                         $pot12 = substr($no_meter_rusak, 0, 2);
-                        $pot34 = substr($no_meter_rusak,2,2);
+                        $pot34 = substr($no_meter_rusak, 2, 2);
                         $pjg_seri = strlen($no_meter_rusak);
 
                         $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
-                        $rowseri=mysqli_fetch_array($queryseri);  
+                        $rowseri = mysqli_fetch_array($queryseri);
                         $merk_meter_rusak = $rowseri['merk'];
                         $tipe_meter_rusak = $rowseri['tipe'];
-                        $tahun_meter_rusak = $rowseri['tahun'];                            
+                        $tahun_meter_rusak = $rowseri['tahun'];
 
-                        echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>';
-
-                        echo '<td style="text-align: center">' . $alasan_rusak . '</td>';
-
-                        $y = substr($row['tgl_pakai'], 0, 4);
-                        $m = substr($row['tgl_pakai'], 5, 2);
-                        $d = substr($row['tgl_pakai'], 8, 2);
-                        $h = substr($row['tgl_pakai'], 11, 2);
-                        $i = substr($row['tgl_pakai'], 14, 2);
-                        $s = substr($row['tgl_pakai'], 17, 2);
-
-                        if ($m == "01") {
-                            $nm = "Januari";
-                        } elseif ($m == "02") {
-                            $nm = "Februari";
-                        } elseif ($m == "03") {
-                            $nm = "Maret";
-                        } elseif ($m == "04") {
-                            $nm = "April";
-                        } elseif ($m == "05") {
-                            $nm = "Mei";
-                        } elseif ($m == "06") {
-                            $nm = "Juni";
-                        } elseif ($m == "07") {
-                            $nm = "Juli";
-                        } elseif ($m == "08") {
-                            $nm = "Agustus";
-                        } elseif ($m == "09") {
-                            $nm = "September";
-                        } elseif ($m == "10") {
-                            $nm = "Oktober";
-                        } elseif ($m == "11") {
-                            $nm = "November";
-                        } elseif ($m == "12") {
-                            $nm = "Desember";
-                        }
-                        echo '
-                            <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <br/><hr/> ' . $h . ":" . $i . ":" . $s . '</td>
-                            <td style="text-align: center">' . $row['ptgs_pasang'] . '</td>
-                            <td style="text-align: center">' . $row['sisa_pulsa'] . '</td>
-                            <td style="text-align: center">' . $row['no_hp_plg'] . '</td>
-                            <td style="text-align: center">' . $row['std_dummy'] . '</td>
-                            <td style="text-align: center">' . $row['nama_cc'] . '</td>
-                            <td style="text-align: center">';
+                        echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>
+                        <td style="text-align: center">' . $alasan_rusak . '</td>
+                            
+                        <td style = "text-align: center">' . $row['ptgs_pasang'] . '</td>
+                        <td style = "text-align: center">' . $row['sisa_pulsa'] . '</td>
+                        <td style = "text-align: center">' . $row['no_hp_plg'] . '</td>
+                        <td style = "text-align: center">' . $row['std_dummy'] . '</td>
+                        <td style = "text-align: center">' . $row['nama_cc'] . '</td>
+                        <td style = "text-align: center">';
 
                         if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
 
-                            echo ' <div class="row"><a class="btn btn-warning" href="?page=mdg&act=edit&id_meter=' . $row['id_meter'] . '">
-                                                        <i class="fa fa-edit"> Edit</i></a></div></br>
-                                                    <div class="row">    
-                                                    <a class="btn btn-danger" href="?page=mdg&act=del&id_meter=' . $row['id_meter'] . '">
-                                                        <i class="fa fa-trash-o"> Delete</i></a></div>';
+                            echo ' <div class = "row"><a class = "btn btn-warning" href = "?page=mdg&act=edit&id_meter=' . $row['id_meter'] . '">
+                        <i class = "fa fa-edit"> Edit</i></a></div></br>
+                        <div class = "row">
+                        <a class = "btn btn-danger" href = "?page=mdg&act=del&id_meter=' . $row['id_meter'] . '">
+                        <i class = "fa fa-trash-o"> Delete</i></a></div>';
                         } else {
-                            echo '<i class="glyphicon glyphicon-ban-circle"></i>';
+                            echo '<i class = "glyphicon glyphicon-ban-circle"></i>';
                         }
                         echo '
-                                    </td> 
-                                </tr> 
-                            </tbody>';
+                        </td>
+                        </tr>
+                        </tbody>';
                     }
                 } else {
-                    echo '<tr><td colspan="10"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+                    echo '<tr><td colspan = "10"><center><p class = "add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
                 }
                 echo '</table><br/><br/>
                         </div>
-                    </div>
-                    <!-- Row form END -->';
+                        </div>
+                        <!--Row form END -->';
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%'");
+                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy='$cari' || no_meter_rusak='$cari%'||"
+                        . "ptgs_pasang LIKE '%$cari%' || sisa_pulsa='$cari%' || no_hp_plg='$cari%' || std_dummy LIKE '$cari%'"
+                        . " && unit LIKE '$unit%'");
                 $cdata = mysqli_num_rows($query);
                 $cpg = ceil($cdata / $limit);
 
-                echo '<!-- Pagination START -->
-                          <ul class="pagination">';
+                echo '<!--Pagination START -->
+                        <ul class = "pagination">';
 
                 if ($cdata > $limit) {
 
                     //first and previous pagging
                     if ($pg > 1) {
                         $prev = $pg - 1;
-                        echo '<li><a href="?page=mdg&pg=1"><i class="fa fa-angle-double-left"></i></a></li>
-                                  <li><a href="?page=mdg&pg=' . $prev . '"><i class="fa fa-angle-left"></i></a></li>';
+                        echo '<li><a href = "?page=mdg&pg=1"><i class = "fa fa-angle-double-left"></i></a></li>
+                        <li><a href = "?page=mdg&pg=' . $prev . '"><i class = "fa fa-angle-left"></i></a></li>';
                     } else {
-                        echo '<li class="disabled"><a href=""><i class="fa fa-angle-double-left"></i></a></li>
-                                  <li class="disabled"><a href=""><i class="fa fa-angle-left"></i></a></li>';
+                        echo '<li class = "disabled"><a href = ""><i class = "fa fa-angle-double-left"></i></a></li>
+                        <li class = "disabled"><a href = ""><i class = "fa fa-angle-left"></i></a></li>';
                     }
 
                     //perulangan pagging
                     for ($i = 1; $i <= $cpg; $i++)
                         if ($i != $pg) {
-                            echo '<li><a href="?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
+                            echo '<li><a href = "?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
                         } else {
-                            echo '<li><a href="?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
+                            echo '<li><a href = "?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
                         }
 
                     //last and next pagging
                     if ($pg < $cpg) {
                         $next = $pg + 1;
-                        echo '<li><a href="?page=mdg&pg=' . $next . '"><i class="fa fa-angle-right"></i></a></li>
-                                  <li><a href="?page=mdg&pg=' . $cpg . '"><i class="fa fa-angle-double-right"></i></a></li>';
+                        echo '<li><a href = "?page=mdg&pg=' . $next . '"><i class = "fa fa-angle-right"></i></a></li>
+                        <li><a href = "?page=mdg&pg=' . $cpg . '"><i class = "fa fa-angle-double-right"></i></a></li>';
                     } else {
-                        echo '<li class="disabled"><a href=""><i class="fa fa-angle-right"></i></a></li>
-                                  <li class="disabled"><a href=""><i class="fa fa fa-angle-double-right"></i></a></li>';
+                        echo '<li class = "disabled"><a href = ""><i class = "fa fa-angle-right"></i></a></li>
+                        <li class = "disabled"><a href = ""><i class = "fa fa fa-angle-double-right"></i></a></li>';
                     }
                     echo '
                         </ul>
-                        <!-- Pagination END -->';
+                        <!--Pagination END -->';
                 } else {
                     echo '';
                 }
@@ -312,11 +314,11 @@ if (empty($_SESSION['admin'])) {
 
                                 <thead>
                                     <tr>
+                                        <th width="5%" style="text-align: center">Tanggal Pakai</th>
                                         <th width="5%" style="text-align: center">No. Dummy</th>
                                         <th width="5%" style="text-align: center">No. Meter Rusak</th>
                                         <th width="5%%" style="text-align: center">Merk Meter Rusak</th>
                                         <th width="5%" style="text-align: center">Alasan Rusak</th>
-                                        <th width="5%" style="text-align: center">Tanggal Pakai</th>
                                         <th width="5%" style="text-align: center">Petugas Pasang</th>
                                         <th width="5%" style="text-align: center">Sisa Pulsa</th>
                                         <th width="5%" style="text-align: center">No. HP Plg</th>
@@ -337,10 +339,45 @@ if (empty($_SESSION['admin'])) {
                                     if (mysqli_num_rows($query) > 0) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
-                                            echo ' 
-                                                <tr>
-                                                <td style="text-align: center">' . $row['no_dummy'] . '</td>
-                                                <td style="text-align: center">' . $row['no_meter_rusak'] . '</td>';
+                                            echo '
+                                            <tr>';
+
+                                            $y = substr($row['tgl_pakai'], 0, 4);
+                                            $m = substr($row['tgl_pakai'], 5, 2);
+                                            $d = substr($row['tgl_pakai'], 8, 2);
+                                            $h = substr($row['tgl_pakai'], 11, 2);
+                                            $i = substr($row['tgl_pakai'], 14, 2);
+                                            $s = substr($row['tgl_pakai'], 17, 2);
+
+                                            if ($m == "01") {
+                                                $nm = "Januari";
+                                            } elseif ($m == "02") {
+                                                $nm = "Februari";
+                                            } elseif ($m == "03") {
+                                                $nm = "Maret";
+                                            } elseif ($m == "04") {
+                                                $nm = "April";
+                                            } elseif ($m == "05") {
+                                                $nm = "Mei";
+                                            } elseif ($m == "06") {
+                                                $nm = "Juni";
+                                            } elseif ($m == "07") {
+                                                $nm = "Juli";
+                                            } elseif ($m == "08") {
+                                                $nm = "Agustus";
+                                            } elseif ($m == "09") {
+                                                $nm = "September";
+                                            } elseif ($m == "10") {
+                                                $nm = "Oktober";
+                                            } elseif ($m == "11") {
+                                                $nm = "November";
+                                            } elseif ($m == "12") {
+                                                $nm = "Desember";
+                                            }
+                                            echo '
+                                            <td style = "text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td>
+                                            <td style = "text-align: center">' . $row['no_dummy'] . '</td>
+                                            <td style = "text-align: center">' . $row['no_meter_rusak'] . '</td>';
 
                                             if ($row['alasan_rusak'] == 1) {
                                                 $alasan_rusak = "Token tidak dapat dimasukkan";
@@ -381,65 +418,29 @@ if (empty($_SESSION['admin'])) {
                                             } else {
                                                 $alasan_rusak = "Lain-lain";
                                             }
-                                            
-                                            
+
+
                                             //merk tipe tahun otomatis  dibagian tampilan aja      
-                                            $no_meter_rusak=$row['no_meter_rusak'];
+                                            $no_meter_rusak = $row['no_meter_rusak'];
                                             $pot12 = substr($no_meter_rusak, 0, 2);
-                                            $pot34 = substr($no_meter_rusak,2,2);
+                                            $pot34 = substr($no_meter_rusak, 2, 2);
                                             $pjg_seri = strlen($no_meter_rusak);
-                                            
+
                                             $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
-                                            $rowseri=mysqli_fetch_array($queryseri);  
+                                            $rowseri = mysqli_fetch_array($queryseri);
                                             $merk_meter_rusak = $rowseri['merk'];
                                             $tipe_meter_rusak = $rowseri['tipe'];
                                             $tahun_meter_rusak = $rowseri['tahun'];
 
 
-                                            echo '<td style="text-align: center">' . $merk_meter_rusak. '</td>';
-
-                                            echo '<td style="text-align: center">' . $alasan_rusak . '</td>';
-
-                                            $y = substr($row['tgl_pakai'], 0, 4);
-                                            $m = substr($row['tgl_pakai'], 5, 2);
-                                            $d = substr($row['tgl_pakai'], 8, 2);
-                                            $h = substr($row['tgl_pakai'], 11, 2);
-                                            $i = substr($row['tgl_pakai'], 14, 2);
-                                            $s = substr($row['tgl_pakai'], 17, 2);
-
-                                            if ($m == "01") {
-                                                $nm = "Januari";
-                                            } elseif ($m == "02") {
-                                                $nm = "Februari";
-                                            } elseif ($m == "03") {
-                                                $nm = "Maret";
-                                            } elseif ($m == "04") {
-                                                $nm = "April";
-                                            } elseif ($m == "05") {
-                                                $nm = "Mei";
-                                            } elseif ($m == "06") {
-                                                $nm = "Juni";
-                                            } elseif ($m == "07") {
-                                                $nm = "Juli";
-                                            } elseif ($m == "08") {
-                                                $nm = "Agustus";
-                                            } elseif ($m == "09") {
-                                                $nm = "September";
-                                            } elseif ($m == "10") {
-                                                $nm = "Oktober";
-                                            } elseif ($m == "11") {
-                                                $nm = "November";
-                                            } elseif ($m == "12") {
-                                                $nm = "Desember";
-                                            }
-                                            echo '
-                                                <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td>
-                                                <td style="text-align: center">' . $row['ptgs_pasang'] . '</td>
-                                                <td style="text-align: center">' . $row['sisa_pulsa'] . '</td>
-                                                <td style="text-align: center">' . $row['no_hp_plg'] . '</td>
-                                                <td style="text-align: center">' . $row['std_dummy'] . '</td>
-                                                <td style="text-align: center">' . $row['nama_cc'] . '</td>
-                                                <td style="text-align: center">';
+                                            echo '<td style = "text-align: center">' . $merk_meter_rusak . '</td>
+                                            <td style = "text-align: center">' . $alasan_rusak . '</td>
+                                            <td style = "text-align: center">' . $row['ptgs_pasang'] . '</td>
+                                            <td style = "text-align: center">' . $row['sisa_pulsa'] . '</td>
+                                            <td style = "text-align: center">' . $row['no_hp_plg'] . '</td>
+                                            <td style = "text-align: center">' . $row['std_dummy'] . '</td>
+                                            <td style = "text-align: center">' . $row['nama_cc'] . '</td>
+                                            <td style = "text-align: center">';
 
 
                                             if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
@@ -451,24 +452,24 @@ if (empty($_SESSION['admin'])) {
 
                                                 if ($aktivasi == "non aktif") {
 
-                                                    echo ' <div class="row"><a class="btn btn-warning" href="?page=mdg&act=edit&id_meter=' . $row['id_meter'] . '">
-                                                        <i class="fa fa-edit"> Edit</i></a></div></br>
-                                                    <div class="row">    
-                                                    <a class="btn btn-danger" href="?page=mdg&act=del&id_meter=' . $row['id_meter'] . '">
-                                                        <i class="fa fa-trash-o"> Delete</i></a></div>';
+                                                    echo ' <div class = "row"><a class = "btn btn-warning" href = "?page=mdg&act=edit&id_meter=' . $row['id_meter'] . '">
+                                            <i class = "fa fa-edit"> Edit</i></a></div></br>
+                                            <div class = "row">
+                                            <a class = "btn btn-danger" href = "?page=mdg&act=del&id_meter=' . $row['id_meter'] . '">
+                                            <i class = "fa fa-trash-o"> Delete</i></a></div>';
                                                 } else {
-                                                    echo '<btn class="btn btn-success" disabled><i class="glyphicon glyphicon-ban-circle"></i> Aktif</btn>';
+                                                    echo '<btn class = "btn btn-success" disabled><i class = "glyphicon glyphicon-ban-circle"></i> Aktif</btn>';
                                                 }
                                             } else {
-                                                echo '<i class="glyphicon glyphicon-ban-circle" disabled></i>';
+                                                echo '<i class = "glyphicon glyphicon-ban-circle" disabled></i>';
                                             }
                                             echo '
-                                                </td> 
-                                            </tr> 
-                                        </tbody>';
+                                            </td>
+                                            </tr>
+                                            </tbody>';
                                         }
                                     } else {
-                                        echo '<tr><td colspan="10"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+                                        echo '<tr><td colspan = "10"><center><p class = "add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
                                     }
                                     ?>
                             </table>
@@ -482,41 +483,41 @@ if (empty($_SESSION['admin'])) {
                         $cdata = mysqli_num_rows($query);
                         $cpg = ceil($cdata / $limit);
 
-                        echo '<br/><!-- Pagination START -->
-                          <ul class="pagination">';
+                        echo '<br/><!--Pagination START -->
+                                            <ul class = "pagination">';
 
                         if ($cdata > $limit) {
 
                             //first and previous pagging
                             if ($pg > 1) {
                                 $prev = $pg - 1;
-                                echo '<li><a href="?page=mdg&pg=1"><i class="fa fa-angle-double-left"></i></a></li>
-                                  <li><a href="?page=mdg&pg=' . $prev . '"><i class="fa fa-angle-left"></i></a></li>';
+                                echo '<li><a href = "?page=mdg&pg=1"><i class = "fa fa-angle-double-left"></i></a></li>
+                                            <li><a href = "?page=mdg&pg=' . $prev . '"><i class = "fa fa-angle-left"></i></a></li>';
                             } else {
-                                echo '<li class="disabled"><a href=""><i class="fa fa-angle-double-left"></i></a></li>
-                                  <li class="disabled"><a href=""><i class="fa fa-angle-left"></i></a></li>';
+                                echo '<li class = "disabled"><a href = ""><i class = "fa fa-angle-double-left"></i></a></li>
+                                            <li class = "disabled"><a href = ""><i class = "fa fa-angle-left"></i></a></li>';
                             }
 
                             //perulangan pagging
                             for ($i = 1; $i <= $cpg; $i++)
                                 if ($i != $pg) {
-                                    echo '<li><a href="?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
+                                    echo '<li><a href = "?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
                                 } else {
-                                    echo '<li><a href="?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
+                                    echo '<li><a href = "?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
                                 }
 
                             //last and next pagging
                             if ($pg < $cpg) {
                                 $next = $pg + 1;
-                                echo '<li><a href="?page=mdg&pg=' . $next . '"><i class="fa fa-angle-right"></i></a></li>
-                                  <li><a href="?page=mdg&pg=' . $cpg . '"><i class="fa fa-angle-double-right"></i></a></li>';
+                                echo '<li><a href = "?page=mdg&pg=' . $next . '"><i class = "fa fa-angle-right"></i></a></li>
+                                            <li><a href = "?page=mdg&pg=' . $cpg . '"><i class = "fa fa-angle-double-right"></i></a></li>';
                             } else {
-                                echo '<li class="disabled"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                  <li class="disabled"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>';
+                                echo '<li class = "disabled"><a href = "#"><i class = "fa fa-angle-right"></i></a></li>
+                                            <li class = "disabled"><a href = "#"><i class = "fa fa-angle-double-right"></i></a></li>';
                             }
                             echo '
-                        </ul>
-                        <!-- Pagination END -->';
+                                            </ul>
+                                            <!--Pagination END -->';
                         } else {
                             echo '';
                         }

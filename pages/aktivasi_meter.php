@@ -95,18 +95,18 @@ if (empty($_SESSION['admin'])) {
                             <div class="table-responsive">
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-1">
                                 <thead>
-                                <tr>
-                                    <th width="5%" style="text-align: center">No. Dummy</th>
+                                    <tr>
+                                        <th width="5%" style="text-align: center">Tanggal Pakai</th>
+                                        <th width="5%" style="text-align: center">No. Dummy</th>
                                         <th width="5%" style="text-align: center">No. Meter Rusak</th>
                                         <th width="5%%" style="text-align: center">Merk Meter Rusak</th>
                                         <th width="5%" style="text-align: center">Alasan Rusak</th>
-                                        <th width="5%" style="text-align: center">Tanggal Pakai</th>
                                         <th width="5%" style="text-align: center">Petugas Pasang</th>
                                         <th width="5%" style="text-align: center">Sisa Pulsa</th>
                                         <th width="5%" style="text-align: center">No. HP Plg</th>
                                         <th width="5%" style="text-align: center">Stand Dummy</th>
                                         <th width="5%" style="text-align: center">Tindakan</th>
-                                </tr>
+                                    </tr>
                             </thead>
                             <tbody>
                                 <tr>';
@@ -122,7 +122,42 @@ if (empty($_SESSION['admin'])) {
                     $no = 1;
                     while ($row = mysqli_fetch_array($query)) {
                         echo ' 
-                            <tr>
+                            <tr>';
+                        
+                            $y = substr($row['tgl_pakai'], 0, 4);
+                        $m = substr($row['tgl_pakai'], 5, 2);
+                        $d = substr($row['tgl_pakai'], 8, 2);
+                        $h = substr($row['tgl_pakai'], 11, 2);
+                        $i = substr($row['tgl_pakai'], 14, 2);
+                        $s = substr($row['tgl_pakai'], 17, 2);
+
+                        if ($m == "01") {
+                            $nm = "Januari";
+                        } elseif ($m == "02") {
+                            $nm = "Februari";
+                        } elseif ($m == "03") {
+                            $nm = "Maret";
+                        } elseif ($m == "04") {
+                            $nm = "April";
+                        } elseif ($m == "05") {
+                            $nm = "Mei";
+                        } elseif ($m == "06") {
+                            $nm = "Juni";
+                        } elseif ($m == "07") {
+                            $nm = "Juli";
+                        } elseif ($m == "08") {
+                            $nm = "Agustus";
+                        } elseif ($m == "09") {
+                            $nm = "September";
+                        } elseif ($m == "10") {
+                            $nm = "Oktober";
+                        } elseif ($m == "11") {
+                            $nm = "November";
+                        } elseif ($m == "12") {
+                            $nm = "Desember";
+                        }
+                        echo '
+                            <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <br/><hr/> ' . $h . ":" . $i . ":" . $s . '</td>
                             <td style="text-align: center">' . $row['no_dummy'] . '</td>
                             <td style="text-align: center">' . $row['no_meter_rusak'] . '</td>';
 
@@ -188,42 +223,7 @@ if (empty($_SESSION['admin'])) {
 
                         echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>';
 
-                        echo '<td style="text-align: center">' . $alasan_rusak . '</td>';
-
-                        $y = substr($row['tgl_pakai'], 0, 4);
-                        $m = substr($row['tgl_pakai'], 5, 2);
-                        $d = substr($row['tgl_pakai'], 8, 2);
-                        $h = substr($row['tgl_pakai'], 11, 2);
-                        $i = substr($row['tgl_pakai'], 14, 2);
-                        $s = substr($row['tgl_pakai'], 17, 2);
-
-                        if ($m == "01") {
-                            $nm = "Januari";
-                        } elseif ($m == "02") {
-                            $nm = "Februari";
-                        } elseif ($m == "03") {
-                            $nm = "Maret";
-                        } elseif ($m == "04") {
-                            $nm = "April";
-                        } elseif ($m == "05") {
-                            $nm = "Mei";
-                        } elseif ($m == "06") {
-                            $nm = "Juni";
-                        } elseif ($m == "07") {
-                            $nm = "Juli";
-                        } elseif ($m == "08") {
-                            $nm = "Agustus";
-                        } elseif ($m == "09") {
-                            $nm = "September";
-                        } elseif ($m == "10") {
-                            $nm = "Oktober";
-                        } elseif ($m == "11") {
-                            $nm = "November";
-                        } elseif ($m == "12") {
-                            $nm = "Desember";
-                        }
-                        echo '
-                            <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <br/><hr/> ' . $h . ":" . $i . ":" . $s . '</td>
+                        echo '<td style="text-align: center">' . $alasan_rusak . '</td>
                             <td style="text-align: center">' . $row['ptgs_pasang'] . '</td>
                             <td style="text-align: center">' . $row['sisa_pulsa'] . '</td>
                             <td style="text-align: center">' . $row['no_hp_plg'] . '</td>
@@ -250,7 +250,7 @@ if (empty($_SESSION['admin'])) {
                     </div>
                     <!-- Row form END -->';
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE aktivasi='non aktif' $$ unit LIKE '$unit%'");
+                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE aktivasi='non aktif' && unit LIKE '$unit%'");
                 $cdata = mysqli_num_rows($query);
                 $cpg = ceil($cdata / $limit);
 
@@ -319,11 +319,11 @@ if (empty($_SESSION['admin'])) {
 
                                 <thead>
                                     <tr>
+                                        <th width="5%" style="text-align: center">Tanggal Pakai</th>
                                         <th width="5%" style="text-align: center">No. Dummy</th>
                                         <th width="5%" style="text-align: center">No. Meter Rusak</th>
                                         <th width="5%%" style="text-align: center">Merk Meter Rusak</th>
                                         <th width="5%" style="text-align: center">Alasan Rusak</th>
-                                        <th width="5%" style="text-align: center">Tanggal Pakai</th>
                                         <th width="5%" style="text-align: center">Petugas Pasang</th>
                                         <th width="5%" style="text-align: center">Sisa Pulsa</th>
                                         <th width="5%" style="text-align: center">No. HP Plg</th>
@@ -344,7 +344,42 @@ if (empty($_SESSION['admin'])) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
                                             echo ' 
-                                                <tr>
+                                                <tr>';
+                                                
+                                                $y = substr($row['tgl_pakai'], 0, 4);
+                                                $m = substr($row['tgl_pakai'], 5, 2);
+                                                $d = substr($row['tgl_pakai'], 8, 2);
+                                                $h = substr($row['tgl_pakai'], 11, 2);
+                                                $i = substr($row['tgl_pakai'], 14, 2);
+                                                $s = substr($row['tgl_pakai'], 17, 2);
+
+                                            if ($m == "01") {
+                                                $nm = "Januari";
+                                            } elseif ($m == "02") {
+                                                $nm = "Februari";
+                                            } elseif ($m == "03") {
+                                                $nm = "Maret";
+                                            } elseif ($m == "04") {
+                                                $nm = "April";
+                                            } elseif ($m == "05") {
+                                                $nm = "Mei";
+                                            } elseif ($m == "06") {
+                                                $nm = "Juni";
+                                            } elseif ($m == "07") {
+                                                $nm = "Juli";
+                                            } elseif ($m == "08") {
+                                                $nm = "Agustus";
+                                            } elseif ($m == "09") {
+                                                $nm = "September";
+                                            } elseif ($m == "10") {
+                                                $nm = "Oktober";
+                                            } elseif ($m == "11") {
+                                                $nm = "November";
+                                            } elseif ($m == "12") {
+                                                $nm = "Desember";
+                                            }
+                                            echo '
+                                                <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td>
                                                 <td style="text-align: center">' . $row['no_dummy'] . '</td>
                                                 <td style="text-align: center">' . $row['no_meter_rusak'] . '</td>';
 
@@ -408,44 +443,8 @@ if (empty($_SESSION['admin'])) {
                                                 $merk_meter_rusak = 'Merk Lain';
                                             }
 
-                                            echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>';
-
-                                            echo '<td style="text-align: center">' . $alasan_rusak . '</td>';
-
-                                            $y = substr($row['tgl_pakai'], 0, 4);
-                                            $m = substr($row['tgl_pakai'], 5, 2);
-                                            $d = substr($row['tgl_pakai'], 8, 2);
-                                            $h = substr($row['tgl_pakai'], 11, 2);
-                                            $i = substr($row['tgl_pakai'], 14, 2);
-                                            $s = substr($row['tgl_pakai'], 17, 2);
-
-                                            if ($m == "01") {
-                                                $nm = "Januari";
-                                            } elseif ($m == "02") {
-                                                $nm = "Februari";
-                                            } elseif ($m == "03") {
-                                                $nm = "Maret";
-                                            } elseif ($m == "04") {
-                                                $nm = "April";
-                                            } elseif ($m == "05") {
-                                                $nm = "Mei";
-                                            } elseif ($m == "06") {
-                                                $nm = "Juni";
-                                            } elseif ($m == "07") {
-                                                $nm = "Juli";
-                                            } elseif ($m == "08") {
-                                                $nm = "Agustus";
-                                            } elseif ($m == "09") {
-                                                $nm = "September";
-                                            } elseif ($m == "10") {
-                                                $nm = "Oktober";
-                                            } elseif ($m == "11") {
-                                                $nm = "November";
-                                            } elseif ($m == "12") {
-                                                $nm = "Desember";
-                                            }
-                                            echo '
-                                                <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td>
+                                            echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>
+                                                    <td style="text-align: center">' . $alasan_rusak . '</td>
                                                 <td style="text-align: center">' . $row['ptgs_pasang'] . '</td>
                                                 <td style="text-align: center">' . $row['sisa_pulsa'] . '</td>
                                                 <td style="text-align: center">' . $row['no_hp_plg'] . '</td>

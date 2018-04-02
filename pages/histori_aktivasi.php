@@ -63,13 +63,13 @@ if (empty($_SESSION['admin'])) {
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-1">
                                 <thead>
                                 <tr>
+                                    <th width="5%" style="text-align: center">Tanggal Aktivasi</th>
                                     <th width="5%" style="text-align: center">No. Dummy</th>
                                     <th width="5%" style="text-align: center">No. Meter Rusak</th>
                                     <th width="5%" style="text-align: center">Merk Meter Rusak</th>
                                     <th width="5%" style="text-align: center">No. Meter Baru</th>
                                     <th width="5%" style="text-align: center">Merk Meter Baru</th>
                                     <th width="5%" style="text-align: center">ID Pelanggan</th>
-                                    <th width="5%" style="text-align: center">Tanggal Aktivasi</th>
                                     <th width="5%" style="text-align: center">Petugas Aktivasi</th>
                                     <th width="5%" style="text-align: center">Status</th>
                                 </tr>
@@ -88,7 +88,42 @@ if (empty($_SESSION['admin'])) {
                 $no = 1;
                 while ($row = mysqli_fetch_array($query)) {
                     echo ' 
-                        <tr>
+                        <tr>';
+                        
+                    $y = substr($row['tgl_aktivasi'], 0, 4);
+                    $m = substr($row['tgl_aktivasi'], 5, 2);
+                    $d = substr($row['tgl_aktivasi'], 8, 2);
+                    $h = substr($row['tgl_aktivasi'], 11, 2);
+                    $i = substr($row['tgl_aktivasi'], 14, 2);
+                    $s = substr($row['tgl_aktivasi'], 17, 2);
+
+                    if ($m == "01") {
+                        $nm = "Januari";
+                    } elseif ($m == "02") {
+                        $nm = "Februari";
+                    } elseif ($m == "03") {
+                        $nm = "Maret";
+                    } elseif ($m == "04") {
+                        $nm = "April";
+                    } elseif ($m == "05") {
+                        $nm = "Mei";
+                    } elseif ($m == "06") {
+                        $nm = "Juni";
+                    } elseif ($m == "07") {
+                        $nm = "Juli";
+                    } elseif ($m == "08") {
+                        $nm = "Agustus";
+                    } elseif ($m == "09") {
+                        $nm = "September";
+                    } elseif ($m == "10") {
+                        $nm = "Oktober";
+                    } elseif ($m == "11") {
+                        $nm = "November";
+                    } elseif ($m == "12") {
+                        $nm = "Desember";
+                    }
+                    echo '
+                        <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td>
                         <td style="text-align: center">' . $row['no_dummy'] . '</td>
                         <td style="text-align: center">' . $row['no_meter_rusak'] . '</td>';
 
@@ -140,63 +175,26 @@ if (empty($_SESSION['admin'])) {
                         $merk_meter_baru = 'Merk Lain';
                     }
 
-                    echo '<td style="text-align: center">' . $merk_meter_baru . '</td>';
-                    echo '<td style="text-align: center">' . $row['id_pelanggan'] . '</td>';
-
-                    $y = substr($row['tgl_aktivasi'], 0, 4);
-                    $m = substr($row['tgl_aktivasi'], 5, 2);
-                    $d = substr($row['tgl_aktivasi'], 8, 2);
-                    $h = substr($row['tgl_aktivasi'], 11, 2);
-                    $i = substr($row['tgl_aktivasi'], 14, 2);
-                    $s = substr($row['tgl_aktivasi'], 17, 2);
-
-                    if ($m == "01") {
-                        $nm = "Januari";
-                    } elseif ($m == "02") {
-                        $nm = "Februari";
-                    } elseif ($m == "03") {
-                        $nm = "Maret";
-                    } elseif ($m == "04") {
-                        $nm = "April";
-                    } elseif ($m == "05") {
-                        $nm = "Mei";
-                    } elseif ($m == "06") {
-                        $nm = "Juni";
-                    } elseif ($m == "07") {
-                        $nm = "Juli";
-                    } elseif ($m == "08") {
-                        $nm = "Agustus";
-                    } elseif ($m == "09") {
-                        $nm = "September";
-                    } elseif ($m == "10") {
-                        $nm = "Oktober";
-                    } elseif ($m == "11") {
-                        $nm = "November";
-                    } elseif ($m == "12") {
-                        $nm = "Desember";
-                    }
-                    echo '
-                        <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td>
+                    echo '<td style="text-align: center">' . $merk_meter_baru . '</td>
+                        <td style="text-align: center">' . $row['id_pelanggan'] . '</td>
                         <td style="text-align: center">' . $row['nama'] . '</td>
-                        <td style="text-align: center">';
-
-                    echo '<a class="btn btn-success" disabled>
-                        <i class="fa fa-check"></i> Aktif</a>';
-
-                    echo '
-                            </td> 
-                        </tr> 
-                    </tbody>';
+                        <td style="text-align: center">
+                            <a class="btn btn-success" disabled>
+                            <i class="fa fa-check"></i> Aktif</a>
+                        </td> 
+                    </tr> 
+                </tbody>';
                 }
             } else {
-                echo '<tr><td colspan="9"><center><p class="add">Tidak ada data yg sudah diaktivasi.</p></center></td></tr>';
+                echo '<tr><td colspan="9"><center><p class="add">Tidak ada data yg ditemukan.</p></center></td></tr>';
             }
             echo '</table><br/><br/>
                         </div>
                     </div>
                     <!-- Row form END -->';
 
-            $query = mysqli_query($config, "SELECT * FROM tbl_aktivasi WHERE unit LIKE '$unit%'");
+            $query = mysqli_query($config, "SELECT * FROM tbl_aktivasi WHERE no_dummy LIKE '%$cari%' || no_meter_rusak LIKE '%$cari%'||"
+                    . "no_meter_baru LIKE '%$cari%' || id_pelanggan LIKE '%$cari%' || nama LIKE '%$cari%' && unit='$unit%' ");
             $cdata = mysqli_num_rows($query);
             $cpg = ceil($cdata / $limit);
 
@@ -265,13 +263,13 @@ if (empty($_SESSION['admin'])) {
 
                             <thead>
                                 <tr>
+                                    <th width="5%" style="text-align: center">Tanggal Aktivasi</th>
                                     <th width="5%" style="text-align: center">No. Dummy</th>
                                     <th width="5%" style="text-align: center">No. Meter Rusak</th>
                                     <th width="5%" style="text-align: center">Merk Meter Rusak</th>
                                     <th width="5%" style="text-align: center">No. Meter Baru</th>
                                     <th width="5%" style="text-align: center">Merk Meter Baru</th>
                                     <th width="5%" style="text-align: center">ID Pelanggan</th>
-                                    <th width="5%" style="text-align: center">Tanggal Aktivasi</th>
                                     <th width="5%" style="text-align: center">Petugas Aktivasi</th>
                                     <th width="5%" style="text-align: center">Status</th>
                                 </tr>
@@ -289,7 +287,42 @@ if (empty($_SESSION['admin'])) {
                                     $no = 1;
                                     while ($row = mysqli_fetch_array($query)) {
                                         echo ' 
-                                                <tr>
+                                        <tr>';
+
+                                        $y = substr($row['tgl_aktivasi'], 0, 4);
+                                        $m = substr($row['tgl_aktivasi'], 5, 2);
+                                        $d = substr($row['tgl_aktivasi'], 8, 2);
+                                        $h = substr($row['tgl_aktivasi'], 11, 2);
+                                        $i = substr($row['tgl_aktivasi'], 14, 2);
+                                        $s = substr($row['tgl_aktivasi'], 17, 2);
+
+                                        if ($m == "01") {
+                                            $nm = "Januari";
+                                        } elseif ($m == "02") {
+                                            $nm = "Februari";
+                                        } elseif ($m == "03") {
+                                            $nm = "Maret";
+                                        } elseif ($m == "04") {
+                                            $nm = "April";
+                                        } elseif ($m == "05") {
+                                            $nm = "Mei";
+                                        } elseif ($m == "06") {
+                                            $nm = "Juni";
+                                        } elseif ($m == "07") {
+                                            $nm = "Juli";
+                                        } elseif ($m == "08") {
+                                            $nm = "Agustus";
+                                        } elseif ($m == "09") {
+                                            $nm = "September";
+                                        } elseif ($m == "10") {
+                                            $nm = "Oktober";
+                                        } elseif ($m == "11") {
+                                            $nm = "November";
+                                        } elseif ($m == "12") {
+                                            $nm = "Desember";
+                                        }
+                                        echo '
+                                                <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td>
                                                 <td style="text-align: center">' . $row['no_dummy'] . '</td>
                                                 <td style="text-align: center">' . $row['no_meter_rusak'] . '</td>';
 
@@ -337,57 +370,18 @@ if (empty($_SESSION['admin'])) {
                                             $merk_meter_baru = 'Merk Lain';
                                         }
 
-                                        echo '<td style="text-align: center">' . $merk_meter_baru . '</td>';
-                                        echo '<td style="text-align: center">' . $row['id_pelanggan'] . '</td>';
-
-                                        $y = substr($row['tgl_aktivasi'], 0, 4);
-                                        $m = substr($row['tgl_aktivasi'], 5, 2);
-                                        $d = substr($row['tgl_aktivasi'], 8, 2);
-                                        $h = substr($row['tgl_aktivasi'], 11, 2);
-                                        $i = substr($row['tgl_aktivasi'], 14, 2);
-                                        $s = substr($row['tgl_aktivasi'], 17, 2);
-
-                                        if ($m == "01") {
-                                            $nm = "Januari";
-                                        } elseif ($m == "02") {
-                                            $nm = "Februari";
-                                        } elseif ($m == "03") {
-                                            $nm = "Maret";
-                                        } elseif ($m == "04") {
-                                            $nm = "April";
-                                        } elseif ($m == "05") {
-                                            $nm = "Mei";
-                                        } elseif ($m == "06") {
-                                            $nm = "Juni";
-                                        } elseif ($m == "07") {
-                                            $nm = "Juli";
-                                        } elseif ($m == "08") {
-                                            $nm = "Agustus";
-                                        } elseif ($m == "09") {
-                                            $nm = "September";
-                                        } elseif ($m == "10") {
-                                            $nm = "Oktober";
-                                        } elseif ($m == "11") {
-                                            $nm = "November";
-                                        } elseif ($m == "12") {
-                                            $nm = "Desember";
-                                        }
-                                        echo '
-                                                <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td>
-                                                <td style="text-align: center">' . $row['nama'] . '</td>
-                                                <td style="text-align: center">';
-
-
-                                        echo '<a class="btn btn-success" disabled>
-                                                    <i class="fa fa-check"></i> Aktif</a>';
-
-                                        echo '
-                                                </td> 
-                                            </tr> 
-                                        </tbody>';
+                                        echo '<td style="text-align: center">' . $merk_meter_baru . '</td>
+                                            <td style="text-align: center">' . $row['id_pelanggan'] . '</td>
+                                            <td style = "text-align: center">' . $row['nama'] . '</td>
+                                            <td style = "text-align: center">
+                                                <a class = "btn btn-success" disabled>
+                                                <i class = "fa fa-check"></i> Aktif</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>';
                                     }
                                 } else {
-                                    echo '<tr><td colspan="9"><center><p class="add">Tidak ada data yg sudah diaktivasi.</p></center></td></tr>';
+                                    echo '<tr><td colspan = "9"><center><p class = "add">Tidak ada data yg sudah diaktivasi.</p></center></td></tr>';
                                 }
                                 ?> 
                         </table>
@@ -399,41 +393,41 @@ if (empty($_SESSION['admin'])) {
                     $cdata = mysqli_num_rows($query);
                     $cpg = ceil($cdata / $limit);
 
-                    echo '<br/><!-- Pagination START -->
-                          <ul class="pagination">';
+                    echo '<br/><!--Pagination START -->
+                                        <ul class = "pagination">';
 
                     if ($cdata > $limit) {
 
                         //first and previous pagging
                         if ($pg > 1) {
                             $prev = $pg - 1;
-                            echo '<li><a href="?page=his_atv&pg=1"><i class="fa fa-angle-double-left"></i></a></li>
-                                  <li><a href="?page=his_atv&pg=' . $prev . '"><i class="fa fa-angle-left"></i></a></li>';
+                            echo '<li><a href = "?page=his_atv&pg=1"><i class = "fa fa-angle-double-left"></i></a></li>
+                                        <li><a href = "?page=his_atv&pg=' . $prev . '"><i class = "fa fa-angle-left"></i></a></li>';
                         } else {
-                            echo '<li class="disabled"><a href=""><i class="fa fa-angle-double-left"></i></a></li>
-                                  <li class="disabled"><a href=""><i class="fa fa-angle-left"></i></a></li>';
+                            echo '<li class = "disabled"><a href = ""><i class = "fa fa-angle-double-left"></i></a></li>
+                                        <li class = "disabled"><a href = ""><i class = "fa fa-angle-left"></i></a></li>';
                         }
 
                         //perulangan pagging
                         for ($i = 1; $i <= $cpg; $i++)
                             if ($i != $pg) {
-                                echo '<li><a href="?page=his_atv&pg=' . $i . '"> ' . $i . ' </a></li>';
+                                echo '<li><a href = "?page=his_atv&pg=' . $i . '"> ' . $i . ' </a></li>';
                             } else {
-                                echo '<li><a href="?page=his_atv&pg=' . $i . '"> ' . $i . ' </a></li>';
+                                echo '<li><a href = "?page=his_atv&pg=' . $i . '"> ' . $i . ' </a></li>';
                             }
 
                         //last and next pagging
                         if ($pg < $cpg) {
                             $next = $pg + 1;
-                            echo '<li><a href="?page=his_atv&pg=' . $next . '"><i class="fa fa-angle-right"></i></a></li>
-                                  <li><a href="?page=his_atv&pg=' . $cpg . '"><i class="fa fa-angle-double-right"></i></a></li>';
+                            echo '<li><a href = "?page=his_atv&pg=' . $next . '"><i class = "fa fa-angle-right"></i></a></li>
+                                        <li><a href = "?page=his_atv&pg=' . $cpg . '"><i class = "fa fa-angle-double-right"></i></a></li>';
                         } else {
-                            echo '<li class="disabled"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                  <li class="disabled"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>';
+                            echo '<li class = "disabled"><a href = "#"><i class = "fa fa-angle-right"></i></a></li>
+                                        <li class = "disabled"><a href = "#"><i class = "fa fa-angle-double-right"></i></a></li>';
                         }
                         echo '
-                        </ul>
-                        <!-- Pagination END -->';
+                                        </ul>
+                                        <!--Pagination END -->';
                     } else {
                         echo '';
                     }

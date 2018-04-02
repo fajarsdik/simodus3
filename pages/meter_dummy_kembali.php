@@ -121,7 +121,7 @@ if (empty($_SESSION['admin'])) {
                 //script untuk mencari data
                 $unit = $_SESSION['unit'];
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl WHERE no_dummy LIKE '%$cari%' || lokasi_posko LIKE '%$cari%' || nama_cc LIKE '%$cari%' "
+                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl WHERE no_dummy LIKE '$cari%' || lokasi_posko LIKE '%$cari%' || nama_cc LIKE '%$cari%' "
                         . "&& unit LIKE '$unit%'"
                         . "ORDER by tgl_kembali DESC LIMIT $curr, $limit");
 
@@ -192,7 +192,8 @@ if (empty($_SESSION['admin'])) {
                     </div>
                     <!-- Row form END -->';
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl unit LIKE '$unit%'");
+                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_kbl WHERE no_dummy='$cari%' || lokasi_posko LIKE '%$cari%' || nama_cc LIKE '%$cari%' "
+                        . "&& unit LIKE '$unit%'");
                 $cdata = mysqli_num_rows($query);
                 $cpg = ceil($cdata / $limit);
 
@@ -247,9 +248,9 @@ if (empty($_SESSION['admin'])) {
 
                                 <thead>
                                     <tr>
+                                        <th width="5%" style="text-align: center">Tanggal Kembali</th>
                                         <th width="5%" style="text-align: center">No. Dummy</th>
                                         <th width="5%" style="text-align: center">Stand Bongkar</th>
-                                        <th width="5%" style="text-align: center">Tanggal Kembali</th>
                                         <th width="5%" style="text-align: center">Lokasi Posko</th>
                                         <th width="5%" style="text-align: center">Nama Call Center</th>
                                         <th width="5%" style="text-align: center">Tindakan</th>
@@ -266,9 +267,7 @@ if (empty($_SESSION['admin'])) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
                                             echo ' 
-                                                <tr>
-                                                <td style="text-align: center">' . $row['no_dummy'] . '</td>
-                                                <td style="text-align: center">' . $row['stand'] . '</td>';
+                                                <tr>';
 
                                             $y = substr($row['tgl_kembali'], 0, 4);
                                             $m = substr($row['tgl_kembali'], 5, 2);
@@ -304,25 +303,29 @@ if (empty($_SESSION['admin'])) {
                                             }
                                             echo '
                                                 <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td>
-                                                <td style="text-align: center">' . $row['lokasi_posko'] . '</td>
-                                                <td style="text-align: center">' . $row['nama_cc'] . '</td>
-                                                <td style="text-align: center">';
+                                                
+
+                                                <td style="text-align: center">' . $row['no_dummy'] . '</td>
+                                                <td style="text-align: center">' . $row['stand'] . '</td>
+                                                <td style = "text-align: center">' . $row['lokasi_posko'] . '</td>
+                                                <td style = "text-align: center">' . $row['nama_cc'] . '</td>
+                                                <td style = "text-align: center">';
 
                                             if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
 
-                                                echo ' <div class="row"><a class="btn btn-warning" href="?page=mdk&act=edit&id_meter=' . $row['id_meter'] . '">
-                                                        <i class="fa fa-edit"> Edit</i></a></div></br>
-                                                    <div class="row">';
+                                                echo ' <div class = "row"><a class = "btn btn-warning" href = "?page=mdk&act=edit&id_meter=' . $row['id_meter'] . '">
+                                            <i class = "fa fa-edit"> Edit</i></a></div></br>
+                                            <div class = "row">';
                                             } else {
-                                                echo '<i class="glyphicon glyphicon-ban-circle"></i></a>';
+                                                echo '<i class = "glyphicon glyphicon-ban-circle"></i></a>';
                                             }
                                             echo '
-                                                </td> 
-                                            </tr> 
-                                        </tbody>';
+                                            </td>
+                                            </tr>
+                                            </tbody>';
                                         }
                                     } else {
-                                        echo '<tr><td colspan="6"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+                                        echo '<tr><td colspan = "6"><center><p class = "add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
                                     }
                                     ?>
                             </table>
@@ -334,41 +337,41 @@ if (empty($_SESSION['admin'])) {
                         $cdata = mysqli_num_rows($query);
                         $cpg = ceil($cdata / $limit);
 
-                        echo '<br/><!-- Pagination START -->
-                          <ul class="pagination">';
+                        echo '<br/><!--Pagination START -->
+                                            <ul class = "pagination">';
 
                         if ($cdata > $limit) {
 
                             //first and previous pagging
                             if ($pg > 1) {
                                 $prev = $pg - 1;
-                                echo '<li><a href="?page=mdk&pg=1"><i class="fa fa-angle-double-left"></i></a></li>
-                                  <li><a href="?page=mdk&pg=' . $prev . '"><i class="fa fa-angle-left"></i></a></li>';
+                                echo '<li><a href = "?page=mdk&pg=1"><i class = "fa fa-angle-double-left"></i></a></li>
+                                            <li><a href = "?page=mdk&pg=' . $prev . '"><i class = "fa fa-angle-left"></i></a></li>';
                             } else {
-                                echo '<li class="disabled"><a href=""><i class="fa fa-angle-double-left"></i></a></li>
-                                  <li class="disabled"><a href=""><i class="fa fa-angle-left"></i></a></li>';
+                                echo '<li class = "disabled"><a href = ""><i class = "fa fa-angle-double-left"></i></a></li>
+                                            <li class = "disabled"><a href = ""><i class = "fa fa-angle-left"></i></a></li>';
                             }
 
                             //perulangan pagging
                             for ($i = 1; $i <= $cpg; $i++)
                                 if ($i != $pg) {
-                                    echo '<li><a href="?page=mdk&pg=' . $i . '"> ' . $i . ' </a></li>';
+                                    echo '<li><a href = "?page=mdk&pg=' . $i . '"> ' . $i . ' </a></li>';
                                 } else {
-                                    echo '<li><a href="?page=mdk&pg=' . $i . '"> ' . $i . ' </a></li>';
+                                    echo '<li><a href = "?page=mdk&pg=' . $i . '"> ' . $i . ' </a></li>';
                                 }
 
                             //last and next pagging
                             if ($pg < $cpg) {
                                 $next = $pg + 1;
-                                echo '<li><a href="?page=mdk&pg=' . $next . '"><i class="fa fa-angle-right"></i></a></li>
-                                  <li><a href="?page=mdk&pg=' . $cpg . '"><i class="fa fa-angle-double-right"></i></a></li>';
+                                echo '<li><a href = "?page=mdk&pg=' . $next . '"><i class = "fa fa-angle-right"></i></a></li>
+                                            <li><a href = "?page=mdk&pg=' . $cpg . '"><i class = "fa fa-angle-double-right"></i></a></li>';
                             } else {
-                                echo '<li class="disabled"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                  <li class="disabled"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>';
+                                echo '<li class = "disabled"><a href = "#"><i class = "fa fa-angle-right"></i></a></li>
+                                            <li class = "disabled"><a href = "#"><i class = "fa fa-angle-double-right"></i></a></li>';
                             }
                             echo '
-                        </ul>
-                        <!-- Pagination END -->';
+                                            </ul>
+                                            <!--Pagination END -->';
                         } else {
                             echo '';
                         }
