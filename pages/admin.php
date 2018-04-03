@@ -102,6 +102,8 @@ if (empty($_SESSION['admin'])) {
                         $unit = "Rayon Tanjungpinang Kota";
                     } elseif ($_SESSION['unit'] == 18310) {
                         $unit = "Rayon Anambas";
+                    } elseif ($_SESSION['unit'] == 1845) {
+                        $unit = "Rayon Air Molek";
                     }
 
 
@@ -285,8 +287,7 @@ if (empty($_SESSION['admin'])) {
                                                 </a>
                                             </div>
                                         </div>
-
-
+                                
                                         <?php
                                     }
                                 }
