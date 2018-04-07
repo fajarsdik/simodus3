@@ -41,12 +41,12 @@ if (!empty($_SESSION['admin'])) {
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                                            <li>
+                    <?php
+                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4 || $_SESSION['admin'] == 5) {
+                        ?>
+                        <li>
                             <a href="../pages/admin.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-                    <?php
-                        if ($_SESSION['sdum_tambah'] +$_SESSION['sdum_aktivasi']+$_SESSION['sdum_kembali'] > 1) {
-                        ?>
                         <li>
                             <a href="?page=mon"><i class="fa fa-table fa-fw"></i> Monitoring Dummy</a>
                         </li>
@@ -76,26 +76,25 @@ if (!empty($_SESSION['admin'])) {
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                <?php                
+                    <?php                
                     }
                     ?>
-                    
                         
-                <?php
-                    if ($_SESSION['sp2tl'] == 1) {
+                    <?php
+                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 6) {
                         ?>
+                    
+                            <li>
+                                <a href="#"><i class="fa fa-fax fa-fw"></i> P2TL<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="?page=pet">Temuan</a>
+                                    </li>
 
-                        <li>
-                            <a href="#"><i class="fa fa-fax fa-fw"></i> P2TL<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="?page=pet">Temuan</a>
-                                </li>
-
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                <?php                
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                    <?php                
                     }
                     ?>
                         

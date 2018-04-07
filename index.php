@@ -49,7 +49,7 @@ require('include/config.php');
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title center">SIMODUS</h3>
+                            <h3 class="panel-title center">SIMODUS [BETA]</h3>
                         </div>
                         <div class="panel-body">
 
@@ -59,10 +59,10 @@ require('include/config.php');
                                 $username = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['username'])));
                                 $password = trim(htmlspecialchars(mysqli_real_escape_string($config, $_REQUEST['password'])));
 
-                                $query = mysqli_query($config, "SELECT id_user, username, nama, nip, unit, admin, sdum_tambah, sdum_aktivasi, sdum_kembali, sp2tl FROM tbl_user WHERE username=BINARY'$username' AND password=MD5('$password')");
+                                $query = mysqli_query($config, "SELECT id_user, username, nama, nip, unit, admin FROM tbl_user WHERE username=BINARY'$username' AND password=MD5('$password')");
 
                                 if (mysqli_num_rows($query) > 0) {
-                                    list($id_user, $username, $nama, $nip, $unit, $admin,$sdum_tambah, $sdum_aktivasi, $sdum_kembali, $sp2tl) = mysqli_fetch_array($query);
+                                    list($id_user, $username, $nama, $nip, $unit, $admin) = mysqli_fetch_array($query);
 
                                     session_start();
 
@@ -73,14 +73,6 @@ require('include/config.php');
                                     $_SESSION['nip'] = $nip;
                                     $_SESSION['unit'] = $unit;
                                     $_SESSION['admin'] = $admin;
-                                    
-                                    //menu dummy
-                                    $_SESSION['sdum_tambah'] = $sdum_tambah;
-                                    $_SESSION['sdum_aktivasi'] = $sdum_aktivasi;
-                                    $_SESSION['sdum_kembali']=$sdum_kembali;
-                                    
-                                    //menu p2tl
-                                    $_SESSION['sp2tl'] = $sp2tl;
 
                                     header("Location: pages/admin.php");
                                     die();
