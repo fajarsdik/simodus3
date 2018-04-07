@@ -110,7 +110,7 @@ if (empty($_SESSION['admin'])) {
                                         <th width="5%" style="text-align: center">Tanggal Pakai</th>
                                         <th width="5%" style="text-align: center">No. Dummy</th>
                                         <th width="5%" style="text-align: center">No. Meter Rusak</th>
-                                        <th width="5%%" style="text-align: center">Merk Meter Rusak</th>
+                                        <th width="5%" style="text-align: center">Merk Meter Rusak</th>
                                         <th width="5%" style="text-align: center">Alasan Rusak</th>
                                         <th width="5%" style="text-align: center">Petugas Pasang</th>
                                         <th width="5%" style="text-align: center">Sisa Pulsa</th>
