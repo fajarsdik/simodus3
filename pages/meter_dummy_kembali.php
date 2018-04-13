@@ -176,8 +176,7 @@ if (empty($_SESSION['admin'])) {
                             echo ' <div class="row"><a class="btn btn-warning" href="?page=mdk&act=edit&id_meter=' . $row['id_meter'] . '">
                                     <i class="fa fa-edit"> Edit</i></a></div></br>
                                    <div class="row"> ';
-                        } else {
-                            echo '<i class="glyphicon glyphicon-ban-circle"></i></a>';
+                        
                         }
                         echo '
                                     </td> 

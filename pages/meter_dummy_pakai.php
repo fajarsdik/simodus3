@@ -241,8 +241,7 @@ if (empty($_SESSION['admin'])) {
                         <div class = "row">
                         <a class = "btn btn-danger" href = "?page=mdg&act=del&id_meter=' . $row['id_meter'] . '">
                         <i class = "fa fa-trash-o"> Delete</i></a></div>';
-                        } else {
-                            echo '<i class = "glyphicon glyphicon-ban-circle"></i>';
+                        
                         }
                         echo '
                         </td>
