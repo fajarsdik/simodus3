@@ -73,31 +73,43 @@ if (!empty($_SESSION['admin'])) {
                                 <li>
                                     <a href="?page=lpd">Laporan</a>
                                 </li>
+
+                                <?php if ($_SESSION['admin'] == 3) { ?>
+
+                                    <li>
+                                        <a href="?page=set">Reset Dummy</a>
+                                    </li>
+
+                                    <?php
+                                    }
+                                ?>
+
+
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                    <?php                
+                        <?php
                     }
                     ?>
-                        
+
                     <?php
                     if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 6) {
                         ?>
-                    
-                            <li>
-                                <a href="#"><i class="fa fa-fax fa-fw"></i> P2TL<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="?page=pet">Temuan</a>
-                                    </li>
 
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
-                    <?php                
+                        <li>
+                            <a href="#"><i class="fa fa-fax fa-fw"></i> P2TL<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="?page=pet">Temuan</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <?php
                     }
                     ?>
-                        
+
                     <li>
                         <a href="?page=about"><i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>

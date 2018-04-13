@@ -84,10 +84,6 @@ if (empty($_SESSION['admin'])) {
                                     $_SESSION['std_dummy'] = 'Form Stand Dummy harus diisi angka!';
                                     echo '<script language="javascript">window.history.back();</script>';
                                 } else {
-
-                                    
-                                    
-                          
                                     
                                     $query = mysqli_query($config, "INSERT INTO tbl_metdum_pakai(id_meter,no_dummy,no_meter_rusak,alasan_rusak,
                                             tgl_pakai,ptgs_pasang,sisa_pulsa,no_hp_plg,std_dummy,nama_cc,aktivasi,kembali,nama,id_user,unit)
@@ -96,6 +92,7 @@ if (empty($_SESSION['admin'])) {
 
                                     $query_status = mysqli_query($config, "UPDATE tbl_metdum_stok SET status='', tgl_pakai='$tgl_pakai', "
                                             . "no_meter_rusak='$no_meter_rusak', posko='$nama' WHERE unit ='$unit' && no_dummy='$no_dummy'");
+                                    
                                     if ($query == true) {
                                         $_SESSION['succAdd'] = 'SUKSES! Data berhasil ditambahkan';
                                         header("Location: ./admin.php?page=mdg");
@@ -129,6 +126,7 @@ if (empty($_SESSION['admin'])) {
                             </div>
 
                             <?php
+                            
                             $unit = $_SESSION['unit'];
                             
                             $query_stok = mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE status='ready' && unit='$unit' ORDER BY no_dummy");
