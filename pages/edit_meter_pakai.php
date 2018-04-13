@@ -58,7 +58,7 @@ if (empty($_SESSION['admin'])) {
                                 } else {
 
                                     $query = mysqli_query($config, "UPDATE tbl_metdum_pakai SET no_meter_rusak='$no_meter_rusak', alasan_rusak='$alasan_rusak', "
-                                            . "ptgs_pasang='$ptgs_pasang', sisa_pulsa='$sisa_pulsa', no_hp_plg='$no_hp_plg', std_dummy='$std_dummy' WHERE id_meter='$id_meter'");
+                                            . "ptgs_pasang='$ptgs_pasang', sisa_pulsa='$sisa_pulsa', no_hp_plg='$no_hp_plg', std_dummy='$std_dummy' WHERE unit ='$unit' && no_dummy='$no_dummy'");
 
                                     if ($query == true) {
                                         $_SESSION['succAdd'] = 'SUKSES! Data berhasil diperbarui';

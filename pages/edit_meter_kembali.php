@@ -20,7 +20,7 @@ if (empty($_SESSION['admin'])) {
         $unit = $_SESSION['unit'];
 
         $query = mysqli_query($config, "UPDATE tbl_metdum_kbl SET no_dummy='$no_dummy', lokasi_posko='$lokasi_posko', nama_cc='$nama_cc',"
-                . "stand='$stand' WHERE id_meter='$id_meter'");
+                . "stand='$stand' WHERE unit ='$unit' && no_dummy='$no_dummy'");
 
         if ($query == true) {
             $_SESSION['succAdd'] = 'SUKSES! Data berhasil diperbarui';
@@ -34,7 +34,7 @@ if (empty($_SESSION['admin'])) {
 
         $id_meter = mysqli_real_escape_string($config, $_REQUEST['id_meter']);
 
-        $query = mysqli_query($config, "SELECT no_dummy, no_meter_rusak, alasan_rusak, ptgs_pasang, sisa_pulsa, no_hp_plg, std_dummy, nama, id_user FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
+        $query = mysqli_query($config, "SELECT no_dummy, no_meter_rusak, alasan_rusak, ptgs_pasang, sisa_pulsa, no_hp_plg, std_dummy, nama, id_user FROM tbl_metdum_pakai WHERE unit ='$unit' && no_dummy='$no_dummy'");
         list($no_dummy, $no_meter_rusak, $alasan_rusak, $ptgs_pasang, $sisa_pulsa, $no_hp_plg, $std_dummy, $nama, $id_user) = mysqli_fetch_array($query);
 
         if (isset($_SESSION['errQ'])) {
@@ -63,7 +63,7 @@ if (empty($_SESSION['admin'])) {
                             <?php
                             $id_meter = mysqli_real_escape_string($config, $_REQUEST['id_meter']);
 
-                            $query = mysqli_query($config, "SELECT no_dummy, lokasi_posko, nama_cc, stand, tgl_kembali, nama, id_user FROM tbl_metdum_kbl WHERE id_meter='$id_meter'");
+                            $query = mysqli_query($config, "SELECT no_dummy, lokasi_posko, nama_cc, stand, tgl_kembali, nama, id_user FROM tbl_metdum_kbl WHERE unit ='$unit' && no_dummy='$no_dummy'");
                             list($no_dummy, $lokasi_posko, $nama_cc, $stand, $tgl_kembali, $nama, $id_user) = mysqli_fetch_array($query);
                             ?>
 

@@ -30,7 +30,7 @@ if (empty($_SESSION['admin'])) {
                 . "'$merk_meter_baru','$id_pelanggan','$tgl_aktivasi','$nama','$id_user','$unit')");
 
         $query_aktivasi = mysqli_query($config, "UPDATE tbl_metdum_pakai SET aktivasi='aktif' "
-                . "WHERE id_meter='$id_meter'");
+                . "WHERE unit='$unit' && no_dummy='$no_dummy'");
 
         $query_tgl_aktivasi = mysqli_query($config, "UPDATE tbl_metdum_stok SET tgl_aktivasi='$tgl_aktivasi' "
                 . "WHERE unit='$unit' && no_dummy='$no_dummy'");

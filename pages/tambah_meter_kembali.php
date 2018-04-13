@@ -69,7 +69,7 @@ if (empty($_SESSION['admin'])) {
                         $query = mysqli_query($config, "INSERT INTO tbl_metdum_kbl(id_meter,no_dummy,lokasi_posko,nama_cc,stand,tgl_kembali,nama,id_user,unit)
                                                    VALUES('$id_meter','$no_dummy','$lokasi_posko','$nama_cc','$stand','$tgl_kembali','$nama','$id_user','$unit')");
 
-                        $query_kembali = mysqli_query($config, "UPDATE tbl_metdum_pakai SET kembali='sudah' WHERE id_meter='$id_meter'");
+                        $query_kembali = mysqli_query($config, "UPDATE tbl_metdum_pakai SET kembali='sudah' WHERE unit='$unit' && no_dummy='$no_dummy'");
 
                         $query_tgl_aktivasi = mysqli_query($config, "UPDATE tbl_metdum_stok SET tgl_kembali='$tgl_kembali', status='ready', "
                                 . "no_meter_rusak='', posko='$nama' WHERE unit='$unit' && no_dummy='$no_dummy'");
