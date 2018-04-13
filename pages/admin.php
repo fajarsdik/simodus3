@@ -66,7 +66,7 @@ if (empty($_SESSION['admin'])) {
                         break;
                     
                     case 'pet':
-                        include "p2tl_temuan.php";
+                        include "p2tl/p2tl_temuan.php";
                         break;
                     
                     case 'coms':

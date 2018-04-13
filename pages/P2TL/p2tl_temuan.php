@@ -107,16 +107,15 @@ if (empty($_SESSION['admin'])) {
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-1">
                                 <thead>
                                 <tr>
-                                        <th width="5%" style="text-align: center">Tanggal Pakai</th>
-                                        <th width="5%" style="text-align: center">No. Dummy</th>
-                                        <th width="5%" style="text-align: center">No. Meter Rusak</th>
-                                        <th width="5%%" style="text-align: center">Merk Meter Rusak</th>
-                                        <th width="5%" style="text-align: center">Alasan Rusak</th>
-                                        <th width="5%" style="text-align: center">Petugas Pasang</th>
-                                        <th width="5%" style="text-align: center">Sisa Pulsa</th>
-                                        <th width="5%" style="text-align: center">No. HP Plg</th>
-                                        <th width="5%" style="text-align: center">Stand Dummy</th>
-                                        <th width="5%" style="text-align: center">Call Center</th>
+                                        <th width="10%" style="text-align: center">Tanggal Temuan</th>
+                                        <th width="5%" style="text-align: center">No BA</th>
+                                        <th width="5%" style="text-align: center">Idpel</th>
+                                        <th width="5%%" style="text-align: center">Nama</th>
+                                        <th width="5%" style="text-align: center">Alamat</th>
+                                        <th width="5%" style="text-align: center">Tarif</th>
+                                        <th width="5%" style="text-align: center">Daya</th>
+                                        <th width="5%" style="text-align: center">Temuan</th>
+                                        <th width="10%" style="text-align: center">Dengan Cara</th>
                                         <th width="5%">Tindakan</th>
                                 </tr>
                             </thead>
@@ -125,10 +124,10 @@ if (empty($_SESSION['admin'])) {
 
                 //script untuk mencari data
                 $unit = $_SESSION['unit'];
-
-                $query = mysqli_query($config, "SELECT * FROM tbl_p2tl_temuan WHERE no_ba='$cari' || no_meter_rusak='$cari%'||"
-                        . "alamat LIKE '%$cari%' || sisa_pulsa='$cari%' || no_hp_plg='$cari%' || std_dummy LIKE '$cari%'"
-                        . " && unit LIKE '$unit%' ORDER by tgl_temuan ASC LIMIT $curr, $limit");
+                
+                $query = mysqli_query($config, "SELECT * FROM tbl_p2tl_temuan WHERE no_ba='$cari' || idpel='$cari%' ||"
+                        . "alamat LIKE '%$cari%' || nama_temuan='$cari%' || tipe_temuan='$cari%'"
+                        . " && unit LIKE '$unit%' ORDER by tgl_temuan DESC LIMIT $curr, $limit");
 
                 if (mysqli_num_rows($query) > 0) {
                     $no = 1;
@@ -177,13 +176,13 @@ if (empty($_SESSION['admin'])) {
 
                         echo '<td style="text-align: center">' . $row['nama_temuan'] . '</td>
                         <td style = "text-align: center">' . $row['alamat'] . '</td>
-                        <td style = "text-align: center">' . $row['sisa_pulsa'] . '</td>
-                        <td style = "text-align: center">' . $row['no_hp_plg'] . '</td>
-                        <td style = "text-align: center">' . $row['std_dummy'] . '</td>
-                        <td style = "text-align: center">' . $row['nama_cc'] . '</td>
+                        <td style = "text-align: center">' . $row['tarif'] . '</td>
+                        <td style = "text-align: center">' . $row['daya'] . '</td>
+                        <td style = "text-align: center">' . $row['tipe_temuan'] . '</td>
+                        <td style = "text-align: center">' . $row['dengan_cara'] . '</td>
                         <td style = "text-align: center">';
 
-                        if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5|| $_SESSION['admin'] == 6) {
+                        if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
 
                             echo ' <div class = "row"><a class = "btn btn-warning" href = "?page=pet&act=edit&id_temuan=' . $row['id_temuan'] . '">
                         <i class = "fa fa-edit"> Edit</i></a></div></br>
@@ -206,8 +205,8 @@ if (empty($_SESSION['admin'])) {
                         </div>
                         <!--Row form END -->';
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_p2tl_temuan WHERE no_ba='$cari' || idpel='$cari%'||"
-                        . "alamat LIKE '%$cari%' || sisa_pulsa='$cari%' || no_hp_plg='$cari%' || std_dummy LIKE '$cari%'"
+                $query = mysqli_query($config, "SELECT * FROM tbl_p2tl_temuan WHERE no_ba='$cari' || idpel='$cari%'|| nama LIKE '%$cari%' ||"
+                        . "alamat LIKE '%$cari%' || tarif='$cari%' || daya='$cari%' || tipe_temuan LIKE '$cari%'|| dengan_cara='$cari%'"
                         . " && unit LIKE '$unit%'");
                 $cdata = mysqli_num_rows($query);
                 $cpg = ceil($cdata / $limit);
@@ -283,7 +282,7 @@ if (empty($_SESSION['admin'])) {
 
                                     $no = 1;
 
-                                    $query = mysqli_query($config, "SELECT * FROM tbl_p2tl_temuan WHERE unit LIKE '$unit%' ORDER by tgl_temuan ASC LIMIT $curr, $limit");
+                                    $query = mysqli_query($config, "SELECT * FROM tbl_p2tl_temuan WHERE unit LIKE '$unit%' ORDER by tgl_temuan DESC LIMIT $curr, $limit");
                                     if (mysqli_num_rows($query) > 0) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
@@ -335,26 +334,26 @@ if (empty($_SESSION['admin'])) {
                                             <td style = "text-align: center">';
 
 
-//                                            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
-//
+                                            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
+
 //                                                $id_temuan = $row['id_temuan'];
 //
 //                                                $cek_aktivasi = mysqli_query($config, "SELECT aktivasi FROM tbl_p2tl_temuan WHERE id_temuan='$id_temuan'");
 //                                                list($aktivasi) = mysqli_fetch_array($cek_aktivasi);
-//
+
 //                                                if ($aktivasi == "non aktif") {
-//
-//                                                    echo ' <div class = "row"><a class = "btn btn-warning" href = "?page=pet&act=edit&id_temuan=' . $row['id_temuan'] . '">
-//                                            <i class = "fa fa-edit"> Edit</i></a></div></br>
-//                                            <div class = "row">
-//                                            <a class = "btn btn-danger" href = "?page=pet&act=del&id_temuan=' . $row['id_temuan'] . '">
-//                                            <i class = "fa fa-trash-o"> Delete</i></a></div>';
+
+                                                    echo ' <div class = "row"><a class = "btn btn-warning" href = "?page=pet&act=edit&id_temuan=' . $row['id_temuan'] . '">
+                                            <i class = "fa fa-edit"> Edit</i></a></div></br>
+                                            <div class = "row">
+                                            <a class = "btn btn-danger" href = "?page=pet&act=del&id_temuan=' . $row['id_temuan'] . '">
+                                            <i class = "fa fa-trash-o"> Delete</i></a></div>';
 //                                                } else {
 //                                                    echo '<btn class = "btn btn-success" disabled><i class = "glyphicon glyphicon-ban-circle"></i> Aktif</btn>';
 //                                                }
-//                                            } else {
-//                                                echo '<i class = "glyphicon glyphicon-ban-circle" disabled></i>';
-//                                            }
+                                            } else {
+                                                echo '<i class = "glyphicon glyphicon-ban-circle" disabled></i>';
+                                            }
                                             echo '
                                             </td>
                                             </tr>
