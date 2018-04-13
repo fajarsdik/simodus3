@@ -171,7 +171,7 @@ if (empty($_SESSION['admin'])) {
                             <td style="text-align: center">' . $row['nama_cc'] . '</td>
                             <td style="text-align: center">';
 
-                        if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
+                        if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 3) {
 
                             echo ' <div class="row"><a class="btn btn-warning" href="?page=mdk&act=edit&id_meter=' . $row['id_meter'] . '">
                                     <i class="fa fa-edit"> Edit</i></a></div></br>
@@ -311,7 +311,7 @@ if (empty($_SESSION['admin'])) {
                                                 <td style = "text-align: center">' . $row['nama_cc'] . '</td>
                                                 <td style = "text-align: center">';
 
-                                            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
+                                            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 3) {
 
                                                 echo ' <div class = "row"><a class = "btn btn-warning" href = "?page=mdk&act=edit&id_meter=' . $row['id_meter'] . '">
                                             <i class = "fa fa-edit"> Edit</i></a></div></br>
