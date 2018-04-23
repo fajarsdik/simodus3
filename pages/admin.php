@@ -71,7 +71,7 @@ if (empty($_SESSION['admin'])) {
                         include "user.php";
                         break;
                     case 'pet':
-                        include "p2tl_temuan.php";
+                        include "p2tl/p2tl_temuan.php";
                         break;
                     case 'coms':
                         include "comingsoon.php";
