@@ -61,14 +61,18 @@ if (empty($_SESSION['admin'])) {
                     case 'dsb':
                         include "dummy_standby.php";
                         break;
+                    case 'ddbk':
+                        include "dft_dummy_belum_kembali.php";
+                        break;
                     case 'set':
                         include "set_dummy.php";
                         break;
-                    
+                    case 'usr':
+                        include "user.php";
+                        break;
                     case 'pet':
                         include "p2tl_temuan.php";
                         break;
-                    
                     case 'coms':
                         include "comingsoon.php";
                         break;
@@ -184,7 +188,7 @@ if (empty($_SESSION['admin'])) {
                         $belum_aktivasi = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='non aktif'"));
 
                         //menghitung jumlah meter belum kembali
-                        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='aktif' && kembali='belum'"));
+                        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && kembali='belum'"));
                         ?>
 
                         <div class="col-lg-12">
@@ -265,7 +269,7 @@ if (empty($_SESSION['admin'])) {
                                 <?php
                                 if ($belum_aktivasi > 0) {
 
-                                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4) {
+                                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4 || $_SESSION['admin'] == 5) {
                                         ?>
 
                                         <div class="col-lg-3 col-md-6">
@@ -299,7 +303,7 @@ if (empty($_SESSION['admin'])) {
                                 <?php
                                 if ($belum_kembali > 0) {
 
-                                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4) {
+                                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 4 || $_SESSION['admin'] == 5) {
                                         ?>
 
                                         <div class="col-lg-3 col-md-6">
@@ -315,7 +319,7 @@ if (empty($_SESSION['admin'])) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a href="?page=mdk&act=add">
+                                                <a href="?page=ddbk">
                                                     <div class="panel-footer">
                                                         <span class="pull-left">Lihat detail</span>
                                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

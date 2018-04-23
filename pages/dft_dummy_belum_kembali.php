@@ -40,7 +40,7 @@ if (empty($_SESSION['admin'])) {
         <div id = "page-wrapper">
             <div class = "row">
                 <div  class = "col-lg-12">
-                    <h1 class = "page-header">Pemakaian Meter Dummy</h1>
+                    <h1 class = "page-header">Daftar Dummy Belum Kembali</h1>
                 </div>
             </div>
             <!-- Akhir Judul -->
@@ -52,12 +52,12 @@ if (empty($_SESSION['admin'])) {
                             <?php
                             if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 5) {
                                 echo '
-                                      <a href="?page=mdg&act=add" class="btn btn-primary">Tambah Data</a>
+                                      <a href="?page=mdk&act=add" class="btn btn-primary">Kembalikan Dummy</a>
                                  ';
                             }
                             ?>
                         </div>
-                        <form method="post" action="?page=mdg">
+                        <form method="post" action="?page=ddbk">
                             <div class="col-xs-4 col-xs-offset-7 col-md-3 col-md-offset-4 input-group custom-search">
                                 <input id="cari" name="cari" type="text" class="form-control" placeholder="Pencarian...">
                                 <input type="submit" name="submit" class="hidden">
@@ -94,7 +94,7 @@ if (empty($_SESSION['admin'])) {
                 $cari = mysqli_real_escape_string($config, $_REQUEST['cari']);
                 echo '
                     <div class="alert alert-info alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" href="?page=mdg"><a href="?page=mdg" class="alert-link">&times;</a></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" href="?page=ddbk"><a href="?page=mdg" class="alert-link">&times;</a></button>
                         <p>Hasil pencarian untuk kata kunci <strong>" ' . stripslashes($cari) . ' "</strong>
                     </div>
                             
@@ -117,7 +117,6 @@ if (empty($_SESSION['admin'])) {
                                         <th width="5%" style="text-align: center">No. HP Plg</th>
                                         <th width="5%" style="text-align: center">Stand Dummy</th>
                                         <th width="5%" style="text-align: center">Call Center</th>
-                                        <th width="5%">Tindakan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -126,9 +125,8 @@ if (empty($_SESSION['admin'])) {
                 //script untuk mencari data
                 $unit = $_SESSION['unit'];
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy='$cari' || no_meter_rusak='$cari%'||"
-                        . "ptgs_pasang LIKE '%$cari%' || sisa_pulsa='$cari%' || no_hp_plg='$cari%' || std_dummy LIKE '$cari%'"
-                        . " && unit LIKE '$unit%' ORDER by tgl_pakai DESC LIMIT $curr, $limit");
+                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy='$cari' || no_meter_rusak='$cari%'"
+                        . " && unit LIKE '$unit%' && kembali='belum' ORDER by tgl_pakai ASC LIMIT $curr, $limit");
 
                 if (mysqli_num_rows($query) > 0) {
                     $no = 1;
@@ -218,7 +216,7 @@ if (empty($_SESSION['admin'])) {
                         $pot34 = substr($no_meter_rusak, 2, 2);
                         $pjg_seri = strlen($no_meter_rusak);
 
-                        $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang='$pjg_seri' && seri12='$pot12'");
+                        $queryseri = mysqli_query($config, "SELECT * FROM tbl_seri_meter WHERE panjang=$pjg_seri && seri12=$pot12");
                         $rowseri = mysqli_fetch_array($queryseri);
                         $merk_meter_rusak = $rowseri['merk'];
                         $tipe_meter_rusak = $rowseri['tipe'];
@@ -232,33 +230,20 @@ if (empty($_SESSION['admin'])) {
                         <td style = "text-align: center">' . $row['no_hp_plg'] . '</td>
                         <td style = "text-align: center">' . $row['std_dummy'] . '</td>
                         <td style = "text-align: center">' . $row['nama_cc'] . '</td>
-                        <td style = "text-align: center">';
-
-                        if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 3) {
-
-                            echo ' <div class = "row"><a class = "btn btn-warning" href = "?page=mdg&act=edit&id_meter=' . $row['id_meter'] . '">
-                        <i class = "fa fa-edit"> Edit</i></a></div></br>
-                        <div class = "row">
-                        <a class = "btn btn-danger" href = "?page=mdg&act=del&id_meter=' . $row['id_meter'] . '">
-                        <i class = "fa fa-trash-o"> Delete</i></a></div>';
                         
-                        }
-                        echo '
-                        </td>
                         </tr>
                         </tbody>';
                     }
                 } else {
-                    echo '<tr><td colspan = "10"><center><p class = "add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+                    echo '<tr><td colspan = "9"><center><p class = "add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
                 }
                 echo '</table><br/><br/>
                         </div>
                         </div>
                         <!--Row form END -->';
 
-                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy='$cari' || no_meter_rusak='$cari%'||"
-                        . "ptgs_pasang LIKE '%$cari%' || sisa_pulsa='$cari%' || no_hp_plg='$cari%' || std_dummy LIKE '$cari%'"
-                        . " && unit LIKE '$unit%'");
+                $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy='$cari' || no_meter_rusak='$cari%'"
+                        . " && kembali='belum' && unit LIKE '$unit%'");
                 $cdata = mysqli_num_rows($query);
                 $cpg = ceil($cdata / $limit);
 
@@ -270,8 +255,8 @@ if (empty($_SESSION['admin'])) {
                     //first and previous pagging
                     if ($pg > 1) {
                         $prev = $pg - 1;
-                        echo '<li><a href = "?page=mdg&pg=1"><i class = "fa fa-angle-double-left"></i></a></li>
-                        <li><a href = "?page=mdg&pg=' . $prev . '"><i class = "fa fa-angle-left"></i></a></li>';
+                        echo '<li><a href = "?page=ddbk&pg=1"><i class = "fa fa-angle-double-left"></i></a></li>
+                        <li><a href = "?page=ddbk&pg=' . $prev . '"><i class = "fa fa-angle-left"></i></a></li>';
                     } else {
                         echo '<li class = "disabled"><a href = ""><i class = "fa fa-angle-double-left"></i></a></li>
                         <li class = "disabled"><a href = ""><i class = "fa fa-angle-left"></i></a></li>';
@@ -280,16 +265,16 @@ if (empty($_SESSION['admin'])) {
                     //perulangan pagging
                     for ($i = 1; $i <= $cpg; $i++)
                         if ($i != $pg) {
-                            echo '<li><a href = "?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
+                            echo '<li><a href = "?page=ddbk&pg=' . $i . '"> ' . $i . ' </a></li>';
                         } else {
-                            echo '<li><a href = "?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
+                            echo '<li><a href = "?page=ddbk&pg=' . $i . '"> ' . $i . ' </a></li>';
                         }
 
                     //last and next pagging
                     if ($pg < $cpg) {
                         $next = $pg + 1;
-                        echo '<li><a href = "?page=mdg&pg=' . $next . '"><i class = "fa fa-angle-right"></i></a></li>
-                        <li><a href = "?page=mdg&pg=' . $cpg . '"><i class = "fa fa-angle-double-right"></i></a></li>';
+                        echo '<li><a href = "?page=ddbk&pg=' . $next . '"><i class = "fa fa-angle-right"></i></a></li>
+                        <li><a href = "?page=ddbk&pg=' . $cpg . '"><i class = "fa fa-angle-double-right"></i></a></li>';
                     } else {
                         echo '<li class = "disabled"><a href = ""><i class = "fa fa-angle-right"></i></a></li>
                         <li class = "disabled"><a href = ""><i class = "fa fa fa-angle-double-right"></i></a></li>';
@@ -316,14 +301,13 @@ if (empty($_SESSION['admin'])) {
                                         <th width="5%" style="text-align: center">Tanggal Pakai</th>
                                         <th width="5%" style="text-align: center">No. Dummy</th>
                                         <th width="5%" style="text-align: center">No. Meter Rusak</th>
-                                        <th width="5%%" style="text-align: center">Merk Meter Rusak</th>
+                                        <th width="5%" style="text-align: center">Merk Meter Rusak</th>
                                         <th width="5%" style="text-align: center">Alasan Rusak</th>
                                         <th width="5%" style="text-align: center">Petugas Pasang</th>
                                         <th width="5%" style="text-align: center">Sisa Pulsa</th>
                                         <th width="5%" style="text-align: center">No. HP Plg</th>
                                         <th width="5%" style="text-align: center">Stand Dummy</th>
                                         <th width="5%" style="text-align: center">Call Center</th>
-                                        <th width="5%">Tindakan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -334,7 +318,7 @@ if (empty($_SESSION['admin'])) {
 
                                     $no = 1;
 
-                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' ORDER by tgl_pakai DESC LIMIT $curr, $limit");
+                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && kembali='belum' ORDER by tgl_pakai ASC LIMIT $curr, $limit");
                                     if (mysqli_num_rows($query) > 0) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
@@ -418,7 +402,6 @@ if (empty($_SESSION['admin'])) {
                                                 $alasan_rusak = "Lain-lain";
                                             }
 
-
                                             //merk tipe tahun otomatis  dibagian tampilan aja      
                                             $no_meter_rusak = $row['no_meter_rusak'];
                                             $pot12 = substr($no_meter_rusak, 0, 2);
@@ -431,44 +414,18 @@ if (empty($_SESSION['admin'])) {
                                             $tipe_meter_rusak = $rowseri['tipe'];
                                             $tahun_meter_rusak = $rowseri['tahun'];
 
-
                                             echo '<td style = "text-align: center">' . $merk_meter_rusak . '</td>
-                                            <td style = "text-align: center">' . $alasan_rusak . '</td>
-                                            <td style = "text-align: center">' . $row['ptgs_pasang'] . '</td>
-                                            <td style = "text-align: center">' . $row['sisa_pulsa'] . '</td>
-                                            <td style = "text-align: center">' . $row['no_hp_plg'] . '</td>
-                                            <td style = "text-align: center">' . $row['std_dummy'] . '</td>
-                                            <td style = "text-align: center">' . $row['nama_cc'] . '</td>
-                                            <td style = "text-align: center">';
-
-
-                                            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 3) {
-
-                                                $id_meter = $row['id_meter'];
-
-                                                $cek_aktivasi = mysqli_query($config, "SELECT aktivasi FROM tbl_metdum_pakai WHERE id_meter='$id_meter'");
-                                                list($aktivasi) = mysqli_fetch_array($cek_aktivasi);
-
-                                                if ($aktivasi == "non aktif") {
-
-                                                    echo ' <div class = "row"><a class = "btn btn-warning" href = "?page=mdg&act=edit&id_meter=' . $row['id_meter'] . '">
-                                            <i class = "fa fa-edit"> Edit</i></a></div></br>
-                                            <div class = "row">
-                                            <a class = "btn btn-danger" href = "?page=mdg&act=del&id_meter=' . $row['id_meter'] . '">
-                                            <i class = "fa fa-trash-o"> Delete</i></a></div>';
-                                                } else {
-                                                    echo '<btn class = "btn btn-success" disabled><i class = "glyphicon glyphicon-ban-circle"></i> Aktif</btn>';
-                                                }
-                                            } else {
-                                                echo '<i class = "glyphicon glyphicon-ban-circle" disabled></i>';
-                                            }
-                                            echo '
-                                            </td>
+                                                <td style = "text-align: center">' . $alasan_rusak . '</td>
+                                                <td style = "text-align: center">' . $row['ptgs_pasang'] . '</td>
+                                                <td style = "text-align: center">' . $row['sisa_pulsa'] . '</td>
+                                                <td style = "text-align: center">' . $row['no_hp_plg'] . '</td>
+                                                <td style = "text-align: center">' . $row['std_dummy'] . '</td>
+                                                <td style = "text-align: center">' . $row['nama_cc'] . '</td>
                                             </tr>
-                                            </tbody>';
+                                        </tbody>';
                                         }
                                     } else {
-                                        echo '<tr><td colspan = "10"><center><p class = "add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+                                        echo '<tr><td colspan = "9"><center><p class = "add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
                                     }
                                     ?>
                             </table>
@@ -478,7 +435,7 @@ if (empty($_SESSION['admin'])) {
                         <?php
                         $unit = $_SESSION['unit'];
 
-                        $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%'");
+                        $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && kembali='belum'");
                         $cdata = mysqli_num_rows($query);
                         $cpg = ceil($cdata / $limit);
 
@@ -490,8 +447,8 @@ if (empty($_SESSION['admin'])) {
                             //first and previous pagging
                             if ($pg > 1) {
                                 $prev = $pg - 1;
-                                echo '<li><a href = "?page=mdg&pg=1"><i class = "fa fa-angle-double-left"></i></a></li>
-                                            <li><a href = "?page=mdg&pg=' . $prev . '"><i class = "fa fa-angle-left"></i></a></li>';
+                                echo '<li><a href = "?page=ddbk&pg=1"><i class = "fa fa-angle-double-left"></i></a></li>
+                                            <li><a href = "?page=ddbk&pg=' . $prev . '"><i class = "fa fa-angle-left"></i></a></li>';
                             } else {
                                 echo '<li class = "disabled"><a href = ""><i class = "fa fa-angle-double-left"></i></a></li>
                                             <li class = "disabled"><a href = ""><i class = "fa fa-angle-left"></i></a></li>';
@@ -500,16 +457,16 @@ if (empty($_SESSION['admin'])) {
                             //perulangan pagging
                             for ($i = 1; $i <= $cpg; $i++)
                                 if ($i != $pg) {
-                                    echo '<li><a href = "?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
+                                    echo '<li><a href = "?page=ddbk&pg=' . $i . '"> ' . $i . ' </a></li>';
                                 } else {
-                                    echo '<li><a href = "?page=mdg&pg=' . $i . '"> ' . $i . ' </a></li>';
+                                    echo '<li><a href = "?page=ddbk&pg=' . $i . '"> ' . $i . ' </a></li>';
                                 }
 
                             //last and next pagging
                             if ($pg < $cpg) {
                                 $next = $pg + 1;
-                                echo '<li><a href = "?page=mdg&pg=' . $next . '"><i class = "fa fa-angle-right"></i></a></li>
-                                            <li><a href = "?page=mdg&pg=' . $cpg . '"><i class = "fa fa-angle-double-right"></i></a></li>';
+                                echo '<li><a href = "?page=ddbk&pg=' . $next . '"><i class = "fa fa-angle-right"></i></a></li>
+                                            <li><a href = "?page=ddbk&pg=' . $cpg . '"><i class = "fa fa-angle-double-right"></i></a></li>';
                             } else {
                                 echo '<li class = "disabled"><a href = "#"><i class = "fa fa-angle-right"></i></a></li>
                                             <li class = "disabled"><a href = "#"><i class = "fa fa-angle-double-right"></i></a></li>';

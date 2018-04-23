@@ -81,7 +81,7 @@ if (!empty($_SESSION['admin'])) {
                                     </li>
 
                                     <?php
-                                    }
+                                }
                                 ?>
 
 
@@ -106,6 +106,16 @@ if (!empty($_SESSION['admin'])) {
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <?php
+                    }
+
+                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3) {
+                        ?>  
+
+                        <li>
+                            <a href="?page=usr"><i class="fa fa-users"></i> Management User</a>
+                        </li>
+
                         <?php
                     }
                     ?>
