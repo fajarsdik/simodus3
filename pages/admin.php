@@ -185,16 +185,42 @@ if (empty($_SESSION['admin'])) {
                         $dummy_standby = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status='ready'"));
 
                         //menghitung jumlah meter belum diaktivasi
-                        $belum_aktivasi = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi='non aktif'"));
+                        $belum_aktivasi = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && tgl_aktivasi IS NULL && status=''"));
 
                         //menghitung jumlah meter belum kembali
-                        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && kembali='belum'"));
+                        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && tgl_kembali IS NULL && status=''"));
                         ?>
 
                         <div class="col-lg-12">
                             <div class="row">
+                                <div class="col-lg-9 col-md-6">
+                                    <div class="panel panel-yellow">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <i class="fa fa-list-alt fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-9 text-right">
+                                                    <?php echo '<div class="huge">' . $jml_dummy . '</div>'; ?>
+                                                    <div>Jumlah Meter Dummy</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="?page=mon">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">Lihat detail</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                                <div class="col-lg-3 col-md-6">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
                                             <div class="row">
@@ -238,34 +264,11 @@ if (empty($_SESSION['admin'])) {
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="panel panel-yellow">
-                                        <div class="panel-heading">
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <i class="fa fa-list-alt fa-5x"></i>
-                                                </div>
-                                                <div class="col-xs-9 text-right">
-                                                    <?php echo '<div class="huge">' . $jml_dummy . '</div>'; ?>
-                                                    <div>Jumlah Meter Dummy</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="?page=mon">
-                                            <div class="panel-footer">
-                                                <span class="pull-left">Lihat detail</span>
-                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
                         <div class="col-lg-12">
                             <div class="row">
-
                                 <?php
                                 if ($belum_aktivasi > 0) {
 
@@ -294,7 +297,7 @@ if (empty($_SESSION['admin'])) {
                                                 </a>
                                             </div>
                                         </div>
-                                
+
                                         <?php
                                     }
                                 }
