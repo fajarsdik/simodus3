@@ -185,10 +185,10 @@ if (empty($_SESSION['admin'])) {
                         $dummy_standby = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status='ready'"));
 
                         //menghitung jumlah meter belum diaktivasi
-                        $belum_aktivasi = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && tgl_aktivasi IS NULL && status=''"));
+                        $belum_aktivasi = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && tgl_pakai IS NOT NULL && tgl_aktivasi IS NULL && status=''"));
 
                         //menghitung jumlah meter belum kembali
-                        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && tgl_kembali IS NULL && status=''"));
+                        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && tgl_aktivasi IS NOT NULL && tgl_kembali IS NULL && status=''"));
                         ?>
 
                         <div class="col-lg-12">
