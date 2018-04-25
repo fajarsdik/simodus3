@@ -90,7 +90,7 @@ if (empty($_SESSION['admin'])) {
                                             VALUES('','$no_dummy','$no_meter_rusak','$alasan_rusak','$tgl_pakai','$ptgs_pasang',"
                                             . "'$sisa_pulsa','$no_hp_plg','$std_dummy','$nama_cc','$aktivasi','$kembali','$nama','$id_user','$unit')");
 
-                                    $query_status = mysqli_query($config, "UPDATE tbl_metdum_stok SET status='', tgl_pakai='$tgl_pakai', "
+                                    $query_status = mysqli_query($config, "UPDATE tbl_metdum_stok SET status='', tgl_pakai='$tgl_pakai', tgl_aktivasi=NULL,tgl_kembali=NULL,"
                                             . "no_meter_rusak='$no_meter_rusak', posko='$nama' WHERE unit ='$unit' && no_dummy='$no_dummy'");
                                     
                                     if ($query == true) {
