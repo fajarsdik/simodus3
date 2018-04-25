@@ -179,16 +179,16 @@ if (empty($_SESSION['admin'])) {
                         $jml_dummy = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%'"));
 
                         //menghitung jumlah dummy terpasang
-                        $dummy_terpasang = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status=''"));
+                        $dummy_terpasang = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status is NULL"));
 
                         //menghitung jumlah dummy standby
                         $dummy_standby = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && status='ready'"));
 
                         //menghitung jumlah meter belum diaktivasi
-                        $belum_aktivasi = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && tgl_pakai IS NOT NULL && tgl_aktivasi IS NULL && status=''"));
+                        $belum_aktivasi = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && tgl_pakai IS NOT NULL && tgl_aktivasi IS NULL "));
 
                         //menghitung jumlah meter belum kembali
-                        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && tgl_aktivasi IS NOT NULL && tgl_kembali IS NULL && status=''"));
+                        $belum_kembali = mysqli_num_rows(mysqli_query($config, "SELECT * FROM tbl_metdum_stok WHERE unit LIKE '$unit%' && tgl_aktivasi IS NOT NULL && tgl_kembali IS NULL "));
                         ?>
 
                         <div class="col-lg-12">

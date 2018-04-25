@@ -74,48 +74,20 @@ if (!empty($_SESSION['admin'])) {
                                     <a href="?page=lpd">Laporan</a>
                                 </li>
 
-                                <?php if ($_SESSION['admin'] == 3) { ?>
+                                <?php if ($_SESSION['admin'] == 10) { ?>
 
                                     <li>
                                         <a href="?page=set">Reset Dummy</a>
                                     </li>
 
                                     <?php
-                                }
+                                    }
                                 ?>
 
 
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php
-                    }
-                    ?>
-
-                    <?php
-                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3 || $_SESSION['admin'] == 6) {
-                        ?>
-
-                        <li>
-                            <a href="#"><i class="fa fa-fax fa-fw"></i> P2TL<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="?page=pet">Temuan</a>
-                                </li>
-
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <?php
-                    }
-
-                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3) {
-                        ?>  
-
-                        <li>
-                            <a href="?page=usr"><i class="fa fa-users"></i> Management User</a>
-                        </li>
-
                         <?php
                     }
                     ?>
