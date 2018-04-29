@@ -90,20 +90,24 @@ if (!empty($_SESSION['admin'])) {
                         </li>
                         <?php
                     }
+                    
+                    if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3) {
+                        echo '<li>
+                                <a href="#"><i class="fa fa-user fa-fw"></i> Manajemen User<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="?page=usr"> User</a>
+                                    </li>
+                                </ul>
+                            </li>';
+                    }
+                    
                     ?>
-
-                    <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> Manajemen User<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="?page=usr"> User</a>
-                            </li>
-                        </ul>
-                    </li>
-
+                        
                     <li>
                         <a href="?page=about"><i class="glyphicon glyphicon-info-sign"></i> About</a>
                     </li>
+                    
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
