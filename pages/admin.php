@@ -70,6 +70,12 @@ if (empty($_SESSION['admin'])) {
                     case 'usr':
                         include "user.php";
                         break;
+                    case 'gpw':
+                        include "ganti_password.php";
+                        break;
+                    case 'prf':
+                        include "profile.php";
+                        break;
                     case 'pet':
                         include "p2tl/p2tl_temuan.php";
                         break;

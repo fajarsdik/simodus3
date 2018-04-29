@@ -37,7 +37,7 @@ if (empty($_SESSION['admin'])) {
                     <div class="row">
                         <div class="col-md-13 col-md-8">
                             <?php
-                            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2) {
+                            if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 || $_SESSION['admin'] == 3) {
                                 echo '
                                       <a href="?page=usr&act=add" class="btn btn-primary">Tambah User</a>
                                  ';
@@ -96,7 +96,6 @@ if (empty($_SESSION['admin'])) {
                                 <?php
                                 //script untuk menampilkan data
                                 $unit = $_SESSION['unit'];
-
                                 $no = 1;
 
                                 $query = mysqli_query($config, "SELECT * FROM tbl_user WHERE unit LIKE '$unit%' ORDER BY admin ASC");
@@ -123,25 +122,27 @@ if (empty($_SESSION['admin'])) {
                                         }
 
                                         echo '     
-                                                <td style = "text-align: center">' . $level . '</td>
-                                                    
+                                                <td style = "text-align: center">' . $level . '</td>';
+
+                                        if ($_SESSION['admin'] == $row['admin']) {
+                                            echo '  
                                                 <td style = "text-align: center">
                                                     <div class = "row"><a class = "btn btn-warning" href = "?page=usr&act=edit&id_user=' . $row['id_user'] . '">
                                                         <i class = "fa fa-edit"> Edit</i></a>
                                                     </div> </br>';
+                                        } else {
+                                            echo '  
+                                                <td style = "text-align: center">
+                                                    <div class = "row"><a class = "btn btn-warning" href = "?page=usr&act=edit&id_user=' . $row['id_user'] . '">
+                                                        <i class = "fa fa-edit"> Edit</i></a>
+                                                    </div> </br>';
+                                        }
 
                                         if ($_SESSION['admin'] == $row['admin']) {
-                                            
-                                            echo '     
-                                                    <div class = "row">
-                                                        <i class = "glyphicon glyphicon-ban-circle" disabled></i>
-                                                    </div>
+                                            echo ' 
                                                 </td>
                                             </tr>';
-                                            
-                                            
                                         } else {
-
                                             echo '     
                                                     <div class = "row">
                                                         <a class = "btn btn-danger" href = "?page=usr&act=del&id_user=' . $row['id_user'] . '">

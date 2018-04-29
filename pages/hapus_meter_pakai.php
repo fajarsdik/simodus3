@@ -102,9 +102,9 @@ if (empty($_SESSION['admin'])) {
                                     <div class="well">
                                         <table class="table table-responsive">
                                             <thead class="red lighten-5 red-text">
-                                            <div id="12"  class="alert alert-danger">
-                                                Apakah Anda yakin akan menghapus data ini?
-                                            </div>
+                                                <div id="12"  class="alert alert-danger">
+                                                    Apakah Anda yakin akan menghapus data ini?
+                                                </div>
                                             </thead>
                                             <tbody>
 
