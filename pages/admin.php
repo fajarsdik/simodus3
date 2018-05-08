@@ -76,9 +76,6 @@ if (empty($_SESSION['admin'])) {
                     case 'prf':
                         include "profile.php";
                         break;
-                    case 'pet':
-                        include "p2tl/p2tl_temuan.php";
-                        break;
                     case 'coms':
                         include "comingsoon.php";
                         break;

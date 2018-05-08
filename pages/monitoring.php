@@ -53,7 +53,7 @@ if (empty($_SESSION['admin'])) {
                                                     ?>
 
                                                     <td style="text-align: center"><?= $row['unit'] ?></td>
-                                                    <td style="text-align: center"><?= $row['no_dummy'] ?></td>
+                                                    <td style="text-align: center"><a href="#"><?= $row['no_dummy'] ?></a></td>
                                                     <td style="text-align: center"><?= $row['no_meter_rusak'] ?></td>
 
                                                     <?php
@@ -62,8 +62,13 @@ if (empty($_SESSION['admin'])) {
                                                         $akhir = date_create();
                                                         $hari_layanan = date_diff($awal, $akhir);
 
-                                                        echo '   
-                                                    <td style="text-align: center">' . $hari_layanan->d . ' hari ' . $hari_layanan->h . ' jam</td>';
+                                                        if ($hari_layanan->m < 1) {
+                                                            echo '   
+                                                            <td style="text-align: center">' . $hari_layanan->d . ' hari ' . $hari_layanan->h . ' jam</td>';
+                                                        } else {
+                                                            echo '   
+                                                            <td style="text-align: center">' . $hari_layanan->m . ' bulan ' . $hari_layanan->d . ' hari</td>';
+                                                        }
                                                     } else {
                                                         echo '   
                                                     <td style="text-align: center"> </td>';
@@ -195,14 +200,20 @@ if (empty($_SESSION['admin'])) {
                                                         $awal = date_create($row['tgl_kembali']);
                                                         $akhir = date_create();
                                                         $lama_standby = date_diff($awal, $akhir);
-                                                        echo
-                                                        '<td style="text-align: center">' . $lama_standby->d . ' hari ' . $lama_standby->h . ' jam</td>';
+
+                                                        if ($hari_layanan->m < 1) {
+                                                            echo '   
+                                                            <td style="text-align: center">' . $hari_layanan->d . ' hari ' . $hari_layanan->h . ' jam</td>';
+                                                        } else {
+                                                            echo '   
+                                                            <td style="text-align: center">' . $hari_layanan->m . ' bulan ' . $hari_layanan->d . ' hari</td>';
+                                                        }
                                                     } else {
                                                         echo '   
-                                                    <td style="text-align: center"> </td>';
+                                                            <td style="text-align: center"> </td>';
                                                     }
                                                     echo '<td style="text-align: center"> ' . $row['posko'] . ' </td>
-                                                </tr>';
+                                                    </tr>';
                                                 }
                                             } else {
                                                 echo '<tr><td colspan="5"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
@@ -278,11 +289,16 @@ if (empty($_SESSION['admin'])) {
                                                             $akhir = date_create();
                                                             $hari_layanan = date_diff($awal, $akhir);
 
-                                                            echo '   
-                                                    <td style="text-align: center">' . $hari_layanan->d . ' hari ' . $hari_layanan->h . ' jam</td>';
+                                                            if ($hari_layanan->m < 1) {
+                                                                echo '   
+                                                                    <td style="text-align: center">' . $hari_layanan->d . ' hari ' . $hari_layanan->h . ' jam</td>';
+                                                            } else {
+                                                                echo '   
+                                                                    <td style="text-align: center">' . $hari_layanan->m . ' bulan ' . $hari_layanan->d . ' hari</td>';
+                                                            }
                                                         } else {
                                                             echo '   
-                                                    <td style="text-align: center"> </td>';
+                                                                <td style="text-align: center"> </td>';
                                                         }
 
                                                         //perhitungan tgl pakai
@@ -403,7 +419,7 @@ if (empty($_SESSION['admin'])) {
                                                             }
 
                                                             echo '
-                                                    <td style="text-align: center">' . $d . " " . $nm . " " . $y . '</td>';
+                                                                <td style="text-align: center">' . $d . " " . $nm . " " . $y . '</td>';
                                                         }
 
                                                         //perhitungan lama standby
@@ -411,14 +427,20 @@ if (empty($_SESSION['admin'])) {
                                                             $awal = date_create($row['tgl_kembali']);
                                                             $akhir = date_create();
                                                             $lama_standby = date_diff($awal, $akhir);
-                                                            echo
-                                                            '<td style="text-align: center">' . $lama_standby->d . ' hari ' . $lama_standby->h . ' jam</td>';
+
+                                                            if ($hari_layanan->m < 1) {
+                                                                echo '   
+                                                                <td style="text-align: center">' . $hari_layanan->d . ' hari ' . $hari_layanan->h . ' jam</td>';
+                                                            } else {
+                                                                echo '   
+                                                                <td style="text-align: center">' . $hari_layanan->m . ' bulan ' . $hari_layanan->d . ' hari</td>';
+                                                            }
                                                         } else {
                                                             echo '   
-                                                    <td style="text-align: center"> </td>';
+                                                                <td style="text-align: center"> </td>';
                                                         }
                                                         echo '<td style="text-align: center"> ' . $row['posko'] . ' </td>
-                                                </tr>';
+                                                            </tr>';
                                                     }
                                                 } else {
                                                     echo '<tr><td colspan="5"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
@@ -428,8 +450,6 @@ if (empty($_SESSION['admin'])) {
                                     </table>
                                 </div>
                                 <!-- Row form END -->
-
-
                             </div>
                             <!--/.panel-body -->
                         </div>

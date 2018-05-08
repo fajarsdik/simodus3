@@ -58,28 +58,6 @@ if (empty($_SESSION['admin'])) {
                                         break;
                                 }
 
-                                if ($_SESSION['admin'] == 1 && $_SESSION['unit'] == $unit_area) {
-                                    echo '<div class = "row">
-                                        <div class = "form-group col-lg-3">
-                                            <label>Area</label>
-                                            <select class= "form-control" name="area" id="area" required>
-                                                <option value="" disabled selected>-----</option>
-                                                <option value="181">Pekanbaru</option>
-                                                <option value="182">Dumai</option>
-                                                <option value="183">Tanjungpinang</option>
-                                                <option value="184">Rengat</option>
-                                            </select>
-                                        </div>';
-                                } else {
-                                    echo '<div class="row">
-                                        <div class="form-group col-lg-3">
-                                            <label>Area</label>
-                                            <select class = "form-control" name="area" id="area" readonly>
-                                                <option value=" ' . $admin_area . ' "> ' . $admin_area . '</option>
-                                            </select>
-                                        </div>';
-                                }
-
                                 switch ($_SESSION['unit']) {
                                     case '18301' :
                                         $admin_rayon = "Bintan Center";
@@ -115,31 +93,51 @@ if (empty($_SESSION['admin'])) {
                                         $admin_rayon = "Air Molek";
                                         break;
                                 }
-                                
-                                if ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2 && $_SESSION['unit'] == '183') {
+
+                                if ($_SESSION['admin'] == 2) {
+
+                                    echo '<div class = "row">
+                                        <div class = "form-group col-lg-3">
+                                            <label>Area</label>
+                                            <select class= "form-control" name="area" id="area" required>
+                                                <option value="' . $_SESSION['unit'] . '" readonly selected>' . $admin_area . '</option>
+                                            </select>
+                                        </div>';
+
+                                    if ($_SESSION['unit'] == 183) {
+
+                                        echo '<div class = "form-group col-lg-3">
+                                                <label>Rayon</label>
+                                                <select class = "form-control" name = "rayon" id = "rayon" required>
+                                                    <option value="" disabled selected>-----</option>
+                                                    <option value="18301">Bintan Center</option>
+                                                    <option value="18302">Kijang</option>
+                                                    <option value="18303">Tg Uban</option>
+                                                    <option value="18304">Belakang Padang</option>
+                                                    <option value="18305">Tg Balai Karimun</option>
+                                                    <option value="18306">Tg Batu</option>
+                                                    <option value="18307">Dabosingkep</option>
+                                                    <option value="18308">Natuna</option>
+                                                    <option value="18309">Tanjungpinang Kota</option>
+                                                    <option value="18310">Anambas</option>
+                                                </select>
+                                            </div>';
+                                    }
+                                } if ($_SESSION['admin'] == 3) {
+                                    echo '<div class = "row">
+                                        <div class = "form-group col-lg-3">
+                                            <label>Area</label>
+                                            <select class= "form-control" name="area" id="area" required>
+                                                <option value="' . $unit_area . '" readonly selected>' . $admin_area . '</option>
+                                            </select>
+                                        </div>';
+
                                     echo '<div class = "form-group col-lg-3">
-                                        <label>Rayon</label>
-                                        <select class = "form-control" name = "rayon" id = "rayon" required>
-                                            <option value="" disabled selected>-----</option>
-                                            <option value="18301">Bintan Center</option>
-                                            <option value="18302">Kijang</option>
-                                            <option value="18303">Tg Uban</option>
-                                            <option value="18304">Belakang Padang</option>
-                                            <option value="18305">Tg Balai Karimun</option>
-                                            <option value="18306">Tg Batu</option>
-                                            <option value="18307">Dabosingkep</option>
-                                            <option value="18308">Natuna</option>
-                                            <option value="18309">Tanjungpinang Kota</option>
-                                            <option value="18310">Anambas</option>
-                                        </select>
-                                    </div>';
-                                } else {
-                                    echo '<div class = "form-group col-lg-3">
-                                        <label>Rayon</label>
-                                        <select class = "form-control" name = "rayon" id = "rayon" readonly>
-                                            <option value=" ' . $_SESSION['unit'] . ' "> ' . $admin_rayon . '</option>
-                                        </select>
-                                    </div>';
+                                            <label>Rayon</label>
+                                            <select class = "form-control" name = "rayon" id = "rayon" required>
+                                                <option value="' . $_SESSION['unit'] . '" readonly selected>' . $admin_rayon . '</option>
+                                            </select>
+                                        </div>';
                                 }
                                 ?>
                             </div>
@@ -169,13 +167,9 @@ if (empty($_SESSION['admin'])) {
         if (isset($_REQUEST['submit'])) {
 
             $area = $_REQUEST['area'];
-            echo $area;
             $rayon = $_REQUEST['rayon'];
-            echo $rayon;
             $tgl_awal = $_REQUEST['tgl_awal'];
-            echo $tgl_awal;
             $tgl_akhir = $_REQUEST['tgl_akhir'];
-            echo $tgl_akhir;
             $unit = $_SESSION['unit'];
 
             echo ' 
@@ -183,8 +177,11 @@ if (empty($_SESSION['admin'])) {
                 <div class = "panel-heading"><i class = "fa fa-file-o"></i>
                     Hasil Pencarian
                 </div>
+                
                 <div class = "panel-body">
                     <div class = "table-responsive">
+                    <a href="proses_laporan_dummy.php?unit='. $rayon .'&tgl_awal='. $tgl_awal .'&tgl_akhir='. $tgl_akhir .'" class="btn btn-default">Export ke Excel</a>
+                    <div class="row"></div><br/>
                         <table width = "100%" class = "table table-striped table-bordered table-hover" id = "monitoring-1">
                             <thead>
                                 <tr>
@@ -196,7 +193,7 @@ if (empty($_SESSION['admin'])) {
                                     <th width = "5%" style = "text-align: center">Alasan Rusak</th>
                                     <th width = "5%" style = "text-align: center">Sisa Pulsa</th>
                                     <th width = "5%" style = "text-align: center">No. Dummy</th>
-                                    <th width = "5%" style = "text-align: center">Stand Dummy</th>
+                                    <th width = "5%" style = "text-align: center">Stand Pasang</th>
                                     <th width = "5%" style = "text-align: center">Stand Kembali</th>
                                     <th width = "5%" style = "text-align: center">Pemakaian Dummy</th>
                                     <th width = "5%" style = "text-align: center">Tgl Kembali</th>
@@ -205,10 +202,9 @@ if (empty($_SESSION['admin'])) {
                             </thead>
                             <tbody>';
 
-
             //query mencari data
             $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai a LEFT JOIN tbl_aktivasi b ON a.id_meter = b.id_meter RIGHT JOIN tbl_metdum_kbl c ON a.id_meter = c.id_meter "
-                    . "WHERE a.tgl_pakai BETWEEN '$tgl_awal' AND '$tgl_akhir' && a.unit='$unit' ORDER BY a.tgl_pakai DESC");
+                    . "WHERE a.tgl_pakai BETWEEN '$tgl_awal' AND '$tgl_akhir' && a.unit='$rayon' ORDER BY a.tgl_pakai DESC");
 
             if (mysqli_num_rows($query) > 0) {
                 $no = 1;
@@ -231,54 +227,52 @@ if (empty($_SESSION['admin'])) {
                     $merk_meter_rusak = $rowseri['merk'];
                     $tipe_meter_rusak = $rowseri['tipe'];
                     $tahun_meter_rusak = $rowseri['tahun'];
-                    
+
                     if ($row['alasan_rusak'] == 1) {
-                            $alasan_rusak = "Token tidak dapat dimasukkan";
-                        } else if ($row['alasan_rusak'] == 2) {
-                            $alasan_rusak = "Sisa kredit pada kWh meter hilang/bertambah saat listrik padam";
-                        } else if ($row['alasan_rusak'] == 3) {
-                            $alasan_rusak = "Kerusakan pada keypad";
-                        } else if ($row['alasan_rusak'] == 4) {
-                            $alasan_rusak = "LCD mati/rusak";
-                        } else if ($row['alasan_rusak'] == 5) {
-                            $alasan_rusak = "kWh Meter rusak (akibat petir/terbakar)";
-                        } else if ($row['alasan_rusak'] == 6) {
-                            $alasan_rusak = "Sisa kredit tidak bertambah saat kredit baru dimasukkan";
-                        } else if ($row['alasan_rusak'] == 7) {
-                            $alasan_rusak = "Baut tutup terminal patah";
-                        } else if ($row['alasan_rusak'] == 8) {
-                            $alasan_rusak = "Tegangan dibawah 180V tidak bisa hidup";
-                        } else if ($row['alasan_rusak'] == 9) {
-                            $alasan_rusak = "Micro switch rusak / tidak keluar tegangan";
-                        } else if ($row['alasan_rusak'] == 10) {
-                            $alasan_rusak = "ID meter pada display dan nameplate tidak sama";
-                        } else if ($row['alasan_rusak'] == 11) {
-                            $alasan_rusak = "Sisa kredit tidak berkurang";
-                        } else if ($row['alasan_rusak'] == 12) {
-                            $alasan_rusak = "Display overload tanpa beban";
-                        } else if ($row['alasan_rusak'] == 13) {
-                            $alasan_rusak = "Terminal kWh meter rusak";
-                        } else if ($row['alasan_rusak'] == 14) {
-                            $alasan_rusak = "Meter periksa/tutup dibuka lampu tetap nyala";
-                        } else if ($row['alasan_rusak'] == 15) {
-                            $alasan_rusak = "Timbul rusak";
-                        } else if ($row['alasan_rusak'] == 16) {
-                            $alasan_rusak = "kWh minus";
-                        } else if ($row['alasan_rusak'] == 17) {
-                            $alasan_rusak = "kWh bertambah";
-                        } else if ($row['alasan_rusak'] == 18) {
-                            $alasan_rusak = "Lain-lain";
-                        }
-                        
-                        if (empty($row['stand'])) {
-                            $pem_dummy = 0;
-                        } else if ($row['std_dummy'] > $row['stand']) {
-                            $pem_dummy = "Periksa Stand Kembali";
-                        } else {
-                            $pem_dummy = $row['stand'] - $row['std_dummy'];
-                        }
-                        
-                        
+                        $alasan_rusak = "Token tidak dapat dimasukkan";
+                    } else if ($row['alasan_rusak'] == 2) {
+                        $alasan_rusak = "Sisa kredit pada kWh meter hilang/bertambah saat listrik padam";
+                    } else if ($row['alasan_rusak'] == 3) {
+                        $alasan_rusak = "Kerusakan pada keypad";
+                    } else if ($row['alasan_rusak'] == 4) {
+                        $alasan_rusak = "LCD mati/rusak";
+                    } else if ($row['alasan_rusak'] == 5) {
+                        $alasan_rusak = "kWh Meter rusak (akibat petir/terbakar)";
+                    } else if ($row['alasan_rusak'] == 6) {
+                        $alasan_rusak = "Sisa kredit tidak bertambah saat kredit baru dimasukkan";
+                    } else if ($row['alasan_rusak'] == 7) {
+                        $alasan_rusak = "Baut tutup terminal patah";
+                    } else if ($row['alasan_rusak'] == 8) {
+                        $alasan_rusak = "Tegangan dibawah 180V tidak bisa hidup";
+                    } else if ($row['alasan_rusak'] == 9) {
+                        $alasan_rusak = "Micro switch rusak / tidak keluar tegangan";
+                    } else if ($row['alasan_rusak'] == 10) {
+                        $alasan_rusak = "ID meter pada display dan nameplate tidak sama";
+                    } else if ($row['alasan_rusak'] == 11) {
+                        $alasan_rusak = "Sisa kredit tidak berkurang";
+                    } else if ($row['alasan_rusak'] == 12) {
+                        $alasan_rusak = "Display overload tanpa beban";
+                    } else if ($row['alasan_rusak'] == 13) {
+                        $alasan_rusak = "Terminal kWh meter rusak";
+                    } else if ($row['alasan_rusak'] == 14) {
+                        $alasan_rusak = "Meter periksa/tutup dibuka lampu tetap nyala";
+                    } else if ($row['alasan_rusak'] == 15) {
+                        $alasan_rusak = "Timbul rusak";
+                    } else if ($row['alasan_rusak'] == 16) {
+                        $alasan_rusak = "kWh minus";
+                    } else if ($row['alasan_rusak'] == 17) {
+                        $alasan_rusak = "kWh bertambah";
+                    } else if ($row['alasan_rusak'] == 18) {
+                        $alasan_rusak = "Lain-lain";
+                    }
+
+                    if (empty($row['stand'])) {
+                        $pem_dummy = 0;
+                    } else if ($row['std_dummy'] > $row['stand']) {
+                        $pem_dummy = "Periksa Stand Kembali";
+                    } else {
+                        $pem_dummy = $row['stand'] - $row['std_dummy'];
+                    }
 
                     echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>
                             <td style = "text-align: center">' . $alasan_rusak . '</td>
@@ -294,51 +288,21 @@ if (empty($_SESSION['admin'])) {
             } else {
                 echo '
                     <tr>
-                    <td colspan = "13"><center>Tidak ada data yang ditemukan.</center></td>
+                        <td colspan = "13"><center>Tidak ada data yang ditemukan.</center></td>
                     </tr>';
             }
 
             echo '
-                    </tbody>
+                        </tbody>
                     </table>
-                    </div>
-                    <!--/.table-responsive -->
-                    </div>
-                    <!--/.panel-body -->
-                    </div>';
+                </div>
+            <!--/.table-responsive -->
+            </div>
+        <!--/.panel-body -->
+        </div>';
         } else {
             ?>
 
-            <div class="panel panel-primary">
-                <div class="panel-heading"><i class="fa fa-file-o"></i>
-                    Hasil Pencarian
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-1">
-                            <thead>
-                                <tr>
-                                    <th width="5%" style="text-align: center">No.</th>
-                                    <th width="5%" style="text-align: center">Tgl Pakai</th>
-                                    <th width="5%" style="text-align: center">ID Pelanggan</th>
-                                    <th width="5%" style="text-align: center">No. Meter Rusak</th>
-                                    <th width="5%" style="text-align: center">Merk Meter Rusak</th>
-                                    <th width="5%" style="text-align: center">Alasan Rusak</th>
-                                    <th width="5%" style="text-align: center">Sisa Pulsa</th>
-                                    <th width="5%" style="text-align: center">No. Dummy</th>
-                                    <th width="5%" style="text-align: center">Stand Dummy</th>
-                                    <th width="5%" style="text-align: center">Stand Kembali</th>
-                                    <th width="5%" style="text-align: center">Pemakaian Dummy</th>
-                                    <th width="5%" style="text-align: center">Tgl Kembali</th>
-                                    <th width="5%" style="text-align: center">Posko</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <!--/.table-responsive -->
-                </div>
-                <!--/.panel-body -->
-            </div>
             <!--/.panel -->
         </div>
         <!--/.col-lg-12 -->
