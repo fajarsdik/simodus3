@@ -86,6 +86,11 @@ if (empty($_SESSION['admin'])) {
                                 <form role="form" method="POST" action="?page=atv&act=eam" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="form-group col-lg-6">
+                                            <label for="no_dummy">Nomor Dummy</label>
+                                            <input class="form-control" type="number" name="no_dummy" id="no_dummy" value="<?php echo $no_dummy; ?>" readonly required>
+                                        </div>
+
+                                        <div class="form-group col-lg-6">
                                             <input type="hidden" name="id_meter" value="<?php echo $id_meter; ?>"> 
                                             <input type="hidden" name="no_dummy" value="<?php echo $no_dummy; ?>"> 
                                             <label for="no_meter_rusak">No. Meter Rusak</label>

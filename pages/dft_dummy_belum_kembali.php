@@ -126,7 +126,7 @@ if (empty($_SESSION['admin'])) {
                 $unit = $_SESSION['unit'];
 
                 $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy='$cari' || no_meter_rusak='$cari%'"
-                        . " && unit LIKE '$unit%' && kembali='belum' ORDER by tgl_pakai ASC LIMIT $curr, $limit");
+                        . " && unit LIKE '$unit%' && aktivasi ='aktif' && kembali='belum' ORDER by tgl_pakai ASC LIMIT $curr, $limit");
 
                 if (mysqli_num_rows($query) > 0) {
                     $no = 1;
@@ -243,7 +243,7 @@ if (empty($_SESSION['admin'])) {
                         <!--Row form END -->';
 
                 $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy='$cari' || no_meter_rusak='$cari%'"
-                        . " && kembali='belum' && unit LIKE '$unit%'");
+                        . " aktivasi ='aktif' && kembali='belum' && unit LIKE '$unit%'");
                 $cdata = mysqli_num_rows($query);
                 $cpg = ceil($cdata / $limit);
 
@@ -318,7 +318,7 @@ if (empty($_SESSION['admin'])) {
 
                                     $no = 1;
 
-                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && kembali='belum' ORDER by tgl_pakai ASC LIMIT $curr, $limit");
+                                    $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi ='aktif' && kembali='belum' ORDER by tgl_pakai ASC LIMIT $curr, $limit");
                                     if (mysqli_num_rows($query) > 0) {
                                         $no = 1;
                                         while ($row = mysqli_fetch_array($query)) {
@@ -435,7 +435,7 @@ if (empty($_SESSION['admin'])) {
                         <?php
                         $unit = $_SESSION['unit'];
 
-                        $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && kembali='belum'");
+                        $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE unit LIKE '$unit%' && aktivasi ='aktif' && kembali='belum'");
                         $cdata = mysqli_num_rows($query);
                         $cpg = ceil($cdata / $limit);
 
