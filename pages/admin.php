@@ -76,6 +76,9 @@ if (empty($_SESSION['admin'])) {
                     case 'prf':
                         include "profile.php";
                         break;
+                    case 'his_dum':
+                        include "histori_dummy.php";
+                        break;
                     case 'coms':
                         include "comingsoon.php";
                         break;

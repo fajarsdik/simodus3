@@ -280,7 +280,7 @@ if (empty($_SESSION['admin'])) {
                                                     while ($row = mysqli_fetch_array($query)) {
                                                         ?>
 
-                                                        <td style="text-align: center"><?= $row['no_dummy'] ?></td>
+                                                        <td style="text-align: center"><a href="?page=his_dum&no_dummy=<?= $row['no_dummy'] ?>&unit=<?= $unit ?>"><?= $row['no_dummy'] ?></a></td>
                                                         <td style="text-align: center"><?= $row['no_meter_rusak'] ?></td>
 
                                                         <?php
