@@ -97,11 +97,11 @@ if (empty($_SESSION['admin'])) {
                                 <thead>
                                     <tr>
                                         <th width="5%" style="text-align: center">Tanggal Pakai</th>
+                                        <th width="5%" style="text-align: center">Posko</th>
+                                        <th width="1%" style="text-align: center">Petugas Pasang</th>
                                         <th width="5%" style="text-align: center">No. Dummy</th>
                                         <th width="5%" style="text-align: center">No. Meter Rusak</th>
-                                        <th width="5%%" style="text-align: center">Merk Meter Rusak</th>
                                         <th width="5%" style="text-align: center">Alasan Rusak</th>
-                                        <th width="5%" style="text-align: center">Petugas Pasang</th>
                                         <th width="5%" style="text-align: center">Sisa Pulsa</th>
                                         <th width="5%" style="text-align: center">No. HP Plg</th>
                                         <th width="5%" style="text-align: center">Stand Dummy</th>
@@ -115,7 +115,7 @@ if (empty($_SESSION['admin'])) {
                 $unit = $_SESSION['unit'];
 
                 $query = mysqli_query($config, "SELECT * FROM tbl_metdum_pakai WHERE no_dummy LIKE '%$cari%' || no_meter_rusak LIKE '%$cari%'||"
-                        . "ptgs_pasang LIKE '%$cari%' || sisa_pulsa LIKE '%$cari%' || no_hp_plg LIKE '%$cari%' || std_dummy LIKE '%$cari%'"
+                        . "ptgs_pasang LIKE '%$cari%'  || no_hp_plg LIKE '%$cari%' "
                         . " && unit LIKE '$unit%' && aktivasi='non aktif' ORDER by tgl_pakai ASC LIMIT $curr, $limit");
 
                 if (mysqli_num_rows($query) > 0) {
@@ -158,6 +158,8 @@ if (empty($_SESSION['admin'])) {
                         }
                         echo '
                             <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <br/><hr/> ' . $h . ":" . $i . ":" . $s . '</td>
+                            <td style="text-align: center">' . $row['nama'] . '</td>
+                            <td style="text-align: center">' . $row['ptgs_pasang'] . '</td>
                             <td style="text-align: center">' . $row['no_dummy'] . '</td>
                             <td style="text-align: center">' . $row['no_meter_rusak'] . '</td>';
 
@@ -199,32 +201,7 @@ if (empty($_SESSION['admin'])) {
                             $alasan_rusak = "Lain-lain";
                         }
 
-                        if ($row['merk_meter_rusak'] == 14) {
-                            $merk_meter_rusak = 'Hexing';
-                        } else if ($row['merk_meter_rusak'] == 86) {
-                            $merk_meter_rusak = 'Smart Meter';
-                        } else if ($row['merk_meter_rusak'] == 45) {
-                            $merk_meter_rusak = 'Sanxing';
-                        } else if ($row['merk_meter_rusak'] == 22) {
-                            $merk_meter_rusak = 'Star';
-                        } else if ($row['merk_meter_rusak'] == 60) {
-                            $merk_meter_rusak = 'FDE';
-                        } else if ($row['merk_meter_rusak'] == 32) {
-                            $merk_meter_rusak = 'Itron';
-                        } else if ($row['merk_meter_rusak'] == 34) {
-                            $merk_meter_rusak = 'Glomet';
-                        } else if ($row['merk_meter_rusak'] == 01) {
-                            $merk_meter_rusak = 'Hexing (Lama)';
-                        } else if ($row['merk_meter_rusak'] == 50) {
-                            $merk_meter_rusak = 'Cannet';
-                        } else {
-                            $merk_meter_rusak = 'Merk Lain';
-                        }
-
-                        echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>';
-
                         echo '<td style="text-align: center">' . $alasan_rusak . '</td>
-                            <td style="text-align: center">' . $row['ptgs_pasang'] . '</td>
                             <td style="text-align: center">' . $row['sisa_pulsa'] . '</td>
                             <td style="text-align: center">' . $row['no_hp_plg'] . '</td>
                             <td style="text-align: center">' . $row['std_dummy'] . '</td>
@@ -320,11 +297,11 @@ if (empty($_SESSION['admin'])) {
                                 <thead>
                                     <tr>
                                         <th width="5%" style="text-align: center">Tanggal Pakai</th>
+                                        <th width="5%" style="text-align: center">Posko</th>
+                                        <th width="1%" style="text-align: center">Petugas Pasang</th>
                                         <th width="5%" style="text-align: center">No. Dummy</th>
                                         <th width="5%" style="text-align: center">No. Meter Rusak</th>
-                                        <th width="5%%" style="text-align: center">Merk Meter Rusak</th>
                                         <th width="5%" style="text-align: center">Alasan Rusak</th>
-                                        <th width="5%" style="text-align: center">Petugas Pasang</th>
                                         <th width="5%" style="text-align: center">Sisa Pulsa</th>
                                         <th width="5%" style="text-align: center">No. HP Plg</th>
                                         <th width="5%" style="text-align: center">Stand Dummy</th>
@@ -379,7 +356,8 @@ if (empty($_SESSION['admin'])) {
                                                 $nm = "Desember";
                                             }
                                             echo '
-                                                <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td>
+                                                <td style="text-align: center">' . $d . " " . $nm . " " . $y . ' <hr/> ' . $h . ":" . $i . ":" . $s . '</td><td style="text-align: center">' . $row['nama'] . '</td>
+                                                <td style="text-align: center">' . $row['ptgs_pasang'] . '</td>
                                                 <td style="text-align: center">' . $row['no_dummy'] . '</td>
                                                 <td style="text-align: center">' . $row['no_meter_rusak'] . '</td>';
 
@@ -443,9 +421,7 @@ if (empty($_SESSION['admin'])) {
                                                 $merk_meter_rusak = 'Merk Lain';
                                             }
 
-                                            echo '<td style="text-align: center">' . $merk_meter_rusak . '</td>
-                                                    <td style="text-align: center">' . $alasan_rusak . '</td>
-                                                <td style="text-align: center">' . $row['ptgs_pasang'] . '</td>
+                                            echo '<td style="text-align: center">' . $alasan_rusak . '</td>
                                                 <td style="text-align: center">' . $row['sisa_pulsa'] . '</td>
                                                 <td style="text-align: center">' . $row['no_hp_plg'] . '</td>
                                                 <td style="text-align: center">' . $row['std_dummy'] . '</td>

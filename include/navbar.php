@@ -71,7 +71,7 @@ if (!empty($_SESSION['admin'])) {
                                     <a href="?page=mdk">Dummy Kembali</a>
                                 </li>
 
-                                <?php if ($_SESSION['admin'] == 2 || $_SESSION['admin'] == 3) { ?>
+                                <?php if ($_SESSION['admin'] == 2 || $_SESSION['admin'] == 3|| $_SESSION['admin'] == 4) { ?>
 
                                     <li>
                                         <a href="?page=lpd">Laporan</a>
