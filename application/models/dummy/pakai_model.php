@@ -1,8 +1,8 @@
 <?php
 	class Pakai_model extends CI_Model{
 
-		public function add_user($data){
-			$this->db->insert('ci_users', $data);
+		public function add_pakai($data){
+			$this->db->insert('tbl_metdum_pakai', $data);
 			return true;
 		}
 

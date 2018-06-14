@@ -22,7 +22,7 @@
                 <label for="no_dummy" class="col-sm-2 control-label">Nomor Dummy</label>
 
                 <div class="col-sm-9">
-                  <input type="text" name="alasan_rusak" class="form-control" id="firstname" placeholder="">
+                  <input type="text" name="no_dummy" class="form-control" id="no_dummy" placeholder="">
                 </div>
               </div>
             
@@ -56,7 +56,6 @@
 
               <div class="form-group">
                 <label for="no_meter_rusak" class="col-sm-2 control-label">Nomor Meter Rusak</label>
-
                 <div class="col-sm-9">
                   <input type="number" name="no_meter_rusak" class="form-control" id="no_meter_rusak" placeholder="">
                 </div>
@@ -64,35 +63,35 @@
 
               <div class="form-group">
                 <label for="ptgs_pasang" class="col-sm-2 control-label">Petugas Pasang</label>
-
                 <div class="col-sm-9">
-                  <input type="text" name="sisa_pulsa" class="form-control" id="sisa_pulsa" placeholder="">
+                  <input type="text" name="ptgs_pasang" class="form-control" id="ptgs_pasang" placeholder="">
                 </div>
               </div>
+            
               <div class="form-group">
-                <label for="unit" class="col-sm-2 control-label">Unit</label>
-
+                <label for="sisa_pulsa" class="col-sm-2 control-label">Sisa Pulsa</label>
                 <div class="col-sm-9">
-                  <input type="number" name="unit" class="form-control" id="unit" placeholder="">
+                  <input type="number" name="sisa_pulsa" class="form-control" id="sisa_pulsa" placeholder="">
                 </div>
               </div>
+            
               <div class="form-group">
-                <label for="mobile_no" class="col-sm-2 control-label">Mobile No</label>
-
+                <label for="no_hp_plg" class="col-sm-2 control-label">Mobile No</label>
                 <div class="col-sm-9">
-                  <input type="number" name="mobile_no" class="form-control" id="mobile_no" placeholder="">
+                  <input type="number" name="no_hp_plg" class="form-control" id="no_hp_plg" placeholder="">
                 </div>
               </div>
-              <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">Password</label>
 
+            <div class="form-group">
+                <label for="nama_cc" class="col-sm-2 control-label">Nama Call Center</label>
                 <div class="col-sm-9">
-                  <input type="password" name="password" class="form-control" id="password" placeholder="">
+                  <input type="text" name="nama_cc" class="form-control" id="nama_cc" placeholder="">
                 </div>
               </div>
+            
               <div class="form-group">
                 <div class="col-md-11">
-                  <input type="submit" name="submit" value="Add User" class="btn btn-info pull-right">
+                  <input type="submit" name="submit" value="SIMPAN" class="btn btn-app.save pull-right">
                 </div>
               </div>
             <?php echo form_close( ); ?>
