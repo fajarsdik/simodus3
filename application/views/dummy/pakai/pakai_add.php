@@ -22,7 +22,12 @@
                 <label for="no_dummy" class="col-sm-2 control-label">Nomor Dummy</label>
 
                 <div class="col-sm-9">
-                  <input type="text" name="no_dummy" class="form-control" id="no_dummy" placeholder="">
+                  <select name="no_dummy" class="form-control">
+                    <option disabled selected>-----</option>
+                    <?php foreach($dummy as $row){?>
+                    <option value="<?php echo $row['no_dummy']; ?>"><?php  echo $row['no_dummy']; ?></option>
+                    <?php } ?>      
+                  </select>
                 </div>
               </div>
             

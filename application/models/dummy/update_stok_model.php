@@ -1,5 +1,5 @@
 <?php
-	class Pakai_model extends CI_Model{
+	class Update_stok_model extends CI_Model{
 
 		public function add_pakai($data){
 			$this->db->insert('tbl_metdum_pakai', $data);
@@ -40,7 +40,7 @@
 			return $result = $query->row_array();
 		}
 
-		public function edit_user($data, $id){
+		public function update_stok($data, $id){
 			$this->db->where('id', $id);
 			$this->db->update('ci_users', $data);
 			return true;
