@@ -105,7 +105,7 @@
             <td><?= $row['sisa_pulsa']; ?></td>
             <td><?= $row['nama_cc']; ?></td>
             <td class="text-right">
-                <a href="<?= base_url('dummy/pakai/edit'.$row['id_meter']); ?>" class="btn btn-warning btn-flat
+                <a href="<?= base_url('dummy/pakai/edit/'.$row['id_meter']); ?>" class="btn btn-warning btn-flat
                     <?=(
                             $this->session->userdata('is_admin') == 3                        
                         )?'':'disabled'

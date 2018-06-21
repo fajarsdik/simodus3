@@ -32,6 +32,13 @@
               </div>
             
               <div class="form-group">
+                <label for="std_dummy" class="col-sm-2 control-label">Stand Dummy</label>
+                <div class="col-sm-9">
+                  <input type="number" name="std_dummy" class="form-control" id="std_dummy" placeholder="">
+                </div>
+              </div>
+
+              <div class="form-group">
                 <label for="alasan_rusak" class="col-sm-2 control-label">Alasan Rusak</label>
 
                 <div class="col-sm-9">
@@ -87,7 +94,7 @@
                 </div>
               </div>
 
-            <div class="form-group">
+              <div class="form-group">
                 <label for="nama_cc" class="col-sm-2 control-label">Nama Call Center</label>
                 <div class="col-sm-9">
                   <input type="text" name="nama_cc" class="form-control" id="nama_cc" placeholder="">

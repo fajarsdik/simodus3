@@ -17,51 +17,89 @@
               </div>
             <?php endif; ?>
            
-            <?php echo form_open(base_url('admin/users/edit/'.$user['id']), 'class="form-horizontal"' )?> 
+            <?php echo form_open(base_url('dummy/pakai/edit/'.$dummy['id_meter']), 'class="form-horizontal"' )?> 
               <div class="form-group">
-                <label for="firstname" class="col-sm-2 control-label">First Name</label>
+                <label for="no_dummy" class="col-sm-2 control-label">Nomor Dummy</label>
 
                 <div class="col-sm-9">
-                  <input type="text" name="firstname" value="<?= $user['firstname']; ?>" class="form-control" id="firstname" placeholder="">
+                  <input type="text" name="no_dummy" value="<?= $dummy['no_dummy']; ?>" class="form-control" disabled="disabled" id="no_dummy" placeholder="">
                 </div>
               </div>
-
+            
               <div class="form-group">
-                <label for="lastname" class="col-sm-2 control-label">Last Name</label>
-
+                <label for="std_dummy" class="col-sm-2 control-label">Stand Dummy</label>
                 <div class="col-sm-9">
-                  <input type="text" name="lastname" value="<?= $user['lastname']; ?>" class="form-control" id="lastname" placeholder="">
+                  <input type="text" name="std_dummy"  value="<?= $dummy['std_dummy'] ; ?>" class="form-control" id="std_dummy" placeholder="">
                 </div>
               </div>
+            
 
               <div class="form-group">
-                <label for="email" class="col-sm-2 control-label">Email</label>
-
+                <label for="no_meter_rusak" class="col-sm-2 control-label" >Nomor Meter Rusak</label>
                 <div class="col-sm-9">
-                  <input type="email" name="email" value="<?= $user['email']; ?>" class="form-control" id="email" placeholder="">
+                  <input type="text" name="no_meter_rusak" value="<?= $dummy['no_meter_rusak']; ?>" class="form-control"  id="no_meter_rusak" placeholder="">        
                 </div>
               </div>
+            
               <div class="form-group">
-                <label for="mobile_no" class="col-sm-2 control-label">Mobile No</label>
+                <label for="alasan_rusak" class="col-sm-2 control-label">Alasan Rusak</label>
 
                 <div class="col-sm-9">
-                  <input type="number" name="mobile_no" value="<?= $user['mobile_no']; ?>" class="form-control" id="mobile_no" placeholder="">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="role" class="col-sm-2 control-label">Select Role</label>
-
-                <div class="col-sm-9">
-                  <select name="user_role" class="form-control">
-                    <option value="">Select Role</option>
-                    <option value="1" <?= ($user['is_admin'] == 1)?'selected': '' ?> >Admin</option>
-                    <option value="0" <?= ($user['is_admin'] == 0)?'selected': '' ?>>User</option>
+                  <select name="alasan_rusak" class="form-control">
+                    <option disabled selected>-----</option>
+                    <option value="1">Token tidak dapat dimasukkan</option>
+                    <option value="2">Sisa kredit pada kWh meter hilang/bertambah saat listrik padam</option>
+                    <option value="3">Kerusakan pada keypad</option>
+                    <option value="4">LCD mati/rusak</option>
+                    <option value="5">kWh Meter rusak (akibat petir/terbakar)</option>
+                    <option value="6">Sisa kredit tidak bertambah saat kredit baru dimasukkan</option>
+                    <option value="7">Baut tutup terminal patah</option>
+                    <option value="8">Tegangan dibawah 180V tidak bisa hidup</option>
+                    <option value="9">Micro switch rusak / tidak keluar tegangan</option>
+                    <option value="10">ID meter pada display dan nameplate tidak sama</option>
+                    <option value="11">Sisa kredit tidak berkurang</option>
+                    <option value="12">Display overload tanpa beban</option>
+                    <option value="13">Terminal kWh meter rusak</option>
+                    <option value="14">Meter periksa/tutup dibuka lampu tetap nyala</option>
+                    <option value="15">Timbul rusak</option>
+                    <option value="16">kWh minus</option>
+                    <option value="17">kWh bertambah</option>
+                    <option value="18">Lain-lain</option>
                   </select>
                 </div>
               </div>
               <div class="form-group">
+                <label for="ptgs_pasang" class="col-sm-2 control-label">Petugas Pasang</label>
+                <div class="col-sm-9">     
+                  <input type="text" name="ptgs_pasang" value="<?= $dummy['ptgs_pasang']; ?>" class="form-control" id="ptgs_pasang" placeholder="">
+                </div>
+              </div>
+            
+              <div class="form-group">
+                <label for="sisa_pulsa" class="col-sm-2 control-label">Sisa Pulsa</label>
+                <div class="col-sm-9">
+                  <input type="text" name="sisa_pulsa"  value="<?= $dummy['sisa_pulsa'] ; ?>" class="form-control" id="sisa_pulsa" placeholder="">
+                </div>
+              </div>
+            
+              <div class="form-group">
+                <label for="no_hp_plg" class="col-sm-2 control-label">Mobile No</label>
+                <div class="col-sm-9">
+                  <input type="text" name="no_hp_plg" value="<?= $dummy['no_hp_plg'] ; ?>" class="form-control" id="no_hp_plg" placeholder="">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="nama_cc" class="col-sm-2 control-label">Nama Call Center</label>
+                <div class="col-sm-9">
+                  <input type="text" name="nama_cc" value="<?= $dummy['nama_cc'] ; ?>" class="form-control" id="nama_cc" placeholder="">
+                </div>
+              </div>
+            
+            
+              <div class="form-group">
                 <div class="col-md-11">
-                  <input type="submit" name="submit" value="Update User" class="btn btn-info pull-right">
+                  <input type="submit" name="submit" value="Update Pemakaian Dummy" class="btn btn-info pull-right">
                 </div>
               </div>
             <?php echo form_close(); ?>
