@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Edit User</h3>
+          <h3 class="box-title">Aktivasi Meter Baru</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
@@ -17,36 +17,33 @@
               </div>
             <?php endif; ?>
            
-            <?php echo form_open(base_url('dummy/pakai/edit/'.$dummy['id_meter']), 'class="form-horizontal"' )?> 
+            <?php echo form_open(base_url('dummy/aktivasi/entri/'.$dummy['id_meter']), 'class="form-horizontal"' )?> 
               <div class="form-group">
                 <label for="no_dummy" class="col-sm-2 control-label">Nomor Dummy</label>
 
                 <div class="col-sm-9">
-                  <input type="text" name="no_dummy" value="<?= $dummy['no_dummy']; ?>" class="form-control" disabled="disabled" id="no_dummy" placeholder="">
+                    <input type="text" name="no_dummy" value="<?= $dummy['no_dummy']; ?>" class="form-control" readonly="readonly" id="no_dummy" placeholder="">
                 </div>
               </div>
             
-              <div class="form-group">
-                <label for="std_dummy" class="col-sm-2 control-label">Stand Dummy</label>
-                <div class="col-sm-9">
-                  <input type="text" name="std_dummy"  value="<?= $dummy['std_dummy'] ; ?>" class="form-control" id="std_dummy" placeholder="">
-                </div>
-              </div>
-            
-
               <div class="form-group">
                 <label for="no_meter_rusak" class="col-sm-2 control-label" >Nomor Meter Rusak</label>
                 <div class="col-sm-9">
-                  <input type="text" name="no_meter_rusak" value="<?= $dummy['no_meter_rusak']; ?>" class="form-control"  id="no_meter_rusak" placeholder="">        
+                  <input type="text" name="no_meter_rusak" value="<?= $dummy['no_meter_rusak']; ?>" class="form-control"  readonly="readonly" id="no_meter_rusak" placeholder="">        
                 </div>
               </div>
             
+              <div class="form-group">
+                <label for="ptgs_pasang" class="col-sm-2 control-label">Petugas Pasang</label>
+                <div class="col-sm-9">     
+                  <input type="text" name="ptgs_pasang" value="<?= $dummy['ptgs_pasang']; ?>" class="form-control" readonly="readonly" id="ptgs_pasang" placeholder="">
+                </div>
+              </div>
               <div class="form-group">
                 <label for="alasan_rusak" class="col-sm-2 control-label">Alasan Rusak</label>
 
                 <div class="col-sm-9">
                   <select name="alasan_rusak" class="form-control">
-                    <option disabled selected>-----</option>
                     <option value="1"<?= ($dummy['alasan_rusak'] == 1)?'selected': '' ?> >Token tidak dapat dimasukkan</option>
                     <option value="2"<?= ($dummy['alasan_rusak'] == 2)?'selected': '' ?>>Sisa kredit pada kWh meter hilang/bertambah saat listrik padam</option>
                     <option value="3"<?= ($dummy['alasan_rusak'] == 3)?'selected': '' ?>>Kerusakan pada keypad</option>
@@ -68,12 +65,7 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="ptgs_pasang" class="col-sm-2 control-label">Petugas Pasang</label>
-                <div class="col-sm-9">     
-                  <input type="text" name="ptgs_pasang" value="<?= $dummy['ptgs_pasang']; ?>" class="form-control" id="ptgs_pasang" placeholder="">
-                </div>
-              </div>
+            
             
               <div class="form-group">
                 <label for="sisa_pulsa" class="col-sm-2 control-label">Sisa Pulsa</label>
@@ -82,24 +74,33 @@
                 </div>
               </div>
             
+            
               <div class="form-group">
-                <label for="no_hp_plg" class="col-sm-2 control-label">Mobile No</label>
+                <label for="id_pelanggan" class="col-sm-2 control-label"> Idpel </label>
                 <div class="col-sm-9">
-                  <input type="text" name="no_hp_plg" value="<?= $dummy['no_hp_plg'] ; ?>" class="form-control" id="no_hp_plg" placeholder="">
+                  <input type="text" name="id_pelanggan" class="form-control" id="id_pelanggan" placeholder="">
                 </div>
               </div>
-
+            
               <div class="form-group">
-                <label for="nama_cc" class="col-sm-2 control-label">Nama Call Center</label>
+                <label for="no_meter_baru" class="col-sm-2 control-label">No Meter Baru</label>
                 <div class="col-sm-9">
-                  <input type="text" name="nama_cc" value="<?= $dummy['nama_cc'] ; ?>" class="form-control" id="nama_cc" placeholder="">
+                  <input type="text" name="no_meter_baru" class="form-control" id="no_meter_baru" placeholder="">
+                </div>
+              </div>
+            
+              <div class="form-group">
+                <label for="nama" class="col-sm-2 control-label"> Nama Petugas Aktivasi </label>
+                <div class="col-sm-9">
+                  <input type="text" name="nama" class="form-control" id="nama" placeholder="">
                 </div>
               </div>
             
             
+                        
               <div class="form-group">
                 <div class="col-md-11">
-                  <input type="submit" name="submit" value="Update Pemakaian Dummy" class="btn btn-info pull-right">
+                  <input type="submit" name="submit" value="Simpan Data Meter Baru" class="btn btn-info pull-right">
                 </div>
               </div>
             <?php echo form_close(); ?>

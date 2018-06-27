@@ -61,9 +61,9 @@ $cur_tab = $this->uri->segment(2)==''?'dashboard': $this->uri->segment(2);
             </span>
           </a>
           <ul class="treeview-menu">
-            <li id="dashboard1"><a href="<?= base_url('dummy/pakai'); ?>"><i class="fa fa-circle-o"></i> Pemakaian Dummy</a></li>
-            <li id="dashboard1"><a href="<?= base_url('admin/dashboard'); ?>"><i class="fa fa-circle-o"></i> Aktivasi Dummy</a></li>
-            <li id="dashboard2"><a href="<?= base_url('admin/dashboard2/'); ?>"><i class="fa fa-circle-o"></i> Dummy Kembali</a></li>
+            <li id="pemakaiandummy"><a href="<?= base_url('dummy/pakai'); ?>"><i class="fa fa-circle-o"></i> Pemakaian Dummy</a></li>
+            <li id="aktivasimeterbaru"><a href="<?= base_url('dummy/aktivasi'); ?>"><i class="fa fa-circle-o"></i> Aktivasi Dummy</a></li>
+            <li id="meterdummykembali"><a href="<?= base_url('dummy/kembali'); ?>"><i class="fa fa-circle-o"></i> Dummy Kembali</a></li>
           </ul>
         </li>
       </ul>

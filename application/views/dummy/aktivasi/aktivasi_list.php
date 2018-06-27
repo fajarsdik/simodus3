@@ -4,14 +4,16 @@
  <section class="content">
    <div class="box">
     <div class="box-header">
-      <h3 class="box-title">Pemakaian Dummy <?= ucwords($this->session->userdata('unit')); ?></h3>
+      <h3 class="box-title">List Untuk Aktivasi Dummy <?= ucwords($this->session->userdata('unit')); ?></h3>
     </div>
-       <a href="<?= base_url('dummy/pakai/add'); ?>" class="btn btn-info btn-flat
+       <a href="<?= base_url('dummy/aktivasi/histori'); ?>" class="btn btn-info btn-flat
                     <?=(
-                            $this->session->userdata('is_admin') == 5                        
+                            $this->session->userdata('is_admin') == 4 
+                            ||
+                            $this->session->userdata('is_admin') == 3                           
                         )?'':'disabled'
                     ?>
-                   ">Tambah Data
+                   ">Histori Aktivasi
        </a>
     <!-- /.box-header -->
     <div class="box-body table-responsive">
@@ -25,7 +27,7 @@
           <th>Stand Dummy</th>
           <th>Sisa Pulsa</th>
           <th>Call Center</th>
-          <th style="width: 150px;" class="text-right">Tindakan</th>
+          <th style="width: 130px;" class="text-right">Tindakan</th>
         </tr>
         </thead>
         <tbody>
@@ -105,21 +107,12 @@
             <td><?= $row['sisa_pulsa']; ?></td>
             <td><?= $row['nama_cc']; ?></td>
             <td class="text-right">
-                <a href="<?= base_url('dummy/pakai/edit/'.$row['id_meter']); ?>" class="btn btn-warning btn-flat
+                <a href="<?= base_url('dummy/aktivasi/entri/'.$row['id_meter']); ?>" class="btn btn-warning btn-flat
                     <?=(
                             $this->session->userdata('is_admin') == 3                        
                         )?'':'disabled'
                     ?>
-                   ">Edit
-                </a>
-                <a href="<?= base_url('dummy/pakai/del/'.$row['id_meter']); ?>" class="btn btn-danger btn-flat 
-                    <?=(
-                            $row['aktivasi']=='non aktif' 
-                            && 
-                            $this->session->userdata('is_admin') == 3                        
-                        )?'':'disabled'
-                    ?>
-                    ">Delete
+                   ">Aktivasi
                 </a>
             </td>
             

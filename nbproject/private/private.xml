@@ -5,10 +5,13 @@
         <group>
             <file>file:/C:/xampp/htdocs/simodus6/application/models/dummy/pakai_model.php</file>
             <file>file:/C:/xampp/htdocs/simodus6/application/views/dummy/pakai/pakai_list.php</file>
+            <file>file:/C:/xampp/htdocs/simodus6/application/controllers/dummy/aktivasi.php</file>
+            <file>file:/C:/xampp/htdocs/simodus6/application/models/dummy/aktivasi_model.php</file>
             <file>file:/C:/xampp/htdocs/simodus6/application/views/admin/adminlte/forms/general.php</file>
             <file>file:/C:/xampp/htdocs/simodus6/application/controllers/dummy/pakai.php</file>
             <file>file:/C:/xampp/htdocs/simodus6/application/views/admin/include/sidebar.php</file>
             <file>file:/C:/xampp/htdocs/simodus6/application/views/dummy/pakai/pakai_add.php</file>
+            <file>file:/C:/xampp/htdocs/simodus6/application/views/dummy/aktivasi/aktivasi_entri.php</file>
             <file>file:/C:/xampp/htdocs/simodus6/application/views/dummy/pakai/pakai_edit.php</file>
         </group>
     </open-files>
