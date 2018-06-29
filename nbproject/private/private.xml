@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/simodus6/application/models/dummy/pakai_model.php</file>
+            <file>file:/C:/xampp/htdocs/simodus6/application/models/admin/Dashboard_model.php</file>
+            <file>file:/C:/xampp/htdocs/simodus6/application/views/admin/dashboard/index.php</file>
+            <file>file:/C:/xampp/htdocs/simodus6/application/views/admin/include/navbar.php</file>
             <file>file:/C:/xampp/htdocs/simodus6/application/views/dummy/pakai/pakai_list.php</file>
-            <file>file:/C:/xampp/htdocs/simodus6/application/controllers/dummy/aktivasi.php</file>
-            <file>file:/C:/xampp/htdocs/simodus6/application/models/dummy/aktivasi_model.php</file>
-            <file>file:/C:/xampp/htdocs/simodus6/application/views/admin/adminlte/forms/general.php</file>
             <file>file:/C:/xampp/htdocs/simodus6/application/controllers/dummy/pakai.php</file>
             <file>file:/C:/xampp/htdocs/simodus6/application/views/admin/include/sidebar.php</file>
-            <file>file:/C:/xampp/htdocs/simodus6/application/views/dummy/pakai/pakai_add.php</file>
-            <file>file:/C:/xampp/htdocs/simodus6/application/views/dummy/aktivasi/aktivasi_entri.php</file>
-            <file>file:/C:/xampp/htdocs/simodus6/application/views/dummy/pakai/pakai_edit.php</file>
         </group>
     </open-files>
 </project-private>
