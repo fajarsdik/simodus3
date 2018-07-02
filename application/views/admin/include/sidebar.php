@@ -28,7 +28,7 @@ $cur_tab = $this->uri->segment(2)==''?'dashboard': $this->uri->segment(2);
       </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
+<!--      <ul class="sidebar-menu">
         <li id="dashboard" class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -41,11 +41,11 @@ $cur_tab = $this->uri->segment(2)==''?'dashboard': $this->uri->segment(2);
             <li id="dashboard2"><a href="<?= base_url('admin/dashboard2/'); ?>"><i class="fa fa-circle-o"></i> Dashboard V2</a></li>
           </ul>
         </li>
-      </ul>
+      </ul>-->
       
       <ul class="sidebar-menu">
         <li id="dashboard" class="treeview">
-          <a href="#"><i class="fa fa-dashboard"></i> <span>Monitoring Dummy</span>           
+          <a href="<?= base_url('monitoring/dummy'); ?>"><i class="fa fa-dashboard"></i> <span>Monitoring Dummy</span>           
           </a>
         </li>
       </ul>
@@ -250,6 +250,7 @@ $cur_tab = $this->uri->segment(2)==''?'dashboard': $this->uri->segment(2);
             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li>
+
 
         <li><a target="_blank" href="../documentation_adminlte/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>

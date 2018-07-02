@@ -20,6 +20,18 @@
 			}
 		}
 
+//		public function get_all_data(){
+//			$this->db->where('id', $id);
+//			$this->db->update('tbl_user', $data);
+//			return true;
+//		}
+
+                
+		public function get_all_data(){
+//                
+                    
+		}
+                
 		public function change_pwd($data, $id){
 			$this->db->where('id', $id);
 			$this->db->update('ci_users', $data);

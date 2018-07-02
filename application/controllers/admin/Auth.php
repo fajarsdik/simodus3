@@ -30,7 +30,7 @@
 				else {
 					$data = array(
 					'username' => $this->input->post('username'),
-					'password' => $this->input->post('password')
+					'password' => $this->input->post('password')    
 					);
 					$result = $this->auth_model->login($data);
 					if ($result == TRUE) {

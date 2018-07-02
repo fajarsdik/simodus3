@@ -13,7 +13,7 @@
                         $this->benchmark->mark('code_start');
 
                                 $this->db->order_by('id_meter','desc');
-                                $this->db->limit(1000);
+                                $this->db->limit(150);
                                 $this->db->like('unit', $this->session->userdata('unit'));
         //                        $this->db->where('unit', $this->session->userdata('unit'));
 

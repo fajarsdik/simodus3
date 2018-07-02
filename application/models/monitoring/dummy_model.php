@@ -1,5 +1,5 @@
 <?php
-	class Aktivasi_model extends CI_Model{
+	class Dummy_model extends CI_Model{
 
 		public function entri_model($data,$data_stok,$no_dummy,$id){
 			$this->db->insert('tbl_aktivasi', $data);
@@ -29,12 +29,12 @@
                     
 		}
 
-		public function get_histori(){
+		public function get_all_data(){
 //                    untuk menghitung waktu operasi model ini
                         $this->benchmark->mark('code_start');
-                                $this->db->order_by('tgl_aktivasi','asc');
+                                $this->db->order_by('no_dummy','asc');
                                 $this->db->where('unit', $this->session->userdata('unit'));
-                                $query = $this->db->get('tbl_aktivasi');
+                                $query = $this->db->get('tbl_metdum_stok');
                                 return $result = $query->result_array();
                         $this->benchmark->mark('code_end');
                     

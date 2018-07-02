@@ -21,7 +21,7 @@
 //                    untuk menghitung waktu operasi model ini
                         $this->benchmark->mark('code_start');
                                 $this->db->order_by('tgl_kembali','asc');
-                                $this->db->limit(1000);
+                                $this->db->limit(150);
                                 $this->db->where('unit', $this->session->userdata('unit'));
                                 $query = $this->db->get('tbl_metdum_kbl');
                                 return $result = $query->result_array();
